@@ -1,0 +1,9 @@
+@startuml
+hide circle
+hide members
+class Alistar <<block>>
+class PropulseurArriere <<block>>
+class PropulseurLateral <<block>>
+Alistar *-- "4" PropulseurArriere
+Alistar *-- "2" PropulseurLateral
+@enduml

@@ -1,0 +1,5 @@
+@startuml
+actor Operateur
+left to right direction
+Operateur -- (Obtenir des\ninformations sur\nle pipeline)
+@enduml

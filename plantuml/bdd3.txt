@@ -1,0 +1,15 @@
+@startuml
+hide circle
+hide members
+class ContextCordeuse <<block>>
+class Utilisateur <<actor>>
+class Cordeuse <<block>>
+class Corde <<block>>
+class Raquette <<block>>
+class Alimentation <<block>>
+ContextCordeuse *-- Utilisateur
+ContextCordeuse *-- Cordeuse
+ContextCordeuse *-- Corde
+ContextCordeuse *-- Raquette
+ContextCordeuse *-- Alimentation
+@enduml

@@ -1,0 +1,5 @@
+@startuml
+Utilisateur -> (Utiliser ...)
+Utilisateur -- (Obtenir ...)
+Utilisateur <- (Afficher ...)
+@enduml

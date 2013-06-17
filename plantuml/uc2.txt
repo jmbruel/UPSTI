@@ -1,0 +1,4 @@
+@startuml
+Utilisateur -> (Acheter en ligne)
+(Acheter en ligne) .> (S'identifier) : <<include>>
+@enduml

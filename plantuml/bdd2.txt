@@ -1,0 +1,9 @@
+@startuml
+hide circle
+class SarmentNonAttache <<block>>
+class SarmentAttache <<block>>
+class Lien <<block>>
+Sarment <|-- SarmentAttache
+Sarment <|-- SarmentNonAttache
+Lien "1" --* SarmentAttache : possede
+@enduml

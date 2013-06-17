@@ -1,0 +1,3 @@
+@startuml
+Utilisateur -> (Acheter en ligne)
+@enduml

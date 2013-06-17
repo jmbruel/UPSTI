@@ -1,0 +1,6 @@
+@startuml
+Utilisateur -> (Acheter en ligne)
+Utilisateur -> (Gerer son profil)
+(Acheter en ligne) .> (S'identifier) : <<include>>
+(Gerer son profil) .> (S'identifier) : <<include>>
+@enduml

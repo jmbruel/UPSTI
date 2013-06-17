@@ -1,0 +1,8 @@
+@startuml
+actor Utilisateur
+left to right direction
+skinparam packageStyle rect
+rectangle Cordeuse {
+Utilisateur -> (Corder)
+}
+@enduml

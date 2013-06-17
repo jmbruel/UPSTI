@@ -5,7 +5,14 @@ ICONSDIR=/Users/bruel/dev/asciidoc/images/icons
 #-----------------------------------------------------
 
 all: site slides
-	
+
+cord: cordeuse.$(EXT)
+	@echo '==> Compiling asciidoc files to generate HTML'
+	asciidoc -b html5 -a icons -a iconsdir=$(ICONSDIR) -a data-uri \
+	-a stylesheet=/Users/bruel/Dropbox/Public/dev/SysMLBook/stylesheets/scribe.css \
+	-a book \
+	cordeuse.$(EXT)
+
 site: *.$(EXT)
 	@echo '==> Compiling asciidoc files to generate HTML'
 	asciidoc -b html5 -a toc2 -a icons -a iconsdir=$(ICONSDIR) -a data-uri \

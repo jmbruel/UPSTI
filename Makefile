@@ -50,4 +50,7 @@ plantuml/%.png: plantuml/%.txt
 	@echo '==> Compiling plantUML files to generate PNG'
 	java -jar plantuml.jar $<
 
+publish:
+	cp *.html /Users/bruel/dev/jmbhome/public/teaching/SysML
+	
 

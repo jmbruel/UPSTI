@@ -1,0 +1,612 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.6" />
+<meta name="description" content="IGS - Langage Python" />
+<meta name="keywords" content="Langage Python" />
+<title>Expressions régulières et Tests en Python</title>
+<link rel="stylesheet" href="./xhtml11.css" type="text/css" />
+<link rel="stylesheet" href="./layout1.css" type="text/css" />
+<link rel="stylesheet" href="./layout1a.css" type="text/css" />
+<link rel="stylesheet" href="./pygments.css" type="text/css" />
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){asciidoc.footnotes(); asciidoc.toc(1);}
+/*]]>*/
+</script>
+<script type="text/javascript" src="./asciidoc-xhtml11.js"></script>
+</head>
+<body>
+<div id="layout-banner">
+  <div id="layout-title">IGS</div>
+  <div id="layout-description">La langage Python</div>
+</div>
+<table>
+<tr valign="top">
+<td id="layout-menu" width="12%">
+<div>&#187;<a href="plan.html">Accueil</a></div>
+<div>&#187;<a href="http://jmbhome.heroku.com/teaching/POO/POO-python.html">Notes Python</a></div>
+<div>&#187;<a href="exos.html">Exercices POO</a></div>
+<div>&#187;<a href="re_tests.html">ER et Tests</a></div>
+<div>&#187;<a href="classes.html">Classes</a></div>
+<div>&#187;<a href="webserver.html">HTTP Server</a></div>
+<div>&#187;<a href="turtle.html">Turtle</a></div>
+<div>&#187;<a href="tkinter.html">Tkinter GUI</a></div>
+<!--div id="page-source">&#187;<a href="IGSe_tests.txt" target="_blank">Page&nbsp;Source</a></div-->
+<!--div id="layout-menu-jmi">
+<div>&#187;<a href="plan.html">Accueil</a></div>
+<div>&#187;<a href="http://jmbhome.heroku.com/teaching/POO/POO-python.html">Notes Python</a></div>
+<div>&#187;<a href="exos.html">Exercices POO</a></div>
+<div>&#187;<a href="re_tests.html">ER et Tests</a></div>
+<div>&#187;<a href="classes.html">Classes</a></div>
+<div>&#187;<a href="webserver.html">HTTP Server</a></div>
+<div>&#187;<a href="turtle.html">Turtle</a></div>
+<div>&#187;<a href="tkinter.html">Tkinter GUI</a></div>
+<div id="page-source">&#187;<a href="IGSe_tests.txt">Page&nbsp;Source</a></div>
+</div-->
+</td>
+<td width="88%">
+<div id="layout-content">
+<div id="header">
+<h1>Expressions régulières et Tests en Python</h1>
+<span id="author">Jean-Michel Inglebert</span><br />
+<span id="email"><tt>&lt;<a href="mailto:jean-michel.inglebert@univ-tlse2.fr">jean-michel.inglebert@univ-tlse2.fr</a>&gt;</tt></span><br />
+Janvier, 2013
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_les_expressions_régulières_ou_motifs">1. Les expressions régulières ou motifs</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Tout comme pour le shell (ex : <tt>ls [a-z]*.pl</tt> ou <tt>dir *.pl</tt>) ou la commande Unix <tt>grep</tt> ou <em>Perl</em>, le langage
+<em>Python</em> permet d&#8217;utiliser des expressions régulières pour
+détecter des motifs quelconques dans des chaînes de caractères.</p></div>
+<div class="paragraph"><p>Les expressions régulières sont des <em>motifs modèles</em> que l&#8217;on tente
+d'<tt>apparier</tt> (de mettre en correspondance) à des <em>chaines de caractères</em>.</p></div>
+<div class="paragraph"><p>En <em>Python</em>, une expression régulière est définie
+avec la syntaxe : <tt>r'expression regulière'</tt> (et non avec <em>/&#8230;/</em> comme
+dans beaucoup de langages).</p></div>
+<div class="paragraph"><p>En <em>Python</em> l&#8217;appariement d&#8217;une expression régulière à une chaine de caractères
+est réalisé avec les méthodes <tt>match()</tt> ou <tt>search()</tt> du module <tt>re</tt>.</p></div>
+<div class="paragraph"><p>Ces méthodes retournent une valeur fausse (<tt>None</tt>) si la mise en correspondance échoue
+, une instance de la classe <tt>Match</tt> sinon.</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s">r&#39;cherche VAL&#39;</span><span class="p">,</span><span class="s">&quot;pas de val ici&quot;</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">result</span>
+
+<span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">r&#39;var&#39;</span><span class="p">,</span> <span class="s">&quot;var=val&quot;</span><span class="p">):</span> <span class="k">print</span> <span class="s">&#39;OK1&#39;</span><span class="p">,</span>
+<span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">r&#39;val&#39;</span><span class="p">,</span> <span class="s">&quot;var=val&quot;</span><span class="p">):</span> <span class="k">print</span> <span class="s">&#39;OK2&#39;</span><span class="p">,</span>
+<span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">r&#39;=&#39;</span><span class="p">,</span> <span class="s">&quot;var=val&quot;</span><span class="p">):</span> <span class="k">print</span> <span class="s">&#39;OK3&#39;</span><span class="p">,</span>
+<span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">r&#39;var=val&#39;</span><span class="p">,</span> <span class="s">&quot;var=val&quot;</span><span class="p">):</span> <span class="k">print</span> <span class="s">&#39;OK4&#39;</span><span class="p">,</span>
+<span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">r&#39;^var=val&#39;</span><span class="p">,</span> <span class="s">&quot;var=val&quot;</span><span class="p">):</span> <span class="k">print</span> <span class="s">&#39;OK5&#39;</span><span class="p">,</span>
+<span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">r&#39;var=val$&#39;</span><span class="p">,</span> <span class="s">&quot;var=val&quot;</span><span class="p">):</span> <span class="k">print</span> <span class="s">&#39;OK6&#39;</span><span class="p">,</span>
+<span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">r&#39;^var=val$&#39;</span><span class="p">,</span> <span class="s">&quot;var=val&quot;</span><span class="p">):</span> <span class="k">print</span> <span class="s">&#39;OK7&#39;</span><span class="p">,</span>
+<span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">r&#39;^var&#39;</span><span class="p">,</span> <span class="s">&quot;var=val&quot;</span><span class="p">):</span> <span class="k">print</span> <span class="s">&#39;OK8&#39;</span><span class="p">,</span>
+<span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">r&#39;val$&#39;</span><span class="p">,</span> <span class="s">&quot;var=val&quot;</span><span class="p">):</span> <span class="k">print</span> <span class="s">&#39;OK9&#39;</span><span class="p">,</span>
+<span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">r&#39;^var\s*=val$&#39;</span><span class="p">,</span> <span class="s">&quot;var=val&quot;</span><span class="p">):</span> <span class="k">print</span> <span class="s">&#39;OK10&#39;</span><span class="p">,</span>
+<span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">r&#39;^var=\s*val$&#39;</span><span class="p">,</span> <span class="s">&quot;var=val&quot;</span><span class="p">):</span> <span class="k">print</span> <span class="s">&#39;OK11&#39;</span><span class="p">,</span>
+<span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">r&#39;^var\s*=\s*val$&#39;</span><span class="p">,</span> <span class="s">&quot;var=val&quot;</span><span class="p">):</span> <span class="k">print</span> <span class="s">&#39;OK12&#39;</span>
+</pre></div></div></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Tester tous les appariements
+</p>
+</li>
+<li>
+<p>
+Trouver une manière plus efficace d'écrire le code précédent
+</p>
+</li>
+<li>
+<p>
+Remplacer <tt>match</tt> par <tt>search</tt> dans le code précédent et conclure
+</p>
+</li>
+<li>
+<p>
+Expliquer les affichages produits par le code suivant :
+</p>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s">r&#39;VAL&#39;</span><span class="p">,</span><span class="s">&quot;VAL est ici&quot;</span><span class="p">)</span>
+<span class="k">print</span> <span class="nb">dir</span><span class="p">(</span><span class="s">&#39;Match&#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">result</span>
+<span class="k">print</span> <span class="nb">dir</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">result</span><span class="o">.</span><span class="n">string</span>
+</pre></div></div></div>
+</li>
+</ol></div>
+<div class="sect2">
+<h3 id="_compilation_des_expressions_régulières">1.1. Compilation des expressions régulières</h3>
+<div class="paragraph"><p>Les programmes suivants sont fonctionnellement équivalents :</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="n">prog</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">prog</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+</pre></div></div></div>
+<div class="paragraph"><p>est équivalent à :</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
+</pre></div></div></div>
+<div class="paragraph"><p>Mais dans le second cas <em>Python</em> compile <tt>pattern</tt> avant
+de tenter l&#8217;appariement.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Note" src="data:image/png;base64,
+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" />
+</td>
+<td class="content">Il est donc conseillé de sauvegarder la compilation
+des expressions régulières souvent utilisées dans vos programmes.</td>
+</tr></table>
+</div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Exécuter le code suivant, comprendre, expliquer et conclure.
+</p>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s">r&#39;var&#39;</span><span class="p">,</span><span class="s">r&#39;val&#39;</span><span class="p">,</span><span class="s">r&#39;=&#39;</span><span class="p">,</span><span class="s">r&#39;var=val&#39;</span><span class="p">,</span><span class="s">r&#39;^var=val&#39;</span><span class="p">,</span>
+            <span class="s">r&#39;var=val$&#39;</span><span class="p">,</span><span class="s">r&#39;^var=val$&#39;</span><span class="p">,</span><span class="s">r&#39;^var&#39;</span><span class="p">,</span><span class="s">r&#39;val$&#39;</span><span class="p">,</span><span class="s">r&#39;^var\s*=val$&#39;</span><span class="p">,</span>
+            <span class="s">r&#39;^var=\s*val$&#39;</span><span class="p">,</span><span class="s">r&#39;^var\s*=\s*val$&#39;</span><span class="p">)</span>
+
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">tuple</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s">&quot;var=val&quot;</span><span class="p">)</span>
+                <span class="c"># if result: print &#39;OK%d&#39; % num,</span>
+                <span class="n">num</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">t2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
+<span class="k">print</span>
+<span class="k">print</span> <span class="n">t2</span> <span class="o">-</span> <span class="n">t1</span><span class="p">,</span> <span class="s">&#39;sans compilation&#39;</span>
+
+<span class="n">ctuple</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">tuple</span><span class="p">:</span>
+        <span class="n">ctuple</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">ctuple</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s">&quot;var=val&quot;</span><span class="p">)</span>
+                <span class="c"># if result: print &#39;OK%d&#39; % num,</span>
+                <span class="n">num</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">t2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
+<span class="k">print</span>
+<span class="k">print</span> <span class="n">t2</span> <span class="o">-</span> <span class="n">t1</span><span class="p">,</span> <span class="s">&#39;avec compilation&#39;</span>
+</pre></div></div></div>
+</li>
+<li>
+<p>
+quel a été le temps de compilation des 12 expressions régulières ?
+</p>
+</li>
+</ol></div>
+</div>
+<div class="sect2">
+<h3 id="_captures">1.2. Captures</h3>
+<div class="paragraph"><p>Il est de plus possible, lorsqu&#8217;un appariement est réalisé, de récupérer
+les sous ensembles de la chaîne qui ont pu être mis en correspondance
+avec les sous-motifs placés entre parenthèses.</p></div>
+<div class="paragraph"><p>La capture réalisée
+par le premier couple de parenthèses est affectée au groupe numéro 1, la capture
+réalisée par le second couple de parenthèses est affectée au groupe numéro 2, etc.</p></div>
+<div class="paragraph"><p>Par exemple, les mises en correspondance suivantes placent
+<tt>var</tt> dans <tt>le groupe 1</tt> et  <tt>val</tt> dans <tt>le groupe 2</tt></p></div>
+<div class="paragraph"><p>Les sous-chaines associées aux groupes sont accessibles avec les méthodes
+<tt>group()</tt> ou <tt>groups()</tt>.</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="n">chaine</span> <span class="o">=</span> <span class="s">&quot;var=val&quot;</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">r&#39;([a-z]+)=val&#39;</span><span class="p">,</span> <span class="n">chaine</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="p">:</span> <span class="k">print</span> <span class="n">result</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="p">:</span> <span class="k">print</span> <span class="n">result</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">r&#39;([a-z]+)=([a-z]+)&#39;</span><span class="p">,</span> <span class="n">chaine</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="p">:</span> <span class="k">print</span> <span class="n">result</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="p">:</span> <span class="k">print</span> <span class="n">result</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="p">:</span> <span class="k">print</span> <span class="n">result</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
+</pre></div></div></div>
+<div class="paragraph"><p>Il est également possible de nommer les groupes dans l&#8217;expression régulière
+ainsi :</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">r&#39;(?P&lt;nom&gt;[a-z]+)=(?P&lt;valeur&gt;[a-z]+)&#39;</span><span class="p">,</span> <span class="n">chaine</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="p">:</span> <span class="k">print</span> <span class="n">result</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="p">:</span> <span class="k">print</span> <span class="n">result</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="p">:</span> <span class="k">print</span> <span class="n">result</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">result</span><span class="p">:</span> <span class="k">print</span> <span class="n">result</span><span class="o">.</span><span class="n">groupdict</span><span class="p">()</span>
+</pre></div></div></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Exécuter et comprendre le code suivant :
+</p>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="n">tuple_motifs</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;var&#39;</span><span class="p">,</span><span class="s">&#39;val&#39;</span><span class="p">,</span><span class="s">&#39;=&#39;</span><span class="p">,</span><span class="s">&#39;var=val&#39;</span><span class="p">,</span><span class="s">&#39;^var=val&#39;</span><span class="p">,</span><span class="s">&#39;var=val$&#39;</span><span class="p">,</span><span class="s">&#39;^var=val$&#39;</span><span class="p">,</span><span class="s">&#39;^var\s*=val$&#39;</span><span class="p">,</span><span class="s">&#39;^var=\s*val$&#39;</span><span class="p">);</span>
+<span class="k">print</span>
+<span class="k">print</span> <span class="n">tuple_motifs</span>
+<span class="k">print</span>
+<span class="n">num</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">tuple_motifs</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s">&quot;var=123&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">result</span><span class="p">:</span> <span class="k">print</span> <span class="s">&#39;OK</span><span class="si">%d</span><span class="s"> </span><span class="se">\&#39;</span><span class="s">var=123</span><span class="se">\&#39;</span><span class="s"> et r</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+        <span class="n">num</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">print</span>
+<span class="n">num</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">tuple_motifs</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s">&quot;truc=val&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">result</span><span class="p">:</span> <span class="k">print</span> <span class="s">&#39;OK</span><span class="si">%d</span><span class="s"> </span><span class="se">\&#39;</span><span class="s">truc=val</span><span class="se">\&#39;</span><span class="s"> et r</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+        <span class="n">num</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div></div></div>
+</li>
+<li>
+<p>
+Même question pour les codes suivants :
+</p>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="n">tuple_motifs</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;^var=\d*$&#39;</span><span class="p">,</span><span class="s">&#39;^var=\d+$&#39;</span><span class="p">,</span><span class="s">&#39;^var=[123]+&#39;</span><span class="p">,</span><span class="s">&#39;^var=[123]+?&#39;</span><span class="p">,</span><span class="s">&#39;^var=[123]+?$&#39;</span><span class="p">)</span>
+<span class="k">print</span>
+<span class="k">print</span> <span class="n">tuple_motifs</span>
+<span class="k">print</span>
+<span class="n">num</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">tuple_motifs</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s">&quot;var=123123&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">result</span><span class="p">:</span> <span class="k">print</span> <span class="s">&#39;OK</span><span class="si">%d</span><span class="s"> </span><span class="se">\&#39;</span><span class="s">var=123123</span><span class="se">\&#39;</span><span class="s"> et r</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+        <span class="n">num</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">tuple_motifs</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;^var=(\d*)$&#39;</span><span class="p">,</span><span class="s">&#39;^var=(\d+)$&#39;</span><span class="p">,</span><span class="s">&#39;^var=([123]+)&#39;</span><span class="p">,</span><span class="s">&#39;^var=([123]+?)&#39;</span><span class="p">,</span><span class="s">&#39;^var=([123]+?)$&#39;</span><span class="p">)</span>
+<span class="k">print</span>
+<span class="k">print</span> <span class="n">tuple_motifs</span>
+<span class="k">print</span>
+<span class="n">num</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">tuple_motifs</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s">&quot;var=123123&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">result</span><span class="p">:</span> <span class="k">print</span> <span class="s">&#39;OK</span><span class="si">%d</span><span class="s"> </span><span class="se">\&#39;</span><span class="s">var=123123</span><span class="se">\&#39;</span><span class="s"> et r</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s">, groupe = </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">result</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">num</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div></div></div>
+</li>
+</ol></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Note" src="data:image/png;base64,
+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" />
+</td>
+<td class="content">
+<div class="paragraph"><p>La méthode <tt>split()</tt> permet de découper une chaîne pour
+chaque appariement réalisé dans la chaine.</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="k">print</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;[a-f]+&#39;</span><span class="p">,</span> <span class="s">&#39;0a2ff3B9&#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;[a-f]+&#39;</span><span class="p">,</span> <span class="s">&#39;0a2ff3B9&#39;</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+</pre></div></div></div>
+</td>
+</tr></table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercice_de_synthèse">2. Exercice de synthèse</h2>
+<div class="sectionbody">
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+A partir du fichier calendrier suivant : <a href="edt_Perl_JMI.ics">edt_Perl_JMI.ics</a>,
+écrire un programme <tt>Python</tt> qui affiche les lignes suivantes :
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>&gt; python ical1.py
+Le fichier edt_Perl_JMI.ics :
+- contient 205 lignes
+- contient 20 evenements
+- contient 4 périodes de vacances
+- contient 8 jours fériés
+- contient 12 séances Perl</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="c"># -*- coding: UTF-8 -*-</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">fichier</span> <span class="o">=</span> <span class="s">&quot;edt_Perl_JMI.ics&quot;</span>
+<span class="n">nb</span> <span class="o">=</span> <span class="n">nbev</span> <span class="o">=</span> <span class="n">nbpv</span> <span class="o">=</span> <span class="n">nbsp</span> <span class="o">=</span> <span class="n">nbjf</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">try</span><span class="p">:</span>
+        <span class="n">fd</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fichier</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">fd</span><span class="p">:</span>
+                <span class="n">nb</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">r&#39;BEGIN:VEVENT&#39;</span><span class="p">,</span> <span class="n">ligne</span><span class="p">):</span> <span class="n">nbev</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s">r&#39;SUMMARY.*VaCaNcEs&#39;</span><span class="p">,</span> <span class="n">ligne</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">):</span> <span class="n">nbpv</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s">r&#39;UID.*Férié&#39;</span><span class="p">,</span> <span class="n">ligne</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">):</span> <span class="n">nbjf</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="c"># SUMMARY;LANGUAGE=fr:Perl - PRE2</span>
+                <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">r&#39;SUMMARY[^:]*:Perl&#39;</span><span class="p">,</span> <span class="n">ligne</span><span class="p">):</span> <span class="n">nbsp</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">print</span> <span class="s">&quot;Le fichier </span><span class="si">%s</span><span class="s"> :&quot;</span> <span class="o">%</span> <span class="n">fichier</span>
+        <span class="k">print</span> <span class="s">&quot;- contient </span><span class="si">%s</span><span class="s"> lignes&quot;</span> <span class="o">%</span> <span class="n">nb</span>
+        <span class="k">print</span> <span class="s">&quot;- contient </span><span class="si">%s</span><span class="s"> evenements&quot;</span> <span class="o">%</span> <span class="n">nbev</span>
+        <span class="k">print</span> <span class="s">&quot;- contient </span><span class="si">%s</span><span class="s"> périodes de vacances&quot;</span> <span class="o">%</span> <span class="n">nbpv</span>
+        <span class="k">print</span> <span class="s">&quot;- contient </span><span class="si">%s</span><span class="s"> jours fériés&quot;</span> <span class="o">%</span> <span class="n">nbjf</span>
+        <span class="k">print</span> <span class="s">&quot;- contient </span><span class="si">%s</span><span class="s"> séances Perl&quot;</span> <span class="o">%</span> <span class="n">nbsp</span>
+<span class="k">finally</span><span class="p">:</span>
+        <span class="n">fd</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div></div></div>
+</li>
+<li>
+<p>
+Ecrire un second programme qui affiche :
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>&gt; python ical2.py
+Le fichier edt_Perl_JMI.ics :
+- contient 205 lignes
+- contient 5 evenements apres 20130110
+- contient 15 evenements avant fin 2012
+- contient 5 evenements apres fin 2012</tt></pre>
+</div></div>
+<div class="paragraph"><p>Vous pourrez démarrer avec le code suivant :</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="n">fichier</span> <span class="o">=</span> <span class="s">&quot;edt_Perl_JMI.ics&quot;</span>
+<span class="n">nb</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">try</span><span class="p">:</span>
+        <span class="n">fd</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fichier</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">fd</span><span class="p">:</span>
+                <span class="n">nb</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">print</span> <span class="s">&quot;Le fichier </span><span class="si">%s</span><span class="s"> contient </span><span class="si">%d</span><span class="s"> lignes&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">fichier</span><span class="p">,</span><span class="n">nb</span><span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+        <span class="n">fd</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div></div></div>
+</li>
+<li>
+<p>
+Pourrait-on réaliser les actions suivantes dans une boucle ?
+</p>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="k">if</span> <span class="n">mon</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span> <span class="n">mon</span> <span class="o">=</span> <span class="s">&quot;0</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">mon</span>
+<span class="k">if</span> <span class="n">day</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span> <span class="n">day</span> <span class="o">=</span> <span class="s">&quot;0</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">day</span>
+<span class="k">if</span> <span class="n">hour</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span> <span class="n">hour</span> <span class="o">=</span> <span class="s">&quot;0</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">hour</span>
+<span class="k">if</span> <span class="nb">min</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span> <span class="nb">min</span> <span class="o">=</span> <span class="s">&quot;0</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">min</span>
+<span class="k">if</span> <span class="n">sec</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span> <span class="n">sec</span> <span class="o">=</span> <span class="s">&quot;0</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">sec</span>
+</pre></div></div></div>
+</li>
+</ol></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tests">3. Tests</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Les phases de tests sont, dans tout développement, indispensables.</p></div>
+<div class="paragraph"><p>Les tests peuvent être réalisés
+"manuellement" mais il est préférable de les automatiser
+afin qu&#8217;ils puissent être réexécutés autant que nécessaire
+tout au long du développement.</p></div>
+<div class="paragraph"><p>Tous les langages de programmation disposent de librairies
+de tests qui permettent de valider le comportement des
+programmes dans tous leurs aspects (des calculs,
+à l&#8217;interface graphique en passant par le réseau).</p></div>
+<div class="sect2">
+<h3 id="_le_module_em_python_em_unittest">3.1. Le module <em>Python</em> unittest</h3>
+<div class="paragraph"><p>Le module <em>Python</em> <tt>unittest</tt> fournit les fonctions de base
+permettant d'écrire des programmes de tests
+unitaires ou fonctionnels
+( voir <a href="http://docs.python.org/2/library/unittest.html">python unittest</a> pour tous les détails).</p></div>
+<div class="paragraph"><p>Pour réaliser un programme de tests,
+il suffit d&#8217;importer le module <tt>unittest</tt> et le module
+à tester puis d'écrire l&#8217;ensemble des tests requis.</p></div>
+<div class="paragraph"><p>On distingue généralement 2 catégories de tests : les tests
+unitaires et les tests fonctionnels.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_les_tests_unitaires">3.2. Les Tests unitaires</h3>
+<div class="paragraph"><p>Il s&#8217;agit des tests qui valident le comportement
+des fonctions des librairies ou des classes en programmation objet.</p></div>
+<div class="paragraph"><p>Ces tests sont conçus pour chaque module logiciel inclus
+dans l&#8217;application produite.</p></div>
+<div class="paragraph"><p>Par exemple, la classe <em>MaClasse</em> pourrait être testée avec
+le programme de test suivant :</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="c"># -*- coding: UTF-8 -*-</span>
+<span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">import</span> <span class="nn">maclasse</span>
+
+<span class="k">class</span> <span class="nc">TestMaClasse</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="n">maclasse</span><span class="o">.</span><span class="n">MaClasse</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">test_x</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">maclasse</span><span class="o">.</span><span class="n">MaClasse</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="mi">23</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_y</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">maclasse</span><span class="o">.</span><span class="n">MaClasse</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_z</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">AttributeError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">z</span>
+        <span class="k">def</span> <span class="nf">f</span><span class="p">():</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">z</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
+        <span class="c">#oups</span>
+        <span class="c"># self.assertRaises(AttributeError,f())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">affiche</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">affiche</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">__str__</span><span class="p">(),</span> <span class="s">&quot;Voila mes valeurs y = 28 z = 42&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_les_tests_fonctionnels">3.3. Les Tests fonctionnels</h3>
+<div class="paragraph"><p>Il s&#8217;agit des tests qui valident le comportement
+d&#8217;une application vis à vis des demandes du client.</p></div>
+<div class="paragraph"><p>C&#8217;est ici le comportement global de l&#8217;application qui est
+validée, on parle aussi de tests d&#8217;intégration car ces tests
+valident le bon fonctionnement des modules logiciels
+lorsqu&#8217;ils sont assemblés pour répondre aux besoins du client.</p></div>
+<div class="paragraph"><p>Par exemple, le programme  <em>maclasse.py</em> pourrait être testé avec
+le programme de test suivant :</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="c"># -*- coding: UTF-8 -*-</span>
+<span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">import</span> <span class="nn">maclasse</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">class</span> <span class="nc">TestMaClasse</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">stdi</span><span class="p">,</span><span class="n">stdo</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">popen2</span><span class="p">(</span><span class="s">&#39;python maclasse.py&#39;</span><span class="p">,</span><span class="s">&#39;t&#39;</span><span class="p">)</span>
+        <span class="n">stdi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lignes</span> <span class="o">=</span> <span class="n">stdo</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+        <span class="n">stdo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">test_go</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s">&#39;python maclasse.py&#39;</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_ligne1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lignes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s">&#39;28</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_lignes1234</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lignes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s">&#39;28</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lignes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">&#39;42</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lignes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s">&#39;Voila mes valeurs y = 28 z = 42</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRegexpMatches</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lignes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s">r&#39;Voila mes valeurs y = \d+ z = \d+\n&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lignes</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="s">&#39;42</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lignes</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="s">&#39;23</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div></div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercice_de_synthèse_2">4. Exercice de synthèse</h2>
+<div class="sectionbody">
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Ecrire les programmes de tests des classes Vecteur2D à Pile et File
+</p>
+</li>
+</ol></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2013-02-26 10:26:15 Paris, Madrid
+</div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,588 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.6" />
+<meta name="description" content="IGS - Langage Python" />
+<meta name="keywords" content="Langage Python" />
+<title>Interface Utilisateur Tkinter</title>
+<link rel="stylesheet" href="./xhtml11.css" type="text/css" />
+<link rel="stylesheet" href="./layout1.css" type="text/css" />
+<link rel="stylesheet" href="./layout1a.css" type="text/css" />
+<link rel="stylesheet" href="./pygments.css" type="text/css" />
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){asciidoc.footnotes(); asciidoc.toc(1);}
+/*]]>*/
+</script>
+<script type="text/javascript" src="./asciidoc-xhtml11.js"></script>
+</head>
+<body>
+<div id="layout-banner">
+  <div id="layout-title">IGS</div>
+  <div id="layout-description">La langage Python</div>
+</div>
+<table>
+<tr valign="top">
+<td id="layout-menu" width="12%">
+<div>&#187;<a href="plan.html">Accueil</a></div>
+<div>&#187;<a href="http://jmbhome.heroku.com/teaching/POO/POO-python.html">Notes Python</a></div>
+<div>&#187;<a href="exos.html">Exercices POO</a></div>
+<div>&#187;<a href="re_tests.html">ER et Tests</a></div>
+<div>&#187;<a href="classes.html">Classes</a></div>
+<div>&#187;<a href="webserver.html">HTTP Server</a></div>
+<div>&#187;<a href="turtle.html">Turtle</a></div>
+<div>&#187;<a href="tkinter.html">Tkinter GUI</a></div>
+<!--div id="page-source">&#187;<a href="IGS	kinter.txt" target="_blank">Page&nbsp;Source</a></div-->
+<!--div id="layout-menu-jmi">
+<div>&#187;<a href="plan.html">Accueil</a></div>
+<div>&#187;<a href="http://jmbhome.heroku.com/teaching/POO/POO-python.html">Notes Python</a></div>
+<div>&#187;<a href="exos.html">Exercices POO</a></div>
+<div>&#187;<a href="re_tests.html">ER et Tests</a></div>
+<div>&#187;<a href="classes.html">Classes</a></div>
+<div>&#187;<a href="webserver.html">HTTP Server</a></div>
+<div>&#187;<a href="turtle.html">Turtle</a></div>
+<div>&#187;<a href="tkinter.html">Tkinter GUI</a></div>
+<div id="page-source">&#187;<a href="IGS	kinter.txt">Page&nbsp;Source</a></div>
+</div-->
+</td>
+<td width="88%">
+<div id="layout-content">
+<div id="header">
+<h1>Interface Utilisateur Tkinter</h1>
+<span id="author">Jean-Michel Inglebert</span><br />
+<span id="email"><tt>&lt;<a href="mailto:jean-michel.inglebert@univ-tlse2.fr">jean-michel.inglebert@univ-tlse2.fr</a>&gt;</tt></span><br />
+Janvier, 2013
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph"><p>Le module <strong>Tkinter</strong> est un module permettant de créer des interfaces
+utilisateur graphiques (GUI) pour des applications locales (dites <em>lourdes</em>).</p></div>
+<div class="paragraph"><p>Tester le programme suivant :</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="c"># -*- coding: UTF-8 -*-</span>
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">Tkinter</span>
+
+<span class="n">Tkinter</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">&quot;Hello monde!&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+<span class="n">Tkinter</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">&quot;Au revoir&quot;</span><span class="p">,</span><span class="n">command</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+<span class="n">Tkinter</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+</pre></div></div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Note" src="data:image/png;base64,
+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" />
+</td>
+<td class="content">
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+la méthode <strong>pack()</strong> gère le positionnement des éléments d&#8217;interface (widgets)
+</p>
+</li>
+<li>
+<p>
+la méthode <strong>mainloop()</strong> débute l&#8217;interaction (infinie) avec l&#8217;utilisateur
+</p>
+</li>
+<li>
+<p>
+quel est le type d&#8217;objet fourni en paramètre <strong>command</strong> au bouton ?
+</p>
+</li>
+</ol></div>
+</td>
+</tr></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_traquer_les_changements">1. Traquer les changements</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Les objets de type <strong>Variable</strong> fournis par Tkinter représentent
+des variables de type quelconque qui si elles sont associées à un élément
+d&#8217;interface permettront de le mettre à jour automatiquement dès que la variable sera modifiée.</p></div>
+<div class="paragraph"><p>Comprendre et tester ce programme :</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="c"># -*- coding: UTF-8 -*-</span>
+<span class="kn">import</span> <span class="nn">Tkinter</span>
+
+<span class="n">root</span> <span class="o">=</span> <span class="n">Tkinter</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
+<span class="n">var1</span> <span class="o">=</span> <span class="n">Tkinter</span><span class="o">.</span><span class="n">StringVar</span><span class="p">()</span>
+
+<span class="n">Tkinter</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">textvariable</span><span class="o">=</span><span class="n">var1</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+<span class="n">Tkinter</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">textvariable</span><span class="o">=</span><span class="n">var1</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+<span class="n">var1</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&#39;Hello Monde!&#39;</span><span class="p">)</span>
+<span class="n">Tkinter</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">&quot;Au revoir&quot;</span><span class="p">,</span><span class="n">command</span><span class="o">=</span><span class="n">root</span><span class="o">.</span><span class="n">quit</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+
+<span class="n">Tkinter</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&quot;La valeur finale de var1 = </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">var1</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</pre></div></div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Note" src="data:image/png;base64,
+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" />
+</td>
+<td class="content">
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+<strong>root</strong> référence l&#8217;interface de l&#8217;application
+</p>
+</li>
+<li>
+<p>
+<strong>var1</strong> est de type <strong>StringVar</strong>, vous pouvez aussi utiliser <strong>DoubleVar</strong> ou <strong>IntVar</strong>
+</p>
+</li>
+<li>
+<p>
+le paramètre <strong>textvariable</strong> lie la variable <strong>var1</strong> aux éléments d&#8217;interface Label et Entry (champ de saisie)
+</p>
+</li>
+<li>
+<p>
+la méthode <strong>root.quit()</strong> arrête l&#8217;interface graphique (la boucle d&#8217;intéraction), mais pas le programme
+</p>
+</li>
+</ol></div>
+</td>
+</tr></table>
+</div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Ajouter un bouton qui réinitialise <strong>var1</strong> à la valeur "Hello Monde!"
+</p>
+</li>
+</ol></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_gérer_plusieurs_fenêtres">2. Gérer plusieurs fenêtres</h2>
+<div class="sectionbody">
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Comprendre et tester ce programme :
+</p>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="c"># -*- coding: UTF-8 -*-</span>
+<span class="kn">import</span> <span class="nn">Tkinter</span>
+
+<span class="n">root</span> <span class="o">=</span> <span class="n">Tkinter</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
+<span class="n">var1</span> <span class="o">=</span> <span class="n">Tkinter</span><span class="o">.</span><span class="n">StringVar</span><span class="p">()</span>
+<span class="n">Tkinter</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">textvariable</span><span class="o">=</span><span class="n">var1</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+<span class="n">Tkinter</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">textvariable</span><span class="o">=</span><span class="n">var1</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+<span class="n">var1</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&#39;Hello Monde!&#39;</span><span class="p">)</span>
+<span class="n">Tkinter</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">&quot;Au revoir&quot;</span><span class="p">,</span><span class="n">command</span><span class="o">=</span><span class="n">root</span><span class="o">.</span><span class="n">quit</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+
+<span class="n">root2</span> <span class="o">=</span> <span class="n">Tkinter</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">()</span>
+<span class="n">Tkinter</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">root2</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="s">&#39;Fenetre 2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+
+<span class="n">Tkinter</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&quot;La valeur finale de var1 = </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">var1</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</pre></div></div></div>
+</li>
+<li>
+<p>
+Déterminer les liens des différentes fenêtres entre-elles
+</p>
+</li>
+<li>
+<p>
+Ajouter la ligne suivante avant l&#8217;entrée dans la boucle d&#8217;intéraction :
+</p>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="n">root</span><span class="o">.</span><span class="n">wait_window</span><span class="p">(</span><span class="n">root2</span><span class="p">)</span>
+</pre></div></div></div>
+<div class="openblock">
+<div class="content">
+<div class="paragraph"><p>Quels sont alors les liens entre les différentes fenêtres ?</p></div>
+</div></div>
+</li>
+<li>
+<p>
+Comprendre et tester ce programme :
+</p>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="c"># -*- coding: UTF-8 -*-</span>
+<span class="kn">import</span> <span class="nn">Tkinter</span>
+
+<span class="n">root</span> <span class="o">=</span> <span class="n">Tkinter</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
+<span class="n">root2</span> <span class="o">=</span> <span class="n">Tkinter</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">()</span>
+<span class="n">var1</span> <span class="o">=</span> <span class="n">Tkinter</span><span class="o">.</span><span class="n">StringVar</span><span class="p">()</span>
+<span class="n">var1</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&#39;Hello Monde!&#39;</span><span class="p">)</span>
+
+<span class="n">Tkinter</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">textvariable</span><span class="o">=</span><span class="n">var1</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+<span class="n">Tkinter</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">textvariable</span><span class="o">=</span><span class="n">var1</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+<span class="n">Tkinter</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="s">&quot;Au revoir&quot;</span><span class="p">,</span><span class="n">command</span><span class="o">=</span><span class="n">root</span><span class="o">.</span><span class="n">quit</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+
+<span class="n">Tkinter</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">root2</span><span class="p">,</span><span class="n">textvariable</span><span class="o">=</span><span class="n">var1</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+<span class="n">Tkinter</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">root2</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="s">&#39;Fenetre 2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+
+<span class="n">root</span><span class="o">.</span><span class="n">wait_window</span><span class="p">(</span><span class="n">root2</span><span class="p">)</span>
+
+<span class="n">Tkinter</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&quot;La valeur finale de var1 = </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">var1</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</pre></div></div></div>
+</li>
+<li>
+<p>
+si la méthode <strong>root2.destroy()</strong> détruit la fenêtre <tt>root2</tt>, ajouter un
+bouton dans <tt>root1</tt> permettant de détruire <tt>root2</tt>
+</p>
+</li>
+<li>
+<p>
+faire de même dans <tt>root2</tt>, puis tester
+</p>
+</li>
+</ol></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_gérer_des_listes">3. Gérer des listes</h2>
+<div class="sectionbody">
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Comprendre et tester ce programme :
+</p>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="c"># -*- coding: UTF-8 -*-</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">Tkinter</span>
+
+<span class="n">root</span> <span class="o">=</span> <span class="n">Tkinter</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
+<span class="n">Tkinter</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="s">&quot;Au revoir&quot;</span><span class="p">,</span><span class="n">command</span><span class="o">=</span><span class="n">root</span><span class="o">.</span><span class="n">quit</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+
+<span class="nb">list</span> <span class="o">=</span> <span class="n">Tkinter</span><span class="o">.</span><span class="n">Listbox</span><span class="p">(</span><span class="n">selectmode</span><span class="o">=</span><span class="n">Tkinter</span><span class="o">.</span><span class="n">SINGLE</span><span class="p">)</span>
+<span class="k">for</span> <span class="nb">str</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;item1&#39;</span><span class="p">,</span> <span class="s">&#39;item2&#39;</span><span class="p">,</span> <span class="s">&#39;item3&#39;</span><span class="p">,</span> <span class="s">&#39;item4&#39;</span><span class="p">):</span>
+        <span class="nb">list</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">Tkinter</span><span class="o">.</span><span class="n">END</span><span class="p">,</span><span class="nb">str</span><span class="p">)</span>
+<span class="nb">list</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+
+<span class="n">gif</span> <span class="o">=</span> <span class="n">Tkinter</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;../pub&#39;</span><span class="p">,</span><span class="s">&#39;calendar.gif&#39;</span><span class="p">))</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">Tkinter</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">gif</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+
+<span class="n">Tkinter</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="s">&quot;Au revoir&quot;</span><span class="p">,</span><span class="n">command</span><span class="o">=</span><span class="n">root</span><span class="o">.</span><span class="n">quit</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+
+<span class="n">root</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&quot;Dernière sélection : </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="s">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="o">.</span><span class="n">curselection</span><span class="p">())</span>
+</pre></div></div></div>
+</li>
+<li>
+<p>
+Tester les valeurs MULTIPLE et EXTENDED pour l&#8217;attribut <em>selectmode</em>
+</p>
+</li>
+</ol></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_utiliser_des_images">4. Utiliser des images</h2>
+<div class="sectionbody">
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Ajouter le code suivant dans votre application :
+</p>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="n">gif</span> <span class="o">=</span> <span class="n">Tkinter</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;../pub&#39;</span><span class="p">,</span><span class="s">&#39;calendar.gif&#39;</span><span class="p">))</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">Tkinter</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">gif</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+</pre></div></div></div>
+</li>
+</ol></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_gestion_des_menus">5. Gestion des menus</h2>
+<div class="sectionbody">
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Comprendre et tester ce programme :
+</p>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="c"># -*- coding: UTF-8 -*-</span>
+<span class="kn">import</span> <span class="nn">Tkinter</span>
+
+<span class="n">root</span> <span class="o">=</span> <span class="n">Tkinter</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
+
+<span class="n">var1</span> <span class="o">=</span> <span class="n">Tkinter</span><span class="o">.</span><span class="n">StringVar</span><span class="p">()</span>
+<span class="n">var1</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&#39;aucune action&#39;</span><span class="p">)</span>
+
+<span class="n">Tkinter</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">textvariable</span><span class="o">=</span><span class="n">var1</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">a1</span><span class="p">():</span>
+        <span class="k">print</span> <span class="s">&quot;Action 1&quot;</span>
+        <span class="n">var1</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Action 1&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">a2</span><span class="p">():</span>
+        <span class="k">print</span> <span class="s">&quot;Action 2&quot;</span>
+        <span class="n">var1</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Action 2&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">a3</span><span class="p">():</span>
+        <span class="k">print</span> <span class="s">&quot;Action 3&quot;</span>
+        <span class="n">var1</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;Action 3&quot;</span><span class="p">)</span>
+
+
+
+<span class="n">action</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">menubar</span> <span class="o">=</span> <span class="n">Tkinter</span><span class="o">.</span><span class="n">Menu</span><span class="p">()</span>
+
+<span class="n">menu1</span> <span class="o">=</span> <span class="n">Tkinter</span><span class="o">.</span><span class="n">Menu</span><span class="p">()</span>
+<span class="n">action</span><span class="p">[</span><span class="s">&#39;Ouvrir&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">a1</span>
+<span class="n">action</span><span class="p">[</span><span class="s">&#39;Sauver&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">a2</span>
+<span class="n">action</span><span class="p">[</span><span class="s">&#39;Quitter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">quit</span>
+
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;Ouvrir&#39;</span><span class="p">,</span><span class="s">&#39;Sauver&#39;</span><span class="p">,</span><span class="s">&#39;Quitter&#39;</span><span class="p">):</span>
+        <span class="n">menu1</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">item</span><span class="p">,</span><span class="n">command</span><span class="o">=</span><span class="n">action</span><span class="p">[</span><span class="n">item</span><span class="p">])</span>
+
+<span class="n">menubar</span><span class="o">.</span><span class="n">add_cascade</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s">&#39;Fichier&#39;</span><span class="p">,</span><span class="n">menu</span><span class="o">=</span><span class="n">menu1</span><span class="p">)</span>
+
+
+<span class="n">root</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">menu</span><span class="o">=</span><span class="n">menubar</span><span class="p">)</span>
+
+<span class="n">root</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+</pre></div></div></div>
+</li>
+<li>
+<p>
+Ajouter un second menu <em>Edition</em> proposant les actions <em>Copier</em>,<em>Coller</em> et <em>Supprimer</em>
+</p>
+</li>
+<li>
+<p>
+Ajouter un <strong>Label</strong> qui affiche la dernière action sélectionnée
+</p>
+</li>
+</ol></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_gestion_des_évênements">6. Gestion des évênements</h2>
+<div class="sectionbody">
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Comprendre et tester ce programme :
+</p>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="c"># -*- coding: UTF-8 -*-</span>
+<span class="kn">import</span> <span class="nn">Tkinter</span>
+
+<span class="n">root</span> <span class="o">=</span> <span class="n">Tkinter</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">trace1</span><span class="p">(</span><span class="n">event</span><span class="p">):</span> <span class="k">print</span> <span class="n">event</span>
+<span class="k">def</span> <span class="nf">trace2</span><span class="p">(</span><span class="n">event</span><span class="p">):</span> <span class="k">print</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">char</span><span class="p">,</span><span class="n">event</span><span class="o">.</span><span class="n">keysym</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">quit</span><span class="p">(</span><span class="n">event</span><span class="p">):</span> <span class="n">root</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+
+<span class="n">root</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s">&#39;&lt;Return&gt;&#39;</span><span class="p">,</span> <span class="n">trace1</span><span class="p">)</span>
+<span class="n">root</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s">&#39;t&#39;</span><span class="p">,</span> <span class="n">trace2</span><span class="p">)</span>
+<span class="n">root</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s">&#39;q&#39;</span><span class="p">,</span> <span class="n">quit</span><span class="p">)</span>
+
+<span class="n">Tkinter</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+</pre></div></div></div>
+</li>
+<li>
+<p>
+Associer la méthode <strong>trace2()</strong> à toutes les touches du clavier
+avec l&#8217;instruction : <tt>root.bind_all(<em>&lt;Key&gt;</em>,trace2)</tt>. Que retourne <strong>event.keysym</strong> ?
+</p>
+</li>
+<li>
+<p>
+Ajouter le traitement suivant des évênements <strong>souris gauche</strong> :
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>def trace3(event): print "%s %s" % (event.x,event.y)
+root.bind_all('&lt;Button-1&gt;',trace3)</tt></pre>
+</div></div>
+</li>
+<li>
+<p>
+Traiter tous les boutons de la souris
+</p>
+</li>
+<li>
+<p>
+Pour les évêmenents souris tracer également les attributs <strong>num</strong>, <strong>x_root</strong>, <strong>y_root</strong> et <strong>widget</strong>
+</p>
+</li>
+</ol></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_programmation_objet_des_interfaces_tkinter">7. Programmation objet des interfaces Tkinter</h2>
+<div class="sectionbody">
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Comprendre et tester ce programme :
+</p>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="c"># -*- coding: UTF-8 -*-</span>
+<span class="kn">from</span> <span class="nn">Tkinter</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">class</span> <span class="nc">Application</span><span class="p">(</span><span class="n">Frame</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">print_coucou</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&quot;Coucou à tous!&quot;</span>
+
+    <span class="k">def</span> <span class="nf">createWidgets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">QUIT</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="s">&quot;QUITTER&quot;</span><span class="p">,</span><span class="n">fg</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">quit</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">QUIT</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">COUCOU</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">COUCOU</span><span class="p">[</span><span class="s">&quot;text&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;Coucou&quot;</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">COUCOU</span><span class="p">[</span><span class="s">&quot;command&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_coucou</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">COUCOU</span><span class="o">.</span><span class="n">pack</span><span class="p">({</span><span class="s">&quot;side&quot;</span><span class="p">:</span> <span class="s">&quot;left&quot;</span><span class="p">})</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">master</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">Frame</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">master</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">createWidgets</span><span class="p">()</span>
+
+<span class="n">root</span> <span class="o">=</span> <span class="n">Tk</span><span class="p">()</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Application</span><span class="p">(</span><span class="n">master</span><span class="o">=</span><span class="n">root</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+<span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+</pre></div></div></div>
+</li>
+<li>
+<p>
+Passer le paramètre <tt>{"side": "left"}</tt> à <strong>self.QUIT.pack()</strong> puis comparer
+</p>
+</li>
+<li>
+<p>
+Modifier le label du bouton <tt>coucou</tt> en "Coucou dans la console" puis comparer
+</p>
+</li>
+<li>
+<p>
+Ajouter un widget de type <strong>Scale</strong> et afficher sa valeur
+dans la console à la fin de l&#8217;application en utilisant sa méthode <strong>get()</strong>
+</p>
+</li>
+</ol></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercice">8. Exercice</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Ecrire l&#8217;interface graphique du programme de votre choix : racine, &#8230;, calendrier, evenement</p></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2013-02-27 06:38:58 Paris, Madrid
+</div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

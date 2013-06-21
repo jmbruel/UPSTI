@@ -1,0 +1,506 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.6" />
+<meta name="description" content="IGS - Langage Python" />
+<meta name="keywords" content="Langage Python" />
+<title>HTTP server classes</title>
+<link rel="stylesheet" href="./xhtml11.css" type="text/css" />
+<link rel="stylesheet" href="./layout1.css" type="text/css" />
+<link rel="stylesheet" href="./layout1a.css" type="text/css" />
+<link rel="stylesheet" href="./pygments.css" type="text/css" />
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){asciidoc.footnotes(); asciidoc.toc(1);}
+/*]]>*/
+</script>
+<script type="text/javascript" src="./asciidoc-xhtml11.js"></script>
+</head>
+<body>
+<div id="layout-banner">
+  <div id="layout-title">IGS</div>
+  <div id="layout-description">La langage Python</div>
+</div>
+<table>
+<tr valign="top">
+<td id="layout-menu" width="12%">
+<div>&#187;<a href="plan.html">Accueil</a></div>
+<div>&#187;<a href="http://jmbhome.heroku.com/teaching/POO/POO-python.html">Notes Python</a></div>
+<div>&#187;<a href="exos.html">Exercices POO</a></div>
+<div>&#187;<a href="re_tests.html">ER et Tests</a></div>
+<div>&#187;<a href="classes.html">Classes</a></div>
+<div>&#187;<a href="webserver.html">HTTP Server</a></div>
+<div>&#187;<a href="turtle.html">Turtle</a></div>
+<div>&#187;<a href="tkinter.html">Tkinter GUI</a></div>
+<!--div id="page-source">&#187;<a href="webserver.txt" target="_blank">Page&nbsp;Source</a></div-->
+<!--div id="layout-menu-jmi">
+<div>&#187;<a href="plan.html">Accueil</a></div>
+<div>&#187;<a href="http://jmbhome.heroku.com/teaching/POO/POO-python.html">Notes Python</a></div>
+<div>&#187;<a href="exos.html">Exercices POO</a></div>
+<div>&#187;<a href="re_tests.html">ER et Tests</a></div>
+<div>&#187;<a href="classes.html">Classes</a></div>
+<div>&#187;<a href="webserver.html">HTTP Server</a></div>
+<div>&#187;<a href="turtle.html">Turtle</a></div>
+<div>&#187;<a href="tkinter.html">Tkinter GUI</a></div>
+<div id="page-source">&#187;<a href="webserver.txt">Page&nbsp;Source</a></div>
+</div-->
+</td>
+<td width="88%">
+<div id="layout-content">
+<div id="header">
+<h1>HTTP server classes</h1>
+<span id="author">Jean-Michel Inglebert</span><br />
+<span id="email"><tt>&lt;<a href="mailto:jean-michel.inglebert@univ-tlse2.fr">jean-michel.inglebert@univ-tlse2.fr</a>&gt;</tt></span><br />
+Janvier, 2013
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_partager_ses_fichiers">1. Partager ses fichiers</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Comment rendre accessible le fichier <tt>calendrier_out.html</tt> ?</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>python -m SimpleHTTPServer</tt></pre>
+</div></div>
+<div class="paragraph"><p>ou bien :</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>python -c "import SimpleHTTPServer;SimpleHTTPServer.test()"</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_premières_versions">2. Premières versions</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Analyser, comprendre et tester les versions suivantes :</p></div>
+<div class="listingblock">
+<div class="title">ws1.py</div>
+<div class="content"><div class="highlight"><pre><span class="c"># -*- coding: UTF-8 -*-</span>
+<span class="kn">import</span> <span class="nn">BaseHTTPServer</span>
+
+<span class="n">server_address</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="mi">8888</span><span class="p">)</span>
+<span class="n">handlerClass</span> <span class="o">=</span> <span class="n">BaseHTTPServer</span><span class="o">.</span><span class="n">BaseHTTPRequestHandler</span>
+<span class="n">httpd</span> <span class="o">=</span> <span class="n">BaseHTTPServer</span><span class="o">.</span><span class="n">HTTPServer</span><span class="p">(</span><span class="n">server_address</span><span class="p">,</span> <span class="n">handlerClass</span><span class="p">)</span>
+<span class="n">httpd</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
+</pre></div></div></div>
+<div class="listingblock">
+<div class="title">ws2.py</div>
+<div class="content"><div class="highlight"><pre><span class="c"># -*- coding: UTF-8 -*-</span>
+<span class="kn">import</span> <span class="nn">BaseHTTPServer</span>
+
+<span class="k">class</span> <span class="nc">MonServeur</span><span class="p">(</span><span class="n">BaseHTTPServer</span><span class="o">.</span><span class="n">BaseHTTPRequestHandler</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">do_GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">send_error</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span> <span class="s">&quot;File not found&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+        <span class="n">server_address</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="mi">8888</span><span class="p">)</span>
+        <span class="n">handlerClass</span> <span class="o">=</span> <span class="n">MonServeur</span>
+        <span class="n">httpd</span> <span class="o">=</span> <span class="n">BaseHTTPServer</span><span class="o">.</span><span class="n">HTTPServer</span><span class="p">(</span><span class="n">server_address</span><span class="p">,</span> <span class="n">handlerClass</span><span class="p">)</span>
+        <span class="n">httpd</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
+</pre></div></div></div>
+<div class="listingblock">
+<div class="title">ws3.py</div>
+<div class="content"><div class="highlight"><pre><span class="c"># -*- coding: UTF-8 -*-</span>
+<span class="kn">from</span> <span class="nn">BaseHTTPServer</span> <span class="kn">import</span> <span class="n">HTTPServer</span><span class="p">,</span> <span class="n">BaseHTTPRequestHandler</span>
+
+<span class="k">class</span> <span class="nc">MonServeur</span><span class="p">(</span><span class="n">BaseHTTPRequestHandler</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">do_GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">send_error</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span> <span class="s">&quot;File not found&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+        <span class="n">server_address</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="mi">8888</span><span class="p">)</span>
+        <span class="n">handlerClass</span> <span class="o">=</span> <span class="n">MonServeur</span>
+        <span class="n">httpd</span> <span class="o">=</span> <span class="n">HTTPServer</span><span class="p">(</span><span class="n">server_address</span><span class="p">,</span> <span class="n">handlerClass</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+                <span class="n">httpd</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">&#39;Arret utilisateur ...&#39;</span>
+                <span class="n">httpd</span><span class="o">.</span><span class="n">socket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div></div></div>
+<div class="listingblock">
+<div class="title">ws4.py</div>
+<div class="content"><div class="highlight"><pre><span class="c"># -*- coding: UTF-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Serveur &#39;Hello Monde&#39;.</span>
+
+<span class="sd">- port d&#39;écoute : 8888</span>
+
+<span class="sd">- Documentation :  pydoc .\ws4.py</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">BaseHTTPServer</span> <span class="kn">import</span> <span class="n">HTTPServer</span><span class="p">,</span> <span class="n">BaseHTTPRequestHandler</span>
+
+<span class="k">class</span> <span class="nc">MonServeur</span><span class="p">(</span><span class="n">BaseHTTPRequestHandler</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Répond toujours &#39;Hello Monde&#39;.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nbClients</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">def</span> <span class="nf">do_GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="n">page</span> <span class="o">=</span> <span class="s">&#39;&lt;html&gt;&lt;body&gt;&lt;h3&gt;Hello Monde (</span><span class="si">%d</span><span class="s">)&lt;/h3&gt;&lt;/body&gt;&lt;/html&gt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbClients</span>
+                <span class="n">MonServeur</span><span class="o">.</span><span class="n">nbClients</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">send_response</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">send_header</span><span class="p">(</span><span class="s">&quot;Content-type&quot;</span><span class="p">,</span> <span class="s">&#39;text/html&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">end_headers</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+        <span class="n">server_address</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="mi">8888</span><span class="p">)</span>
+        <span class="n">handlerClass</span> <span class="o">=</span> <span class="n">MonServeur</span>
+        <span class="n">httpd</span> <span class="o">=</span> <span class="n">HTTPServer</span><span class="p">(</span><span class="n">server_address</span><span class="p">,</span> <span class="n">handlerClass</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+                <span class="n">httpd</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">&#39;Arret utilisateur ...&#39;</span>
+                <span class="n">httpd</span><span class="o">.</span><span class="n">socket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div></div></div>
+<div class="sect2">
+<h3 id="_a_vous_8230">2.1. A vous &#8230;</h3>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Faire en sorte que le serveur retourne <em>Hello Monde (1)</em>
+à la première requête et <em>Hello Monde (20)</em> à la 20ème requête.
+</p>
+</li>
+</ol></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_serveur_web_de_calendriers">3. Serveur web de Calendriers</h2>
+<div class="sectionbody">
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Faire en sorte que le serveur retourne la version html
+du calendrier <tt>edt_Perl_JMI.ics</tt>
+</p>
+<div class="olist loweralpha"><ol class="loweralpha">
+<li>
+<p>
+<em>do_GET()</em> doit retourner la page produite par <em>Calendrier.exportHTML()</em>
+</p>
+<div class="listingblock">
+<div class="title">wscal0.py</div>
+<div class="content"><div class="highlight"><pre><span class="c"># -*- coding: UTF-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Serveur &#39;wscal&#39;.</span>
+
+<span class="sd">- port d&#39;écoute : 8888</span>
+
+<span class="sd">- Exécution :  python wscal.py</span>
+<span class="sd">- Accès :  http://localhost:8888</span>
+
+<span class="sd">- Documentation :  pydoc .\wscal.py</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">BaseHTTPServer</span> <span class="kn">import</span> <span class="n">HTTPServer</span><span class="p">,</span> <span class="n">BaseHTTPRequestHandler</span>
+<span class="kn">from</span> <span class="nn">calendrier</span> <span class="kn">import</span> <span class="n">Calendrier</span>
+
+<span class="k">class</span> <span class="nc">WSCalendrier</span><span class="p">(</span><span class="n">BaseHTTPRequestHandler</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retourne toujours le calendrier jquery.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">do_GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="n">cal1</span> <span class="o">=</span> <span class="n">Calendrier</span><span class="p">(</span><span class="s">&#39;edt_Perl_JMI.ics&#39;</span><span class="p">)</span>
+                <span class="n">cal1</span><span class="o">.</span><span class="n">readICS</span><span class="p">()</span>
+                <span class="n">cal1</span><span class="o">.</span><span class="n">exportHTML</span><span class="p">(</span><span class="s">&#39;paaaaaaaaaaage.html&#39;</span><span class="p">)</span>
+                <span class="n">page</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s">&#39;paaaaaaaaaaage.html&#39;</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">send_response</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">send_header</span><span class="p">(</span><span class="s">&quot;Content-type&quot;</span><span class="p">,</span> <span class="s">&#39;text/html&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">end_headers</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+        <span class="n">server_address</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="mi">8888</span><span class="p">)</span>
+        <span class="n">handlerClass</span> <span class="o">=</span> <span class="n">WSCalendrier</span>
+        <span class="n">httpd</span> <span class="o">=</span> <span class="n">HTTPServer</span><span class="p">(</span><span class="n">server_address</span><span class="p">,</span> <span class="n">handlerClass</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+                <span class="n">httpd</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">&#39;Arret utilisateur ...&#39;</span>
+                <span class="n">httpd</span><span class="o">.</span><span class="n">socket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div></div></div>
+</li>
+<li>
+<p>
+<em>do_GET()</em> doit retourner les fichiers <tt>.css</tt> et <tt>.js</tt> de <em>jquery mobile</em>
+</p>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Note" src="data:image/png;base64,
+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" />
+</td>
+<td class="content">Dans <em>do_GET()</em>, <tt>self.path</tt> contient le chemin du fichier demandé.</td>
+</tr></table>
+</div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Astuce" src="data:image/png;base64,
+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" />
+</td>
+<td class="content">Que faisait la classe <em>SimpleHTTPServer</em> ?</td>
+</tr></table>
+</div>
+</li>
+</ol></div>
+</li>
+<li>
+<p>
+Réaliser le refactoring nécessaire pour la classe <em>Calendrier</em>
+</p>
+<div class="olist loweralpha"><ol class="loweralpha">
+<li>
+<p>
+La variable <em>Calendrier.header</em> sera initialisée à partir du fichier <tt>.ics</tt> lu
+</p>
+</li>
+<li>
+<p>
+La méthode <em>exportHTML()</em> retournera la page sous la forme d&#8217;une chaîne de caratères
+</p>
+</li>
+<li>
+<p>
+La méthode <em>writeHTML()</em> produira le fichier HTML contenant la page <em>jquery</em>
+</p>
+</li>
+<li>
+<p>
+Le serveur http et les tests doivent être modifiés en conséquence
+</p>
+</li>
+</ol></div>
+</li>
+<li>
+<p>
+Afficher chaque évênement dans un formulaire <em>jquery</em>
+</p>
+<div class="olist loweralpha"><ol class="loweralpha">
+<li>
+<p>
+Choisir les éléments de formulaire jquery les plus adaptés sur <a href="http://jquerymobile.com/">http://jquerymobile.com/</a>
+</p>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Astuce" src="data:image/png;base64,
+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" />
+</td>
+<td class="content">une solution possible : <a href="jqform.html">ici</a></td>
+</tr></table>
+</div>
+</li>
+<li>
+<p>
+Modifier la fonction d&#8217;export HTML d&#8217;un évênement
+</p>
+</li>
+</ol></div>
+</li>
+<li>
+<p>
+Permettre à l&#8217;utilisateur de modifier tout évênement
+</p>
+<div class="olist loweralpha"><ol class="loweralpha">
+<li>
+<p>
+Traiter les données saisies
+</p>
+</li>
+<li>
+<p>
+Sauvegarder le calendrier modifié
+</p>
+<div class="paragraph"><p>Le traitement d&#8217;une requête POST s&#8217;effectue avec la méthode <em>do_GET()</em>
+qui doit lire le nombre d&#8217;octets du corps de la réponse sur le descripteur
+de fichier <em>self.rfile</em> :</p></div>
+</li>
+</ol></div>
+</li>
+</ol></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>        def do_POST(self):
+                print self.path
+                print self.headers
+                print self.headers['Content-Length']
+                print self.rfile.read(int(self.headers['Content-Length']))</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_aller_plus_loin">4. Aller plus loin</h2>
+<div class="sectionbody">
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Compléter l&#8217;application pour disposer de toutes les actions CRUD
+</p>
+</li>
+<li>
+<p>
+Modifier la structure de l&#8217;application pour limiter au maximum le volume des données transmises.
+</p>
+</li>
+</ol></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2013-02-26 10:26:21 Paris, Madrid
+</div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,2621 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.6" />
+<meta name="description" content="Notes de cours sur Python" />
+<title>Notes Python</title>
+<link rel="stylesheet" href="./xhtml11.css" type="text/css" />
+<link rel="stylesheet" href="./layout1.css" type="text/css" />
+<link rel="stylesheet" href="./layout1a.css" type="text/css" />
+<link rel="stylesheet" href="./pygments.css" type="text/css" />
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){asciidoc.footnotes(); asciidoc.toc(1);}
+/*]]>*/
+</script>
+<script type="text/javascript" src="./asciidoc-xhtml11.js"></script>
+</head>
+<body>
+<div id="layout-banner">
+  <div id="layout-title">IGS</div>
+  <div id="layout-description">La langage Python</div>
+</div>
+<table>
+<tr valign="top">
+<td id="layout-menu" width="12%">
+<div>&#187;<a href="plan.html">Accueil</a></div>
+<div>&#187;<a href="http://jmbhome.heroku.com/teaching/POO/POO-python.html">Notes Python</a></div>
+<div>&#187;<a href="exos.html">Exercices POO</a></div>
+<div>&#187;<a href="re_tests.html">ER et Tests</a></div>
+<div>&#187;<a href="classes.html">Classes</a></div>
+<!--div id="page-source">&#187;<a href="main.txt" target="_blank">Page&nbsp;Source</a></div-->
+<!--div id="layout-menu-jmi">
+<div>&#187;<a href="plan.html">Accueil</a></div>
+<div>&#187;<a href="http://jmbhome.heroku.com/teaching/POO/POO-python.html">Notes Python</a></div>
+<div>&#187;<a href="exos.html">Exercices POO</a></div>
+<div>&#187;<a href="re_tests.html">ER et Tests</a></div>
+<div>&#187;<a href="classes.html">Classes</a></div>
+<div id="page-source">&#187;<a href="main.txt">Page&nbsp;Source</a></div>
+</div-->
+</td>
+<td width="88%">
+<div id="layout-content">
+<div id="header">
+<h1>Notes Python</h1>
+<span id="author">Cédric Gava (et Jean-Michel Bruel)</span><br />
+<span id="email"><tt>&lt;<a href="mailto:gava.c@free.fr">gava.c@free.fr</a>&gt;</tt></span><br />
+<span id="revision">version 1.0,</span>
+2013-01-24
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_avant_propos">1. Avant-Propos</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Ces notes de cours sont une version mise à jour des notes de cours de <a href="mailto:gava.c@free.fr">Cédric Gava</a>
+par Jean-Michel Bruel.
+Ce document a été généré par <a href="mailto:jean-michel.bruel@univ-tlse2.fr">Jean-Michel Bruel</a> via <a href="http://www.methods.co.nz/asciidoc">AsciiDoc</a> (version <tt>8.6.8</tt>) de <em>Stuart Rackham</em>.</p></div>
+<div class="paragraph"><p>Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la <em>Licence Creative Commons</em>.
+<span class="image">
+<a class="image" href="http://creativecommons.org/licenses/by-sa/3.0/">
+<img alt="Licence Creative Commons" src="data:image/png;base64,
+" />
+</a>
+</span>
+<a href="http://creativecommons.org/licenses/by-sa/3.0/">licence Creative Commons Paternité - Partage à l&#39;Identique 3.0 non transposé</a>.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_introduction">2. Introduction</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Python est <strong>dynamique</strong> (l&#8217;interpréteur peut évaluer des chaînes de
+    caractères représentant des expressions ou des instructions Python),
+    <strong>orthogonal</strong> (un petit nombre de concepts suffit à engendrer des
+    constructions très riches), <strong>réflectif</strong> (il supporte la
+    <strong>métaprogrammation</strong>, par exemple la capacité pour un objet de se
+    rajouter ou de s&#8217;enlever des attributs ou des méthodes, ou même de
+    changer de classe en cours d&#8217;exécution) et <strong>introspectif</strong> (un grand
+    nombre d&#8217;outils de développement, comme le <strong>debugger</strong> ou le
+    <strong>profiler</strong>, sont implantés en Python lui-même).
+</p>
+</li>
+<li>
+<p>
+Comme <strong>Scheme</strong> ou <strong>SmallTalk</strong>, Python est dynamiquement typé. Tout
+    objet manipulable par le programmeur possède un type bien défini à
+    l&#8217;exécution, qui n&#8217;a pas besoin d'être déclaré à l&#8217;avance.
+</p>
+</li>
+<li>
+<p>
+Python possède actuellement deux implémentations. L&#8217;une,
+    <strong>interprétée</strong>, dans laquelle les programmes Python sont compilés
+    en instructions portables, puis exécutés par une machine virtuelle
+    (comme pour Java, avec une différence importante: Java étant
+    statiquement typé, il est beaucoup plus facile d&#8217;accélérer
+    l&#8217;exécution d&#8217;un programme Java que d&#8217;un programme Python).
+</p>
+</li>
+<li>
+<p>
+L&#8217;autre génère directement du <strong>bytecode</strong> Java.
+</p>
+</li>
+<li>
+<p>
+Python est <strong>extensible</strong>: comme <strong>Tcl</strong> ou <strong>Guile</strong>, on peut facilement
+    l&#8217;interfacer avec des bibliothèques C existantes. On peut aussi s&#8217;en servir comme d&#8217;un
+    langage d&#8217;extension pour des systèmes logiciels complexes.
+</p>
+</li>
+</ul></div>
+<div class="sect2">
+<h3 id="_mots_du_langage">2.1. Mots du langage</h3>
+<div class="tableblock">
+<table rules="all"
+style="margin-left:auto; margin-right:auto;"
+width="90%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 1. Mots réservés du langage</caption>
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="center" valign="top"><p class="table">and</p></td>
+<td align="center" valign="top"><p class="table">assert</p></td>
+<td align="center" valign="top"><p class="table">break</p></td>
+<td align="center" valign="top"><p class="table">class</p></td>
+<td align="center" valign="top"><p class="table">continue</p></td>
+<td align="center" valign="top"><p class="table">def</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">del</p></td>
+<td align="center" valign="top"><p class="table">elif</p></td>
+<td align="center" valign="top"><p class="table">else</p></td>
+<td align="center" valign="top"><p class="table">except</p></td>
+<td align="center" valign="top"><p class="table">exec</p></td>
+<td align="center" valign="top"><p class="table">finally</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">for</p></td>
+<td align="center" valign="top"><p class="table">from</p></td>
+<td align="center" valign="top"><p class="table">global</p></td>
+<td align="center" valign="top"><p class="table">if</p></td>
+<td align="center" valign="top"><p class="table">import</p></td>
+<td align="center" valign="top"><p class="table">in</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">is</p></td>
+<td align="center" valign="top"><p class="table">lambda</p></td>
+<td align="center" valign="top"><p class="table">not</p></td>
+<td align="center" valign="top"><p class="table">or</p></td>
+<td align="center" valign="top"><p class="table">pass</p></td>
+<td align="center" valign="top"><p class="table">print</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">raise</p></td>
+<td align="center" valign="top"><p class="table">return</p></td>
+<td align="center" valign="top"><p class="table">try</p></td>
+<td align="center" valign="top"><p class="table">while</p></td>
+<td align="center" valign="top"><p class="table">yield</p></td>
+<td align="center" valign="top"><p class="table"></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_bases">2.2. Bases</h3>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; print msg
+Quoi de neuf ?</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_priorité_des_opérations">2.3. Priorité des opérations</h3>
+<div class="paragraph"><p>L&#8217;acronyme <strong>PEMDAS</strong> :</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<strong>P</strong> pour <strong><strong>parenthèses</strong></strong>. Ce sont elles qui ont la plus haute
+    priorité. Elles vous permettent donc de « forcer » l'évaluation
+    d&#8217;une expression dans l&#8217;ordre que vous voulez.<br />
+    Ainsi 2*(3-1)=4, et (1+1)**(5-2)=8.
+</p>
+</li>
+<li>
+<p>
+<strong>E</strong> pour <strong><strong>exposants</strong></strong>. Les exposants sont évalués ensuite, avant
+    les autres opérations.<br />
+        Ainsi 2**1+1=3 (et non 4), et 3*1**10=3 (et non
+    59049 !).
+</p>
+</li>
+<li>
+<p>
+<strong>M</strong> et <strong>D</strong> pour <strong><strong>multiplication</strong></strong> et <strong><strong>division</strong></strong>, qui ont la
+    même priorité. Elles sont évaluées avant l'<strong><strong>addition</strong></strong> <strong>A</strong> et la
+    <strong><strong>soustraction</strong></strong> <strong>S</strong>, lesquelles sont donc effectuées en dernier
+    lieu. Ainsi 2*3-1 = 5 (plutôt que 4), et 2/3-1 = -1.
+</p>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Note" src="data:image/png;base64,
+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" />
+</td>
+<td class="content">
+<div class="paragraph"><p>(Rappelez-vous que par défaut Python effectue une division
+<strong><strong>entière</strong></strong>)</p></div>
+</td>
+</tr></table>
+</div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Tip" src="data:image/png;base64,
+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" />
+</td>
+<td class="content">
+<div class="paragraph"><p>Ne comptez pas sur les priorités par défaut. Parenthésez! Votre code sera plus lisible.</p></div>
+</td>
+</tr></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_composition">2.4. Composition</h3>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; h, m, s = 15, 27, 34
+&gt;&gt;&gt; print "nombre de secondes écoulées depuis minuit = ", h*3600 +m*60 + s
+nombre de secondes coules depuis minuit =  55654</tt></pre>
+</div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Warning" src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+jwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAACopJREFU
+WEfNmWlUVOcZx598az/1NB96ek4/JHY56eLxWDUmSjQeI/FESVxSl6ClptYNCdZjoknVQIQg1TRa
+tyJS2RQHZRsWEQUXQBxAYURgZpgBZoa5M3Nnu7OAJq1L/8ON15c7AzPxU9/zP5zLMPfe37O8z/O+
+Ly88efKE/q8GgKIZjx8/fvTo0X+fjv9EPcQ7cC+eEM2LKJov4VlOpzM+Pn7VqlV/GB3vRz1WrlzZ
+2Njo8XhgQjRMkYHwFJfLtXXr1p6eHpEen4QdcEPosFgsa9asqaqqstls3377bUSmCEAizcaNG61W
+63PQgO/hw4dDQ0MJCQlgwkMiMk0EBBqO45KSkkQaySvffPPNA2bcfzqkdJH8BBppIHbRMI0LJPmG
+dQxQ3G63Vqu993T09fUNMMNoNDpGB74GFOSNBAQ/rV69WqlUTuyn8ECibxAp1jEjIyN4df3Jk9VE
+0aj7889ZD+EaLly7dm1dXd0ETGGApEixNMPDw7C+/IsvqogkRcTqTkmRmKSSsWTJkgmY5EAizebN
+m2W+GRwcLN27V0nEqpIoorpSUyUU6QKxq62tDeunMUCgMZvNiYmJ7KxGpDDhlWlpFUTPIRhwd9eu
+UKb33nuvoaEhlOkZECDw4m3btrE0iBTSturLL8uIQnWI6GWiF0Y7TyxRJtE5ovJwUu/ZwzKJdX7Z
+smWhfvoOCBAISnJyssw3oClPSSkhYnWUaP6oXiH6es8mp1nvdfP5R9J+SjSb6C2iDURniUrHqmP3
+bjDJWs6KFStkfgoCAUKv12/fvj00UqA5T3SB0QGiHxO1Xr9YWZwLxygVOcMBv+C0N9ecOZKSrFHf
+Muo1H2/58yKiwrFmwKQ727fLgEwmkyx2QaD+/n6ZbxApjUaDSCmIiscqhqhP3TwS8Nstg5mfbamv
+VPjcDnu/+royuzDrgNvB+QUXb9J+MO8XyaM3wh5Wdz79VMaE2o15h9iJvSUI9Oqrr8p8o1ara/bt
+Q0LIBD4AmXTqgOAyadpzDuxqKM8VnBynUzVWnCrO+RowAj/Ur246+NnaHxH9GjEdfQhulNS+c6fI
+hNeLw2AwzJ49W6VSoQcHgdC52bYA34AGSRBWyBJzX6eLM+huVZ1I2dRQdkpwWDhNS7My53z2QcFl
+5wfvVeVlVl/IdfHc1ZrSnxP9g6horG3tn3wi0eDC7/fHxsaWlJQggmOAQN3d3V2dmnqGaDzNIuIM
+ateQTnuz4vjedfUlWaNAN5uVJxUnMjwOKz+grj131G42+AQPfu7/aH1qONvadu+WmESg/Px8pPIY
+IHRJ9Kl8ooLxJQI5zVpNU/mRz+LrFMcE3sz1Nt0oO150PA1AyKdrZTnOIb3HaTdqO/ckr90xmuCs
+RGsRFpFJBMrNzcWkfgaEFi0C5RFNoNeJLIa7zqE+TUvlsZQPAeS2m8xdN66WHC08kurmOZuhMztt
+C/LaxQ32ttUnJ8RuJ4KRrESDJSCfzycHEhcMItBpIlaY3KwAZNaph/o6e1qqS06m1xdndbdeVTdV
+VuQeKDqW7rSaOL36RMoGu0nrtBh6VLVJa+f/dRwLRSCsICIA/ZtoAr2GWabtMPW2ae9cb7lUprpS
+cateebvxYn1FUXFWZmfTRXOv6lT6Nt6kQ+L3BoFiMf9lRoq/Agg0kYFOEUk6QfQl0d+I9hClEGUR
+BYF0nYLT6vc4A173sF8YDngDPsHrcdk5o6ajpaOpJitjh82k5c3a7ls1ifFvfkSUw0iyNlqgk0SS
+/ojYp6fk/evwgfS98XNnLiD6GZFe3eS2DQq2fr/LEhD4EZ/nfsB7fzgwDC6Xw2zorcg/NtDdyuk7
+ulqqAJTEWMhaGxkIjR1FCG6QhOI20HPX7/X4BDcioPhqH/pXdW6msavJrr/t4foE3uh3WYe9rvsB
+34ORwLDfi8LNm/TGey369st3rl1Yt+i3AGKNlK4jAGElJQIhTJJ+R9RcW+lxO2G8X0BNNnYqzyQu
+BNO+3psVNsMdj63f5+R8Lh7hg5OgkYAX3cNjHbDqb9+uL163aFIiYyFrrQTk9Xrls0xc14lAx4gk
+/QVtNf+UgzP6XHa0dMHtdHCDzVW5h3e+f+jj9zWqi7aBe17e7HPZ0ExA82Bk+H7Aj/QSrAa7oaPt
+siIhbtIWouOMJGtFIGwXIgAdIRKFZcZXRNOxwmptRFFBRfa6bF63E37SttXlpG/YlTCzKu8gqgD+
+5Pc4RgK++8P+gM8j8Ca3RcNpVY1Vp1fPp82Mhay1ABI3L+MCoQ7BQ/8kYoXHHdyRZDP0uLgBNE6v
+k/O6eAdn0qhq7lwu6Gqq6G1t4AY0PjePsGLS4cJjNaCBDKqvXT5/bPWbtOmphZKp4kVkIERNp9Nh
+HcgKrXEyFvZ5WRbDPZQWWO+Fq5xWt33I1N1i6Lhq1rTyRg0aCFLH53EgWA5Tt/Fek/pG2YWTqStf
+I4RMZqT4a2QgrOh4nj+/cCEgWKE7/p7oWrWCN/Z4RCbeHIyLzcQb1DZDh8PUI9hNKE6CbdBh6rVo
+27StlxqVpwu+2pH0On081kLR2htJSRGAxDUvajnW+UULFiB7WKH8v4Ql39Vym77Djdlu6xeseoHT
+CZzGPdSLjIFjUAWw9rBo2w0dDTer8itz9+dnbN74YrCiyiysX78e0ZB2v4IgjJlly5cvl+0KsIY8
++9ZbWK2y+pRoElFDabZN1+Y0drmHejyW3lFpPEO9LnOPrb8TmaVrr7tZU1CanVaevXfJS/Th6ENY
+25SLF4utUwRC4gJo4cKFz7r9ggULQrcpYFLMn/93IknYVOwi+g3RnBdJo6rGoozvv20ztHF97WaN
+ynC3sVt16XbDhVrFoaIjO88dSl72S3pntPOwD6lLSECkRBrpUECcZVgPYekYXH5g1x0XFyfbpqBC
+4M+F8+btJ2KVTrSe6CeYJqmJuraLA+oGVKOOq6WqS0XNylOXzxxUHE4+nb4ujmg50b7RvZGk8sWL
+Q2lwSjBjxoz09HRs+0ESBAoEAvh06dKlodsUMBXMnQsrWaURoRvgfX96mX449jjwB0S/IoonQkXF
+VMhgVBYXJ9JIjsEFjiWwmk5LS1MoFGAASRAIX8KKpKurCzsSrGpluwIcMOTOmQPHPJ9ES0oXLQIN
+EllGM23aNJEGbwcDvvDdRlFievfdd0O3KUE/zZkD/0cpuJBVyTvviJsIlgb+CKUJnsBKZ4wSE/JJ
+8pO0DsdqNzcmBlFg9QVRRKGqhdLAH7NmzZL5RiQZc9jAMrW1tbE7FVxj3uXHxKCoRK/i2NiwNPBN
+RkYGGynJL/LjGDZ2OBCSMSEHz8TE7CWKRmffeCOUpr6+fvr06WF9E8ZD4kcSE3a4V65ckZjE9S9G
+2NPWsB/Kshjnw1OnTp2ARh6y0HzCvAOThCK7YI8+Zdds/orXoEG9GS9S44YslAknJoWFhaFM49GE
+ouATpMvEkYoMxMYOZ/jnzp1DnZAGin3Yga4kG/haeXn5zJkzI/pm3BySYFmmt99+G+F/5fuPKVOm
+TJ48OTMzM+ycYt8VFZDEhDqGXlNQUJCXl4e2/L0G7sK9eIJYi0Mh2E8i/69DZEKXwX8tULJxQIEi
++b0G7sK9eAKeMzEN/vo/qlYSUg+t4IgAAAAASUVORK5CYII=" />
+</td>
+<td class="content">
+<div class="paragraph"><p>Attention cependant : il y a une limite à ce que vous pouvez combiner
+ainsi :</p></div>
+<div class="paragraph"><p>Ce que vous placez à la gauche du signe égale dans une expression doit
+toujours être une variable, et non une expression.</p></div>
+<div class="paragraph"><p><strong>m + 1 = b</strong> est tout à fait <strong><strong>illégal</strong></strong></p></div>
+</td>
+</tr></table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_contrôle_du_flux_d_instructions">3. Contrôle du flux d’instructions</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_opérateurs_de_comparaison">3.1. Opérateurs de comparaison</h3>
+<div class="paragraph"><p>La condition évaluée après l&#8217;instruction if peut contenir les
+<strong>opérateurs de comparaison</strong> suivants :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>x == y          # x est égal à y
+x != y          # x est différent de y
+x &gt; y           # x est plus grand que y
+x &lt; y           # x est plus petit que y
+x &gt;= y          # x est plus grand que, ou égal à y
+x &lt;= y          # x est plus petit que, ou égal à y</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_instructions_composées_blocs_d_8217_instructions">3.2. Instructions composées – Blocs d&#8217;instructions</h3>
+<div class="paragraph"><p><span class="image">
+<img alt="Python-notes_fichiers/image002.gif" width="30%" src="data:image/gif;base64,
+" />
+</span></p></div>
+<div class="paragraph"><p><strong>Ligne d&#8217;en-tête:</strong></p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>**première instruction du bloc**</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>**... ...**</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>**... ...**</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>**dernière instruction du bloc**</tt></pre>
+</div></div>
+<div class="paragraph"><p>S&#8217;il y a plusieurs instructions indentées sous la ligne d&#8217;en-tête,
+<strong><strong>elles doivent l'être exactement au même niveau.</strong></strong></p></div>
+<div class="paragraph"><p><strong><strong>Les limites des instructions et des blocs sont définies par la mise
+en page.</strong></strong> Sous Python, c&#8217;est le caractère de fin de ligne qui joue ce
+rôle.</p></div>
+<div class="paragraph"><p><strong><strong>Instruction composée =</strong></strong></p></div>
+<div class="paragraph"><p><strong><strong>En-tête  + double point + bloc d&#8217;instructions indenté</strong></strong></p></div>
+<div class="paragraph"><p> </p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_instructions_répétitives">4. Instructions répétitives</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_ré_affectation">4.1. Ré-affectation</h3>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; a, b, c, d = 3, 4, 5, 7</tt></pre>
+</div></div>
+<div class="paragraph"><p>Supposons par exemple que nous voulions maintenant échanger les valeurs
+des variables <strong>a</strong> et <strong>c</strong>.</p></div>
+<div class="paragraph"><p>Comment faire ?</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; a, b = b, a</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_remarque_concernant_les_caractères_accentués_et_spéciaux">4.2. Remarque concernant les caractères accentués et spéciaux</h3>
+<div class="paragraph"><p>A partir de la version 2.3, il est vivement recommandé aux francophones
+d&#8217;inclure l&#8217;un des pseudo-commentaires suivants au début de tous leurs
+scripts Python (obligatoirement à la 1e ou à la 2e ligne) :</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="c"># -*- coding:Latin-1 -*-</span>
+</pre></div></div></div>
+<div class="paragraph"><p>Ou bien :</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="c"># -*- coding:Utf-8 -*-</span>
+</pre></div></div></div>
+<div class="paragraph"><p>Ces pseudo-commentaires indiquent à Python que vous utiliserez dans
+votre script :</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+soit le jeu de caractères accentués correspondant aux principales
+    langues de l&#8217;Europe occidentale (Français, Italien, Portugais,
+    etc.), codé sur un seul octet suivant la norme ISO-8859.
+</p>
+</li>
+<li>
+<p>
+soit le système de codage mondial sur deux octets appelé Unicode
+    (dont la variante Utf-8 ne code que les caractères « spéciaux » sur
+    deux octets, les caractères du jeu ASCII standard restant codés sur
+    un seul octet). Ce dernier système commence à se répandre de plus en
+    plus, car il présente l&#8217;avantage de permettre la coexistence de
+    caractères de toutes origines dans le même document (caractères
+    grecs, arabes, cyrilliques, japonais, etc.)
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_principaux_types_de_données">5. Principaux types de données</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Seule la valeur zéro est « fausse ».</p></div>
+<div class="sect2">
+<h3 id="_les_types_integer_et_long">5.1. Les types « integer » et « long »</h3>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; a, b, c = 1, 1, 1
+&gt;&gt;&gt; while c&lt;49:
+        print c, " : ", b, type(b)
+        a, b, c = b, a+b, c+1
+...
+...
+... (affichage des 43 premiers termes)
+...
+44 : 1134903170 &lt;type 'int'&gt;
+45 : 1836311903 &lt;type 'int'&gt;
+46 : 2971215073 &lt;type 'long'&gt;
+47 : 4807526976 &lt;type 'long'&gt;
+48 : 7778742049 &lt;type 'long'&gt;</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_le_type_float">5.2. Le type « float »</h3>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; a, b, c = 1., 2., 1 # =&gt; a et b seront du type 'float'
+&gt;&gt;&gt; while c &lt;18:
+        a, b, c = b, b*a, c+1
+        print b</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_le_type_string_chaîne_de_caractères">5.3. Le type « string » (chaîne de caractères)</h3>
+<div class="paragraph"><p>Sous Python, une donnée de type <strong>string</strong> est une suite quelconque de
+caractères délimitée soit par des apostrophes (<em>simple quotes</em>), soit
+par des guillemets (<em>double quotes</em>).</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; phrase1 = 'les oeufs durs.'**
+&gt;&gt;&gt; phrase2 = '"Oui", répondit-il,'**
+&gt;&gt;&gt; phrase3 = "j'aime bien"**
+&gt;&gt;&gt; print phrase2, phrase3, phrase1**
+"Oui", répondit-il, j'aime bien les oeufs durs.</tt></pre>
+</div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Note" src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+jwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAACihJREFU
+WEftmAtQU1cax6u1uq2OM1arLlbF9YXKqLuz7UwfttUuS7tt6a7WjrRVa5XtCrooVBRBXvIssAjK
+Q1FQeSUQHgLySAIh4SGElwlJSEKSe5N7b573FRXd7WO7X2BEZ3c7lJSd6c70m//cOfeew7k//uc7
+59yTGd99990TP6kAoJ9UPPGTonEN189AkzgwNYe4XK6vr++zYwEFuJ12g6cAFB4evnv5gsHDu9Uf
+vKb8nXf7K55wCw+nl+mHAoEZ8PqR/b6qd34r27x4aNOzyi2LNC8thYccDmcamX4oEAyQ7POd2j1v
+DHk/q/z1c+oXlmhe+qVum0fv79ZB1T/HYlqwfigQJA0a/JEKUF5con3ZQ7/teWT7CqOPJ35gB1R9
+880340w/HmtyIFjGZ8yY8cwzz+j3vDryiof+9eeRHStMvp74O6st76+1Re6Fqn9b6qH9zJkzn3os
+5s6dC9yLxwIK8+bN+z47JweC3p12+RvbXpC+uQ59cyXmu4p4dwxllxd58CV95MHFixcOdJQgyjrS
+KLxna7/v6HxAdrlE9TzULVeB7v070w96QPcvXLjw+7ycHAj+T4eu7FzcLshfo6+n5U/rbbs3kP4b
+2dA/UMlHwnxf+8WcpyRVn8tbgo3SU3b5GUoZRauiaVXsIw3H05ovmZEsVpcLYnQ5Hh4eMMr/1aTJ
+gZ5++mmHjqvtijng/yowyd/zdgTtYJIPI1EBAb/xCly9cPbsJ4XcQ7cFwYbuMJssEoBIZQyliqfU
+KROitZmMLo81XGGRQriuWrXqq6++chNo/vz5Nh1PJ03q5Ud5rfV44bn5C+bNBb29Zln25iVNLy7d
+usmjpmCftOGI7tYp8yDQxJHKs9Rw0oRoTTq4AhxOpMiJlrBokZeX14MHD9wEWrJkicNQjQ6kyyWJ
+eWn7Z8+eBRCG7ctBUJg1a2ZwwLaS7I8lVUFqSTg+GEOqEklVEqVOozVZE2L0+SzQGDlOI9eJcry9
+vUdHR90EWrFiBYXUYfLzyq60jrrItJjdWzYte2rWzFlPzoTJtf3lNRHBPgUZ/nxuYG/jF/qeaIss
+0a5MoTQZE6JHshl9AYuWOU0VTlOl08TbsmXLvXv33ARavXo1gzXiirzhnswefvzN0uPXLxzISdr9
+rs+mdb96zs/XOyb07auZe5u5R6TNJxXiKKQv0SJPdQxnAseEGMN11ljuNFU7TTVw3bp1q/tA69at
+Y3EBoSrQ9V8cFKe1Vp+uuRZYnP1pVvyu08G/DwvyyUz4sDT3Mz43eEAQqe46a+hNMg2mEkP/CcRz
+YjVOrBaYNm/efPfuXTcd2rBhA0u0WjXFiOyKojOzpzlOwAutKwqqKvgL91JASc7B0tyA6mtB4pqw
+fkGUQhI/0p2Cy88RiguPHDIUM2glY+KzploWq2exWsgh94HWr1/P4iKrpgRXFmn7cmSSlO6mM5Ib
+YS2VIQJeSAvvC1H1yc76iO6GM4r2RGVHsr433XQ7y6LIcwEZisc1BgQooJsMVr9x40b3gZYvX37H
+LLZrSy3qYvT2ZU3POZk4cbAlto8f1ceP7hfG9gvj5OJE9a1UZCATGThvlGVDwtk1hZS+hEKqx0Uj
+PABiMCGLNTOmRpj27gMtW7bsjkVC6rkWdRmhKkQGsnXSdG136nBXiqY7VSf9m7Y7XSvN0Pdnobez
+CcVFRWcGvzKKNFSP65bwwk1eslVXR5sEDN7K4AIGa4K8dB8IHLpr6yINPLu+wqouKb10XNuTUXU1
+pJ4TSwwXm9WlZVfCjwfurC4KwxT5UmHqxXPHQ4/sloryKPRm6tnAimtxnfycpJjDDM6nAYhoZUyC
+tWvXug+0aeP6ew4pbaqjjTV2Lfd8yuepMfuKLp4ouXSSUxDeL87OSgkk1Jz0hCNS0eXW+qzC3IiK
+ogQSvQkKO/aRA6mnjI3X8iJpQsjgYoZoAyxYSqYHyKbhcAvCPvvY16opA52N2Jeb/tdBSa5Zw0WG
+Ss5GHHDoq3pEl6tKk4HGgTYnRh8OOfpJTkY4MlRHE6L/CVBbfWJI0K5xoAupQV8c/UDWkQdABnlx
+zKn9LqDWXE5hNABdy4torEyz6WvFjdnaQd70AMGO8/iQOfS16t6rR//8/jhQxdUISKCY8H0l+eGR
+Jz7pbbsMQP2SS4W5pwDoQtpxSVO2yyrkpkLKGQOSMITkRw2Z2Wx++63XR8lBJ9FMmxootMahKzcM
+5tt1vIeqxFXcAcklTFXuMNSQSC2urrzBSYa8seoar12MzvwyNCPpmKAuh8YggdoZswQK7udQX1/f
+Xn+/UUruJFqdkJUYMFXB95pdW2TTXLdqrtu0JXZ9jV1XbdffINE6Eq0nUWjTRBn5j2QSUlgrjUto
+ooPGOwDI09PTzb0MjjgnQw6O0kqnWeIk2hismUJvkIYKh45j05ZZ1LBallk0HIuGaxupgPEiDS4s
+CpgAyNQyIRqTMIBCdLiuuAQ+0NwESkhISEsKuc8MOy0drFnMYHx4n0NXadeVAwc+XGZSgqBQbtFW
+glUOA5gEDoE9wkcytblQiFuMudt1xTtgYXQTKCDgUHlx2iijdlo6WUJMYwIYFIe+2jbCI4YrjEou
+Iucgcq5RySPUNTZdrcPQQKJNpAuohcLEE6KJTsbSw1r7WEsvY+6CzdUdoJaWljVr1jiI26OMhjV3
+MJiIMvFJpN5huGEdqSbUVaiiwiArB6EKF5B1BIBgPWyC4wdpEk2IwjoYSzdrlrLWfqelD0xyE6io
+qCj8RMAoPcwSXYy5ncJFFCogkUaHoR7MMGtqTKpKZKgCBAW4tenqHAg4xKfQVvCGIaSPC7wBGtbc
+y+BdsNvfuXNnCt9D44emEydOtAkrR2k1Q3RBJlKmVhJtJpEGALLr68APgMDV1SAowK1dXz8G1Owa
+L5OYIjonBMPEmnvAJ5q4RWHtMMucTufUgIBp6dKl9yigcc0LVV/lUHdZ6ZXYzJRjh/a/d3DvO8cO
+fxh96sD1vNMDkoLB9gJABFDAHRsyAWUSwfSeEJC55hfWLpdWcAqTFyxYwLLs1IC+/fbblStX3iWV
++Tkxl86f2em340hgwOmTxxMS4hLiY69cvnjh/LnExNj4szEf7fmj31sv79m549Cn78WeDigriFP0
+lLnS6KHk3eX8utycc+EnQz71/+Ct7a+/mJ+fP+Uhg5MlHIDgzLto0SI/P7+cnJyqqio+ny8QCEQi
+UXNzMxTa2tog8RsaGpqamqA2NDQ0KirK399/zpw5cLzcsMFrXJDCPj4+R48ezczMFAqFMplMo9Hc
+v39/Cg5B06+//hrOcjRNw+6BoqjBYEDGQq/Xj4yM6MZi/CGGYdDGbrdTFAXtYSwYhrFYLI6HAVXQ
+AMfx8ZYkSYI90L87QNC71WolxgIK0Nf4W+GVUAX9QsCXDSwq8B//47GAh7AxjwdUQQPI4onGcI6G
+lJga0LT8+uRGJ5P/2OBGpz/mT34Gmsy9nx36v3PoX1H4mIUGLCOSAAAAAElFTkSuQmCC" />
+</td>
+<td class="content">
+<div class="paragraph"><p>Remarquez aussi encore une fois que l&#8217;instruction <strong>print</strong> insère un
+espace entre les éléments affichés.</p></div>
+</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>Le caractère spécial « \ » (<strong>antislash</strong>) permet quelques subtilités complémentaires :</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+En premier lieu, il permet d'écrire sur plusieurs lignes une
+    commande qui serait trop longue pour tenir sur une seule (cela vaut
+    pour n&#8217;importe quel type de commande).
+</p>
+</li>
+<li>
+<p>
+A l&#8217;intérieur d&#8217;une chaîne de caractères, l'<strong>antislash</strong> permet
+    d&#8217;insérer un certain nombre de codes spéciaux (sauts à la ligne,
+    apostrophes, guillemets, etc.).
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Exemples :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; txt3 = '"N\'est-ce pas ?" répondit-elle.'
+&gt;&gt;&gt; print txt3
+"N'est-ce pas ?" répondit-elle.</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; Salut = "Ceci est une chaîne plutôt longue\n contenant plusieurs lignes
+    de texte (Ceci fonctionne\n de la même façon en C/C++.\n\
+    Notez que les blancs en début\n de ligne sont significatifs.\n"
+&gt;&gt;&gt; print Salut
+Ceci est une chane plutt longue
+ contenant plusieurs lignes     de texte (Ceci fonctionne
+ de la même faon en C/C++.
+    Notez que les blancs en début
+ de ligne sont significatifs.</tt></pre>
+</div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Note" src="data:image/png;base64,
+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" />
+</td>
+<td class="content">
+<div class="ulist"><ul>
+<li>
+<p>
+La séquence <tt>\n</tt> dans une chaîne provoque un saut à la ligne.
+</p>
+</li>
+<li>
+<p>
+La séquence <tt>\'</tt> permet d&#8217;insérer une apostrophe dans une chaîne
+    délimitée par des apostrophes
+</p>
+</li>
+<li>
+<p>
+Rappelons encore ici que la casse est significative dans les noms de
+    variables (Il faut respecter scrupuleusement le choix initial de
+    majuscules ou minuscules).
+</p>
+</li>
+</ul></div>
+</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>« Triple quotes » :</p></div>
+<div class="paragraph"><p>Pour insérer plus aisément des caractères spéciaux ou « exotiques » dans
+une chaîne, sans faire usage de l'<strong>antislash</strong>, ou pour faire accepter l'<strong>antislash</strong> lui-même
+dans la chaîne, on peut encore délimiter la chaîne à l&#8217;aide de <strong>triples guillemets</strong> ou de <strong>triples
+apostrophes</strong> :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; a1 = """
+... Usage: trucmuche[OPTIONS]
+... { -h
+... -H hôte
+... }"""
+&gt;&gt;&gt; print a1
+Usage: trucmuche[OPTIONS]
+{ -h
+-H hôte
+}</tt></pre>
+</div></div>
+<div class="paragraph"><p>Accès aux caractères individuels d&#8217;une chaîne</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; ch = "Stéphanie"
+&gt;&gt;&gt; print ch[0], ch[3]
+S p</tt></pre>
+</div></div>
+<div class="paragraph"><p>Opérations élémentaires sur les chaînes par fonctions</p></div>
+<div class="paragraph"><p><strong>concaténation</strong> et on la réalise sous Python à l&#8217;aide de l&#8217;opérateur +.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; a = 'Petit poisson'
+&gt;&gt;&gt; b = ' deviendra grand'
+&gt;&gt;&gt; c = a + b
+&gt;&gt;&gt; print c
+petit poisson deviendra grand</tt></pre>
+</div></div>
+<div class="paragraph"><p><strong>len() :</strong></p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; print len(c)</tt></pre>
+</div></div>
+<div class="paragraph"><p><strong>Convertir nombre en chaîne</strong></p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; ch = '8647'
+&gt;&gt;&gt; print ch + 45
+==&gt; * erreur * on ne peut pas additionner une chaîne et un
+nombre
+&gt;&gt;&gt; n = int(ch)
+&gt;&gt;&gt; print n + 65
+8712</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_les_listes_première_approche">5.4. Les listes (première approche)</h3>
+<div class="paragraph"><p>Les <strong>listes</strong>, les <strong>tuples*et les *dictionnaires</strong>.</p></div>
+<div class="paragraph"><p>Sous Python, on peut définir une liste comme <strong>une collection
+d'éléments séparés par des virgules, l&#8217;ensemble étant enfermé dans des
+crochets</strong></p></div>
+<div class="paragraph"><p>Exemple :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; jour = ['lundi', 'mardi', 'mercredi', 1800, 20.357, 'jeudi',
+'vendredi']
+&gt;&gt;&gt; print jour
+['lundi', 'mardi', 'mercredi', 1800, 20.357, 'jeudi', 'vendredi']
+&gt;&gt;&gt; print jour[2]
+mercredi
+&gt;&gt;&gt; print jour[4]
+20.357
+&gt;&gt;&gt; len(jour)
+7
+&gt;&gt;&gt; del(jour[4])
+&gt;&gt;&gt; print jour
+['lundi', 'mardi', 'mercredi', 'juillet', 'jeudi', 'vendredi']</tt></pre>
+</div></div>
+<div class="paragraph"><p>Les listes (objet)</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; jour.append('samedi')
+&gt;&gt;&gt; print jour
+['lundi', 'mardi', 'mercredi', 'juillet', 'jeudi', 'vendredi',
+'samedi']</tt></pre>
+</div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_fonctions_prédéfinies">6. Fonctions prédéfinies</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_interaction_avec_l_8217_utilisateur_la_fonction_input">6.1. Interaction avec l&#8217;utilisateur : la fonction input()</h3>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; print 'Veuillez entrer un nombre positif quelconque : ', nn = input()
+&gt;&gt;&gt; print 'Le carré de', nn, 'vaut', nn**2</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+La fonction <tt>input()</tt> renvoie une valeur dont le type correspond à
+    ce que l&#8217;utilisateur a entré. Dans notre exemple, la variable
+    <tt>nn</tt> contiendra donc un entier, une chaîne de caractères, un réel,
+    etc. suivant ce que l&#8217;utilisateur aura décidé. Si l&#8217;utilisateur
+    souhaite entrer une chaîne de caractères, il doit l&#8217;entrer comme
+    telle, <strong>c&#8217;est-à-dire incluse entre des apostrophes ou des
+    guillemets</strong>. Nous verrons plus loin qu&#8217;un bon script doit
+    toujours vérifier si le type ainsi entré correspond bien à ce que
+    l&#8217;on attend pour la suite du programme.
+</p>
+</li>
+<li>
+<p>
+Pour cette raison, il sera souvent préférable d&#8217;utiliser dans vos
+    scripts la fonction similaire <tt>raw_input()</tt>, laquelle renvoie
+    toujours <strong>une chaîne de caractères</strong>. Vous pouvez ensuite
+    convertir cette chaîne en nombre à l&#8217;aide de <tt>int()</tt> ou de
+    <tt>float()</tt>.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Exemple :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; a = raw_input('Entrez une donnée : ')
+Entrez une donnée : 52.37
+&gt;&gt;&gt; type(a)
+&lt;type 'str'&gt;
+&gt;&gt;&gt; b = float(a) # conversion en valeur numérique
+&gt;&gt;&gt; type(b)
+&lt;type 'float'&gt;</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_importer_un_module_de_fonctions">6.2. Importer un module de fonctions</h3>
+<div class="paragraph"><p>Démo : utilisation des fonctions du module <tt>&lt;math&gt;</tt></p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_contrôle_du_flux_utilisation_d_8217_une_liste_simple">6.3. Contrôle du flux - Utilisation d&#8217;une liste simple</h3>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>
+</pre></div></div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_boucle_while_instructions_imbriquées">7. Boucle while - Instructions imbriquées</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>
+</pre></div></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_fonctions_originales">8. Fonctions originales</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="k">def</span> <span class="nf">nomDeLaFonction</span><span class="p">(</span><span class="o">*</span><span class="n">liste</span> <span class="n">de</span> <span class="n">param</span><span class="err">è</span><span class="n">tres</span><span class="o">*</span><span class="p">):</span>
+<span class="o">...</span>
+<span class="o">*</span><span class="n">bloc</span> <span class="n">d</span><span class="s">&#39;instructions*</span>
+<span class="o">...</span>
+</pre></div></div></div>
+<div class="paragraph"><p>Avec valeur retournéer</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>
+</pre></div></div></div>
+<div class="paragraph"><p>En fait, le corps principal d&#8217;un programme Python constitue lui-même une
+entité un peu particulière, qui est toujours reconnue dans le
+fonctionnement interne de l&#8217;interpréteur sous le nom réservé
+<tt>__main__</tt> (le mot <tt>main</tt> signifie « principal », en anglais. Il
+est encadré par des caractères « souligné » en double, pour éviter toute
+confusion avec d&#8217;autres symboles). L&#8217;exécution d&#8217;un script commence
+toujours avec la première instruction de cette entité <tt>__main__</tt>,
+où qu&#8217;elle puisse se trouver dans le listing. Les instructions qui
+suivent sont alors exécutées l&#8217;une après l&#8217;autre, dans l&#8217;ordre, jusqu&#8217;au
+premier appel de fonction. Un appel de fonction est comme un détour dans
+le flux de l&#8217;exécution : au lieu de passer à l&#8217;instruction suivante,
+l&#8217;interpréteur exécute la fonction appelée, puis revient au programme
+appelant pour continuer le travail interrompu. Pour que ce mécanisme
+puisse fonctionner, il faut que l&#8217;interpréteur ait pu lire la définition
+de la fonction <strong>avant</strong> l&#8217;entité <tt>__main__</tt>, et celle-ci sera
+donc placée en général à la fin du script.</p></div>
+<div class="sect2">
+<h3 id="_documentation_de_fonction">8.1. Documentation de fonction</h3>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; def essai():
+... "Cette fonction est bien documentée mais ne fait presque rien."
+... print "rien à signaler"
+&gt;&gt;&gt; essai()
+rien à signaler
+&gt;&gt;&gt; print essai.__doc__
+Cette fonction est bien documentée mais ne fait presque rien.</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_typage_des_paramètres">8.2. Typage des paramètres</h3>
+<div class="paragraph"><p>Le type d&#8217;un paramètre sera le même que celui
+de l&#8217;argument qui aura été transmis à la fonction.</p></div>
+<div class="paragraph"><p>Exemple :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; def afficher3fois(arg):
+... print arg, arg, arg
+&gt;&gt;&gt; afficher3fois(5)
+5 5 5
+&gt;&gt;&gt; afficher3fois('zut')
+zut zut zut
+&gt;&gt;&gt; afficher3fois([5, 7])
+[5, 7] [5, 7] [5, 7]
+&gt;&gt;&gt; afficher3fois(6**2)
+36 36 36</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_valeurs_par_défaut_pour_les_paramètres">8.3. Valeurs par défaut pour les paramètres</h3>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; def politesse(nom, vedette ='Monsieur'):
+... print "Veuillez agréer ,", vedette, nom, ", mes salutations
+distinguées."
+&gt;&gt;&gt; politesse('Dupont')
+Veuillez agréer , Monsieur Dupont , mes salutations distinguées.
+&gt;&gt;&gt; politesse('Durand', 'Mademoiselle')
+Veuillez agréer , Mademoiselle Durand , mes salutations distinguées.</tt></pre>
+</div></div>
+<div class="paragraph"><p>Dans ce cas, cependant, les paramètres sans valeur par défaut doivent
+précéder les autres dans la liste.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_arguments_avec_étiquettes">8.4. Arguments avec étiquettes</h3>
+<div class="paragraph"><p>On peut faire appel à la fonction en fournissant les arguments
+correspondants dans n&#8217;importe quel ordre, à la condition de désigner nommément les
+paramètres correspondants.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; def oiseau(voltage=100, etat='allumé', action='danser la java'):
+... print 'Ce perroquet ne pourra pas', action
+... print 'si vous le branchez sur', voltage, 'volts !'
+... print "L'auteur de ceci est complètement", etat
+&gt;&gt;&gt; oiseau(etat='givré', voltage=250, action='vous approuver')
+Ce perroquet ne pourra pas vous approuver si vous le branchez sur 250 volts !
+L'auteur de ceci est complètement givré</tt></pre>
+</div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_utilisation_de_fenêtres_et_de_graphismes">9. Utilisation de fenêtres et de graphismes</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Avec Python, la bibliothèque graphique la plus utilisée jusqu'à présent
+est la bibliothèque <strong>Tkinter</strong>, qui est une adaptation de la
+bibliothèque <strong>Tk</strong> développée à l&#8217;origine pour le langage <strong>Tcl</strong>.
+Plusieurs autres bibliothèques graphiques fort intéressantes ont été
+proposées pour Python : <strong>wxPython</strong>, <strong>pyQT</strong>, <strong>pyGTK</strong>, etc. Il existe également des
+possibilités d&#8217;utiliser les bibliothèques de <strong>widgetsJava</strong> et les
+<strong>MFC*de *Windows</strong>.</p></div>
+<div class="paragraph"><p>Les classes de widgets Tkinter</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Note" src="data:image/png;base64,
+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" />
+</td>
+<td class="content">
+<div class="paragraph"><p>Au long de ce cours, nous vous présenterons petit à petit
+le mode d&#8217;utilisation d&#8217;un certain nombre de widgets. Comprenez bien
+cependant qu&#8217;il n&#8217;entre pas dans nos intentions de fournir ici un manuel
+de référence complet sur Tkinter. Nous limiterons nos explications aux
+widgets qui nous semblent les plus intéressants d&#8217;un point de vue
+didactique, c&#8217;est-à-dire ceux qui pourront nous aider à mettre en
+évidence des concepts importants, tel le concept de classe.</p></div>
+</td>
+</tr></table>
+</div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">Widget</p></td>
+<td align="left" valign="top"><p class="table">Description</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Button</p></td>
+<td align="left" valign="top"><p class="table">Un bouton classique, à utiliser pour provoquer l&#8217;exécution d&#8217;une
+commande quelconque.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Canvas</p></td>
+<td align="left" valign="top"><p class="table">Un espace pour disposer divers éléments graphiques. Ce widget peut être
+utilisé pour dessiner, créer des éditeurs graphiques, et aussi pour
+implémenter des widgets personnalisés.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Checkbutton</p></td>
+<td align="left" valign="top"><p class="table">Une « case à cocher » qui peut prendre deux états distincts (la case est
+cochée ou non). Un clic sur ce widget provoque le changement d'état.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Entry</p></td>
+<td align="left" valign="top"><p class="table">Un champ d&#8217;entrée, dans lequel l&#8217;utilisateur du programme pourra insérer
+un texte quelconque à partir du clavier.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Frame</p></td>
+<td align="left" valign="top"><p class="table">Une surface rectangulaire dans la fenêtre, où l&#8217;on peut disposer
+d&#8217;autres widgets.Cette surface peut être colorée. Elle peut aussi être
+décorée d&#8217;une bordure.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Label</p></td>
+<td align="left" valign="top"><p class="table">Un texte (ou libellé) quelconque (éventuellement une image).</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Listbox</p></td>
+<td align="left" valign="top"><p class="table">Une liste de choix proposés à l&#8217;utilisateur, généralement présentés dans
+une sorte de boîte. On peut également configurer la Listbox de telle
+manière qu&#8217;elle se comporte comme une série de « boutons radio » ou de
+cases à cocher.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Menu</p></td>
+<td align="left" valign="top"><p class="table">Un menu. Ce peut être un menu déroulant attaché à la barre de titre, ou
+bien un menu « pop up » apparaissant n&#8217;importe où à la suite d&#8217;un clic.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Menubutton</p></td>
+<td align="left" valign="top"><p class="table">Un bouton-menu, à utiliser pour implémenter des menus déroulants.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Message</p></td>
+<td align="left" valign="top"><p class="table">Permet d&#8217;afficher un texte. Ce widget est une variante du widget Label,
+qui permet d&#8217;adapter automatiquement le texte affiché à une certaine
+taille ou à un certain rapport largeur/hauteur.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Radiobutton</p></td>
+<td align="left" valign="top"><p class="table">Représente (par un point noir dans un petit cercle) une des valeurs
+d&#8217;une variable qui peut en posséder plusieurs. Cliquer sur un « bouton
+radio » donne la valeur correspondante à la variable, et "vide" tous les
+autres boutons radio associés à la même variable.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Scale</p></td>
+<td align="left" valign="top"><p class="table">Vous permet de faire varier de manière très visuelle la valeur d&#8217;une
+variable, en déplaçant un curseur le long d&#8217;une règle.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Scrollbar</p></td>
+<td align="left" valign="top"><p class="table">« ascenseur » ou « barre de défilement » que vous pouvez utiliser en
+association avec les autres widgets : Canvas, Entry, Listbox, Text.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Text</p></td>
+<td align="left" valign="top"><p class="table">Affichage de texte formaté. Permet aussi à l&#8217;utilisateur d'éditer le
+texte affiché. Des images peuvent également être insérées.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Toplevel</p></td>
+<td align="left" valign="top"><p class="table">Une fenêtre affichée séparément, « par-dessus ».</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>Ces classes de <strong>widgets</strong> intègrent chacune un grand nombre de méthodes.
+On peut aussi leur associer (lier) des événements, comme nous venons de
+le voir dans les pages précédentes. Vous allez apprendre en outre que
+tous ces widgets peuvent être positionnés dans les fenêtres à l&#8217;aide de
+trois méthodes différentes : la méthode <tt>grid()</tt>, la méthode
+<tt>pack()</tt> et la méthode <tt>place()</tt>.</p></div>
+<div class="sect2">
+<h3 id="_composition_d_8217_instructions_pour_écrire_un_code_plus_compact">9.1. Composition d&#8217;instructions pour écrire un code plus compact</h3>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="n">txt1</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="n">fen1</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span><span class="s">&#39;Premier champ :&#39;</span><span class="p">)</span>
+<span class="n">txt1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span> <span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sticky</span> <span class="o">=</span><span class="n">E</span><span class="p">)</span>
+</pre></div></div></div>
+<div class="paragraph"><p>du script précédent par une seule, telle que :</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="n">Label</span><span class="p">(</span><span class="n">fen1</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span><span class="s">&#39;Premier champ :&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span> <span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sticky</span> <span class="o">=</span><span class="n">E</span><span class="p">)</span>
+</pre></div></div></div>
+<div class="paragraph"><p>Dans cette nouvelle écriture, vous pouvez constater que nous faisons
+l'économie de la variable intermédiaire <tt>txt1</tt>.</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_les_fichiers">10. Les fichiers</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_noms_de_fichiers_répertoire_courant">10.1. Noms de fichiers - Répertoire courant</h3>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; from os import chdir
+&gt;&gt;&gt; chdir("/home/jules/exercices")</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_les_deux_formes_d_8217_importation">10.2. Les deux formes d&#8217;importation</h3>
+<div class="paragraph"><p>Voici un exemple de la première méthode :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; import os
+&gt;&gt;&gt; rep_cour = os.getcwd()
+&gt;&gt;&gt; print rep_cour
+/Users/bruel/dev/asciidoc/Python</tt></pre>
+</div></div>
+<div class="paragraph"><p>La première ligne de cet exemple importe <strong>l&#8217;intégralité</strong> du module
+os, lequel contient de nombreuses fonctions intéressantes pour l&#8217;accès au système
+d&#8217;exploitation. La seconde ligne utilise la fonction <tt>getcwd()</tt> du
+module <tt>os</tt>. Comme vous pouvez le constater, la fonction
+<tt>getcwd()</tt> renvoie le nom du répertoire courant (<tt>getcwd</tt> = <em>get current
+working directory</em>*).</p></div>
+<div class="paragraph"><p>Par comparaison, voici un exemple similaire utilisant la seconde méthode
+d&#8217;importation :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; from os import getcwd
+&gt;&gt;&gt; rep_cour = getcwd()
+&gt;&gt;&gt; print rep_cour
+/Users/bruel/dev/asciidoc/Python</tt></pre>
+</div></div>
+<div class="paragraph"><p> 
+Nous pouvons de la même manière importer plusieurs fonctions du même
+module :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; from math import sqrt, pi, sin, cos
+&gt;&gt;&gt; print pi
+3.14159265359
+&gt;&gt;&gt; print sqrt(5) # racine carrée de 5
+2.2360679775
+&gt;&gt;&gt; print sin(pi/6) # sinus d'un angle de 30°
+0.5</tt></pre>
+</div></div>
+<div class="paragraph"><p> </p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>from Tkinter import *</tt></pre>
+</div></div>
+<div class="paragraph"><p>Cette méthode d&#8217;importation présente l&#8217;avantage d&#8217;alléger l'écriture du
+code. Elle présente l&#8217;inconvénient (surtout dans sa dernière forme,
+celle qui importe toutes les fonctions d&#8217;un module) d&#8217;encombrer l&#8217;espace
+de noms courant.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_écriture_séquentielle_dans_un_fichier">10.3. Écriture séquentielle dans un fichier</h3>
+<div class="paragraph"><p>Sous Python, l&#8217;accès aux fichiers est assuré par l&#8217;intermédiaire d&#8217;un
+« <strong>objet-fichier</strong> » que l&#8217;on crée à l&#8217;aide de la fonction interne
+<tt>open()</tt>. Après avoir appelé cette fonction, vous pouvez lire et
+écrire dans le fichier en utilisant les méthodes spécifiques de cet
+objet-fichier.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; obFichier = open('Monfichier','a')
+&gt;&gt;&gt; obFichier.write('Bonjour, fichier !')
+&gt;&gt;&gt; obFichier.write("Quel beau temps, aujourd'hui !")
+&gt;&gt;&gt; obFichier.close()</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_lecture_séquentielle_d_8217_un_fichier">10.4. Lecture séquentielle d&#8217;un fichier</h3>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; ofi = open('Monfichier', 'r')
+&gt;&gt;&gt; t = ofi.read()
+&gt;&gt;&gt; print t
+Bonjour, fichier !Quel beau temps, aujourd'hui !
+&gt;&gt;&gt; ofi.close()</tt></pre>
+</div></div>
+<div class="paragraph"><p>Comme on pouvait s&#8217;y attendre, la méthode <tt>read()</tt> lit les données
+présentes dans le fichier et les transfère dans une variable de type «
+chaîne » (<strong>string</strong>) . Si on utilise cette méthode sans argument, la
+totalité du fichier est transférée.
+ 
+La méthode <tt>read()</tt> peut également être utilisée avec un argument.
+Celui-ci indiquera combien de caractères doivent être lus, à partir de
+la position déjà atteinte dans le fichier :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; ofi = open('Monfichier', 'r')
+&gt;&gt;&gt; t = ofi.read(7)
+&gt;&gt;&gt; print t
+Bonjour
+&gt;&gt;&gt; t = ofi.read(15)
+&gt;&gt;&gt; print t
+, fichier !Quel</tt></pre>
+</div></div>
+<div class="paragraph"><p>Si la fin du fichier est déjà atteinte, <tt>read()</tt> renvoie une chaîne
+vide</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; t = ofi.read()
+&gt;&gt;&gt; print t
+&gt;&gt;&gt; ofi.close()</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_l_8217_instruction_tt_break_tt_pour_sortir_d_8217_une_boucle">10.5. L&#8217;instruction <tt>break</tt> pour sortir d&#8217;une boucle</h3>
+<div class="literalblock">
+<div class="content">
+<pre><tt>def copieFichier(source, destination):
+        "copie intégrale d'un fichier"
+        fs = open(source, 'r')
+        fd = open(destination, 'w')
+        while 1:
+                txt = fs.read(50)
+                if txt =="":
+                        break
+                fd.write(txt)
+                fs.close()
+        fd.close()
+return</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_fichiers_texte">10.6. Fichiers texte</h3>
+<div class="paragraph"><p>La méthode <tt>readline()</tt>, par exemple, ne lit qu&#8217;une seule ligne à la
+fois (en incluant le caractère de fin de ligne) :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; f = open('Fichiertexte','r')
+&gt;&gt;&gt; t = f.readline()
+&gt;&gt;&gt; print t
+Ceci est la ligne un
+&gt;&gt;&gt; print f.readline()
+Voici la ligne deux</tt></pre>
+</div></div>
+<div class="paragraph"><p>La méthode <tt>readlines()</tt> transfère toutes les lignes restantes dans une
+liste de chaînes :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; t = f.readlines()
+&gt;&gt;&gt; print t
+['Voici la ligne trois012', 'Voici la ligne quatre012']
+&gt;&gt;&gt; f.close()</tt></pre>
+</div></div>
+<div class="paragraph"><p>Le script qui suit vous montre comment créer une fonction destinée à
+effectuer un certain</p></div>
+<div class="paragraph"><p>traitement sur un fichier texte. En l&#8217;occurrence, il s&#8217;agit ici de
+recopier un fichier texte en omettant</p></div>
+<div class="paragraph"><p>toutes les lignes qui commencent par un caractère <em>#</em> :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>def filtre(source,destination):
+        "recopier un fichier en éliminant les lignes de remarques"
+        fs = open(source, 'r')
+        fd = open(destination, 'w')
+        while 1:
+                txt = fs.readline()
+                        if txt =='':
+                                break
+                        if txt[0] != '#':
+                                fd.write(txt)
+                fs.close()
+        fd.close()
+return</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_enregistrement_et_restitution_de_variables_diverses">10.7. Enregistrement et restitution de variables diverses</h3>
+<div class="paragraph"><p>L&#8217;argument de la méthode <tt>write()</tt> doit être une chaîne de caractères.
+Avec ce que nous avons appris jusqu'à présent, nous ne pouvons donc
+enregistrer d&#8217;autres types de valeurs qu&#8217;en les transformant d&#8217;abord en
+chaînes de caractères.</p></div>
+<div class="paragraph"><p>Nous pouvons réaliser cela à l&#8217;aide de la fonction intégrée <tt>str()</tt>:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; x = 52
+&gt;&gt;&gt; f.write(str(x))</tt></pre>
+</div></div>
+<div class="paragraph"><p>Problème : tous les types stockés sont des strings</p></div>
+<div class="paragraph"><p>Il existe plusieurs solutions à ce genre de problèmes. L&#8217;une des
+meilleures consiste à importer un module Python spécialisé : le module
+<tt>pickle</tt>. Voici comment il s&#8217;utilise :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; import pickle
+&gt;&gt;&gt; f = open('Monfichier', 'w')
+&gt;&gt;&gt; pickle.dump(a, f)
+&gt;&gt;&gt; pickle.dump(b, f)
+&gt;&gt;&gt; pickle.dump(c, f)
+&gt;&gt;&gt; f.close()
+&gt;&gt;&gt; f = open('Monfichier', 'r')
+&gt;&gt;&gt; t = pickle.load(f)
+&gt;&gt;&gt; print t, type(t)
+5 &lt;type 'int'&gt;
+&gt;&gt;&gt; t = pickle.load(f)
+&gt;&gt;&gt; print t, type(t)
+2.83 &lt;type 'float'&gt;
+&gt;&gt;&gt; t = pickle.load(f)
+&gt;&gt;&gt; print t, type(t)
+67 &lt;type 'int'&gt;
+&gt;&gt;&gt; f.close()</tt></pre>
+</div></div>
+<div class="paragraph"><p>Pour cet exemple, on considère que les variables a, b et c contiennent
+les mêmes valeurs que dans l&#8217;exemple précédent. La fonction <tt>dump()</tt> du
+module <tt>pickle</tt> attend deux arguments : le premier est la variable à
+enregistrer, le second est l&#8217;objet fichier dans lequel on travaille. La
+fonction <tt>pickle.load()</tt> effectue le travail inverse, c&#8217;est-à-dire la
+restitution de chaque variable avec son type.</p></div>
+<div class="paragraph"><p>Vous pouvez aisément comprendre ce que font exactement les fonctions du
+module <tt>pickle</tt> en effectuant une lecture « classique » du fichier
+résultant, à l&#8217;aide de la méthode <tt>read()</tt> par exemple.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_gestion_des_exceptions_les_instructions_try_except_else">10.8. Gestion des exceptions. Les instructions try – except - else</h3>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; print 55/0
+ZeroDivisionError: integer division or modulo</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="n">filename</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s">&quot;Veuillez entrer un nom de fichier : &quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&quot;r&quot;</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+<span class="k">print</span> <span class="s">&quot;Le fichier&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="s">&quot;est introuvable&quot;</span>
+</pre></div></div></div>
+<div class="paragraph"><p>Si nous estimons que ce genre de test est susceptible de rendre service
+à plusieurs endroits d&#8217;un programme, nous pouvons aussi l&#8217;inclure dans une fonction :</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="k">def</span> <span class="nf">existe</span><span class="p">(</span><span class="n">fname</span><span class="p">):</span>
+<span class="k">try</span><span class="p">:</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">return</span> <span class="mi">1</span>
+<span class="k">except</span><span class="p">:</span>
+<span class="k">return</span> <span class="mi">0</span>
+
+<span class="n">filename</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s">&quot;Veuillez entrer le nom du fichier : &quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">existe</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="k">print</span> <span class="s">&quot;Ce fichier existe bel et bien.&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+<span class="k">print</span> <span class="s">&quot;Le fichier&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="s">&quot;est introuvable.&quot;</span>
+</pre></div></div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_approfondir_les_structures_de_données">11. Approfondir les structures de données</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_le_point_sur_les_chaînes_de_caractères">11.1. Le point sur les chaînes de caractères</h3>
+<div class="paragraph"><p>les chaînes de caractères (ou <strong>string</strong>) constituent <strong>un type de donnée
+composite</strong>.</p></div>
+<div class="paragraph"><p>En fait, les chaînes de caractères font partie d&#8217;une catégorie d&#8217;objets
+Python que l&#8217;on appelle des <strong>séquences</strong>, et dont font partie aussi
+les <strong>listes</strong> et les <strong>tuples</strong>. On peut effectuer sur les séquences tout un
+ensemble d&#8217;opérations similaires.</p></div>
+<div class="sect3">
+<h4 id="_concaténation_répétition">11.1.1. Concaténation, Répétition</h4>
+<div class="paragraph"><p>Les chaînes peuvent être concaténéesavec l&#8217;opérateur +et
+répétéesavec l&#8217;opérateur \*:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; n = 'abc' + 'def' # concaténation
+&gt;&gt;&gt; m = 'zut ! ' * 4 # répétition
+&gt;&gt;&gt; print n, m
+abcdef zut ! zut ! zut ! zut !</tt></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_surcharge_des_opérateurs">11.1.2. Surcharge des opérateurs.</h4>
+<div class="paragraph"><p>Remarquez au passage que les opérateurs + et * peuvent aussi être
+utilisés pour l&#8217;addition et la multiplication lorsqu&#8217;ils s&#8217;appliquent à
+des arguments numériques.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_indiçage_extraction_longueur">11.1.3. Indiçage, extraction, longueur</h4>
+<div class="paragraph"><p>Les éléments d&#8217;une séquence sont toujours indicés (ou numérotés) de la
+même manière, c&#8217;est-à-dire <strong>à partir de zéro</strong>. Pour extraire un
+caractère d&#8217;une chaîne, il suffit d&#8217;indiquer son indice <strong>entre
+crochets</strong> :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; nom = 'Cédric'
+&gt;&gt;&gt; print nom[1], nom[3], nom[5]
+é r c</tt></pre>
+</div></div>
+<div class="paragraph"><p><strong>slicing</strong> (« découpage en tranches ») :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; ch = "Juliette"
+&gt;&gt;&gt; print ch[0:3]
+Jul</tt></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_parcours_d_8217_une_séquence_l_8217_instruction_for_8230_in_8230">11.1.4. Parcours d&#8217;une séquence. L&#8217;instruction for &#8230; in &#8230;</h4>
+<div class="literalblock">
+<div class="content">
+<pre><tt>nom = 'Jacqueline'
+index = 0
+while index &lt; len(nom):
+        print nom[index] + ' *',
+        index = index +1
+nom = 'Jacqueline'
+
+for caract in nom:
+        print caract + ' *',
+
+liste = ['chien','chat','crocodile']
+for animal in liste:
+        print 'longueur de la chaîne', animal, '=', len(animal)
+
+divers = ['cheval', 3, 17.25, [5, 'Jean']]
+for e in divers:
+        print e</tt></pre>
+</div></div>
+<div class="paragraph"><p>L&#8217;exécution de ce script donne :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>cheval
+3
+17.25
+[5, 'Jean']</tt></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_appartenance_d_8217_un_élément_à_une_séquence_l_8217_instruction_in_utilisée_seule">11.1.5. Appartenance d&#8217;un élément à une séquence. L&#8217;instruction in utilisée seule</h4>
+<div class="literalblock">
+<div class="content">
+<pre><tt>car = "e"
+voyelles = "aeiouyAEIOUY"
+if car in voyelles:
+        print car, "est une voyelle"</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>n = 5
+premiers = [1, 2, 3, 5, 7, 11, 13, 17]
+if n in premiers:
+        print n, "fait partie de notre liste de nombres premiers"</tt></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_les_chaînes_sont_des_séquences_non_modifiables">11.1.6. Les chaînes sont des séquences non modifiables</h4>
+<div class="paragraph"><p>Vous ne pouvez pas modifier le contenu d&#8217;une chaîne existante.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>salut = 'bonjour à tous'
+salut[0] = 'B'
+print salut</tt></pre>
+</div></div>
+<div class="paragraph"><p><strong>interdit, utiliser</strong></p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>salut = 'bonjour à tous'
+salut = 'B' + salut[1:]
+print salut</tt></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_les_chaînes_sont_comparables">11.1.7. Les chaînes sont comparables</h4>
+<div class="literalblock">
+<div class="content">
+<pre><tt>mot = raw_input("Entrez un mot quelconque : ")
+if mot &lt; "limonade":
+        place = "précède"
+elif mot &gt; "limonade":
+        place = "suit"
+else:
+        place = "se confond avec"
+
+print "Le mot", mot, place, "le mot 'limonade' dans l'ordre alphabétique"</tt></pre>
+</div></div>
+<div class="paragraph"><p>La fonction <tt>ord(ch)</tt> accepte n&#8217;importe quel caractère comme argument.
+En retour, elle fournit le code ASCII correspondant à ce caractère.
+Ainsi <tt>ord(<em>A</em>)</tt> renvoie la valeur 65.</p></div>
+<div class="paragraph"><p>La fonction <tt>chr(num)</tt> fait exactement le contraire. L&#8217;argument qu&#8217;on
+lui transmet doit être un entier compris entre 0 et 255. En retour, on
+obtient le caractère ASCII correspondant : Ainsi <tt>chr(65)</tt> renvoie le
+caractère A.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_les_chaînes_sont_des_objets">11.1.8. Les chaînes sont des objets</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>split()</tt> : convertit une chaîne en une liste de sous-chaînes. On
+peut choisir le caractère séparateur en le fournissant comme argument, sinon c&#8217;est un espace, par défaut :
+</p>
+</li>
+</ul></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; c2 ="Votez pour moi"
+&gt;&gt;&gt; a = c2.split()
+&gt;&gt;&gt; print a
+['Votez', 'pour', 'moi']
+&gt;&gt;&gt; c4 ="Cet exemple, parmi d'autres, peut encore servir"
+&gt;&gt;&gt; c4.split(",")
+['Cet exemple', " parmi d'autres", ' peut encore servir']</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>join(liste)</tt> : rassemble une liste de chaînes en une seule (Cette
+méthode fait donc l&#8217;inverse de la précédente). Attention : la chaîne à
+laquelle on applique cette méthode est celle qui servira de séparateur
+(un ou plusieurs caractères); l&#8217;argument transmis est la liste des
+chaînes à rassembler :
+</p>
+</li>
+</ul></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; b2 = ["Salut","les","copains"]
+&gt;&gt;&gt; print " ".join(b2)
+Salut les copains
+&gt;&gt;&gt; print "---".join(b2)
+Salut---les---copains</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>find(sch)</tt> cherche la position d&#8217;une sous-chaîne schdans la
+    chaîne :
+</p>
+</li>
+</ul></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; ch1 = "Cette leçon vaut bien un fromage, sans doute ?"
+&gt;&gt;&gt; ch2 = "fromage"
+&gt;&gt;&gt; print ch1.find(ch2)
+25</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>count(sch)</tt> : compte le nombre de sous-chaînes schdans la
+    chaîne :
+</p>
+</li>
+</ul></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; ch1 = "Le héron au long bec emmanché d'un long cou"
+&gt;&gt;&gt; ch2 = 'long'
+&gt;&gt;&gt; print ch1.count(ch2)
+2</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>lower()</tt> : convertit une chaîne en minuscules :
+</p>
+</li>
+</ul></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; ch ="ATTENTION : Danger !"
+&gt;&gt;&gt; print ch.lower()
+attention : danger !</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>upper()</tt> : convertit une chaîne en majuscules :
+</p>
+</li>
+</ul></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; ch = "Merci beaucoup"
+&gt;&gt;&gt; print ch.upper()
+MERCI BEAUCOUP</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>capitalize()</tt> : convertit en majuscule la première lettre d&#8217;une
+    chaîne :
+</p>
+</li>
+</ul></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; b3 = "quel beau temps, aujourd'hui !"
+&gt;&gt;&gt; print b3.capitalize()
+"Quel beau temps, aujourd'hui !"</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>swapcase()</tt> : convertit toutes les majuscules en minuscules et
+    vice-versa :
+</p>
+</li>
+</ul></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; ch5 = "La CIGALE et la FOURMI"
+&gt;&gt;&gt; print ch5.swapcase()
+lA cigale ET LA fourmi</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>strip()</tt> : enlève les espaces éventuels au début et à la fin de la
+    chaîne :
+</p>
+</li>
+</ul></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; ch = " Monty Python "
+&gt;&gt;&gt; ch.strip()
+'Monty Python'</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>replace(c1, c2)</tt> : remplace tous les caractères <tt>c1</tt> par des
+    caractères <tt>c2</tt> dans la chaîne :
+</p>
+</li>
+</ul></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; ch8 = "Si ce n'est toi c'est donc ton frère"
+&gt;&gt;&gt; print ch8.replace(" ","*")
+Si*ce*n'est*toi*c'est*donc*ton*frère</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>index(c)</tt> : retrouve l&#8217;index de la première occurrence du
+    caractère <tt>c</tt> dans la chaîne :
+</p>
+</li>
+</ul></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; ch9 ="Portez ce vieux whisky au juge blond qui fume"
+&gt;&gt;&gt; print ch9.index("w")
+16</tt></pre>
+</div></div>
+<div class="paragraph"><p>Dans la plupart de ces méthodes, il est possible de préciser quelle
+portion de la chaîne doit être traitée, en ajoutant des arguments
+supplémentaires. Exemple :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; print ch9.index("e")        # cherche à partir du début de la chaîne
+4                                                       # et trouve le premier 'e'
+&gt;&gt;&gt; print ch9.index("e",5)      # cherche seulement à partir de l'indice 5
+8                                                       # et trouve le second 'e'
+&gt;&gt;&gt; print ch9.index("e",15)     # cherche à partir du caractère n° 15
+29                                                      # et trouve le quatrième 'e'</tt></pre>
+</div></div>
+<div class="paragraph"><p>Fonctions intégrées</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>len(ch)</tt> renvoie la longueur de la chaîne <tt>ch</tt> (c&#8217;est-à-dire son
+nombre de caractères)
+</p>
+</li>
+<li>
+<p>
+<tt>float(ch)</tt> convertit la chaîne chen un nombre réel (<strong>float</strong>)
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>(bien entendu, cela ne pourra fonctionner que si la chaîne représente
+bien un tel nombre) :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; a = float("12.36")
+&gt;&gt;&gt; print a + 5
+17.36</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>int(ch)</tt> convertit la chaîne chen un nombre entier :
+</p>
+</li>
+</ul></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; a = int("184")
+&gt;&gt;&gt; print a + 20
+204</tt></pre>
+</div></div>
+<div class="paragraph"><p>Formatage des chaînes de caractères de l&#8217;opérateur <tt>%</tt> : à gauche vous fournissez une chaîne de formatage (un
+patron, en quelque sorte) qui contient des <strong>marqueurs de conversion</strong>,</p></div>
+<div class="paragraph"><p>Exemple :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; coul ="verte"
+&gt;&gt;&gt; temp = 1.347 + 15.9
+&gt;&gt;&gt; print "La couleur est %s et la température vaut %s °C" %(coul,temp)
+La couleur est verte et la température vaut 17.247 °C</tt></pre>
+</div></div>
+<div class="paragraph"><p>Le marqueur <tt>%s</tt> accepte n&#8217;importe quel objet (chaîne, entier, float,
+&#8230;). Vous pouvez expérimenter d&#8217;autres mises en forme en utilisant
+d&#8217;autres marqueurs. Essayez par exemple de remplacer le deuxième
+<tt>%s</tt> par <tt>%d</tt>, ou par <tt>%8.2f</tt>, ou encore par <tt>%8.2g</tt>. Le marqueur
+<tt>%d</tt> attend un nombre et le convertit en entier ; les marqueurs
+<tt>%f</tt> et <tt>%g</tt> attendent des réels et peuvent déterminer la largeur et
+la précision qui seront affichées.</p></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_le_point_sur_les_listes">11.2. Le point sur les listes</h3>
+<div class="sect3">
+<h4 id="_définition_d_8217_une_liste_accès_à_ses_éléments">11.2.1. Définition d&#8217;une liste - Accès à ses éléments</h4>
+<div class="paragraph"><p>Vous savez déjà que l&#8217;on délimite une liste à l&#8217;aide de crochets :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt></tt></pre>
+</div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Note" src="data:image/png;base64,
+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" />
+</td>
+<td class="content">
+<div class="paragraph"><p>Les listes sont circulaires !</p></div>
+</td>
+</tr></table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_les_listes_sont_modifiables">11.2.2. Les listes sont modifiables</h4>
+<div class="paragraph"><p>Contrairement aux chaînes de caractères, les listes sont des séquences
+<strong>modifiables</strong>. Cela nous permettra de construire plus tard des
+listes de grande taille, morceau par morceau, d&#8217;une manière dynamique
+(c&#8217;est-à-dire à l&#8217;aide d&#8217;un algorithme quelconque).</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt></tt></pre>
+</div></div>
+<div class="paragraph"><p>Si l&#8217;on souhaite accéder à un élément faisant partie d&#8217;une liste,
+elle-même située dans une autre liste, il suffit d&#8217;indiquer les deux
+index entre crochets successifs :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt></tt></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_les_listes_sont_des_objets">11.2.3. Les listes sont des objets</h4>
+<div class="literalblock">
+<div class="content">
+<pre><tt></tt></pre>
+</div></div>
+<div class="paragraph"><p>Notez bien la différence entre la méthode <tt>remove()</tt> et l&#8217;instruction
+<tt>del</tt> : <tt>del</tt> travaille avec <strong>un index</strong> ou une tranche d&#8217;index,
+tandis que <tt>remove()</tt> recherche <strong>une valeur</strong> (si plusieurs éléments
+de la liste possèdent la même valeur, seul le premier est effacé).</p></div>
+</div>
+<div class="sect3">
+<h4 id="_techniques_de_slicing_avancé_pour_modifier_une_liste">11.2.4. Techniques de « slicing » avancé pour modifier une liste</h4>
+<div class="paragraph"><p>a) Insertion d&#8217;un ou plusieurs éléments n&#8217;importe où dans une liste</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt></tt></pre>
+</div></div>
+<div class="paragraph"><p>b) Suppression / remplacement d'éléments</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt></tt></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_création_d_8217_une_liste_de_nombres_à_l_8217_aide_de_la_fonction_tt_range_tt">11.2.5. Création d&#8217;une liste de nombres à l&#8217;aide de la fonction <tt>range()</tt></h4>
+<div class="paragraph"><p>Si vous devez manipuler des séquences de nombres, vous pouvez les créer
+très aisément à l&#8217;aide de cette fonction :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; range(10)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</tt></pre>
+</div></div>
+<div class="paragraph"><p>On peut aussi utiliser <tt>range()</tt> avec deux, ou même trois arguments
+séparés par des virgules, afin de générer des séquences de nombres plus spécifiques :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; range(5,13)
+[5, 6, 7, 8, 9, 10, 11, 12]
+&gt;&gt;&gt; range(3,16,3)
+[3, 6, 9, 12, 15]</tt></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_parcours_d_8217_une_liste_à_l_8217_aide_de_for_range_et_len">11.2.6. Parcours d&#8217;une liste à l&#8217;aide de for, range() et len()</h4>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; prov =
+['La','raison','du','plus','fort','est','toujours','la','meilleure']
+&gt;&gt;&gt; for mot in prov:
+print mot,
+La raison du plus fort est toujours la meilleure</tt></pre>
+</div></div>
+<div class="paragraph"><p>Il est très pratique de combiner les fonctions <tt>range()</tt> et
+<tt>len()</tt> pour obtenir automatiquement tous les indices d&#8217;une séquence (liste ou chaîne). Exemple :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>fable = ['Maître','Corbeau','sur','un','arbre','perché']
+for index in range(len(fable)):
+        print index, fable[index]</tt></pre>
+</div></div>
+<div class="paragraph"><p>L&#8217;exécution de ce script donne le résultat :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>0 Maître
+1 Corbeau
+2 sur
+3 un
+4 arbre
+5 perché</tt></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_une_conséquence_du_typage_dynamique">11.2.7. Une conséquence du typage dynamique</h4>
+<div class="paragraph"><p>Même si les éléments d&#8217;une liste sont de types différents, on peut
+parcourir cette liste à l&#8217;aide de <tt>for</tt> sans qu&#8217;il ne s&#8217;ensuive une
+erreur</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; divers = [3, 17.25, [5, 'Jean'], 'Linux is not Windoze']
+&gt;&gt;&gt; for item in divers:
+        print item, type(item)
+3 &lt;type 'int'&gt;
+17.25 &lt;type 'float'&gt;
+[5, 'Jean'] &lt;type 'list'&gt;</tt></pre>
+</div></div>
+<div class="paragraph"><p>Linux is not Windoze &lt;type <em>str</em>&gt;</p></div>
+</div>
+<div class="sect3">
+<h4 id="_opérations_sur_les_listes">11.2.8. Opérations sur les listes</h4>
+<div class="paragraph"><p>On peut appliquer aux listes les opérateurs + (concaténation) et *
+(multiplication) :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; fruits = ['orange','citron']
+&gt;&gt;&gt; legumes = ['poireau','oignon','tomate']
+&gt;&gt;&gt; fruits + legumes
+['orange', 'citron', 'poireau', 'oignon', 'tomate']
+&gt;&gt;&gt; fruits * 3
+['orange', 'citron', 'orange', 'citron', 'orange', 'citron']</tt></pre>
+</div></div>
+<div class="paragraph"><p>L&#8217;opérateur * est particulièrement utile pour créer une liste de n
+éléments identiques :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; sept_zeros = [0]*7
+&gt;&gt;&gt; sept_zeros
+[0, 0, 0, 0, 0, 0, 0]</tt></pre>
+</div></div>
+<div class="paragraph"><p><strong>Test d&#8217;appartenance</strong></p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; v = 'tomate'
+&gt;&gt;&gt; if v in legumes:
+print 'OK'
+OK</tt></pre>
+</div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Note" src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+jwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAACihJREFU
+WEftmAtQU1cax6u1uq2OM1arLlbF9YXKqLuz7UwfttUuS7tt6a7WjrRVa5XtCrooVBRBXvIssAjK
+Q1FQeSUQHgLySAIh4SGElwlJSEKSe5N7b573FRXd7WO7X2BEZ3c7lJSd6c70m//cOfeew7k//uc7
+59yTGd99990TP6kAoJ9UPPGTonEN189AkzgwNYe4XK6vr++zYwEFuJ12g6cAFB4evnv5gsHDu9Uf
+vKb8nXf7K55wCw+nl+mHAoEZ8PqR/b6qd34r27x4aNOzyi2LNC8thYccDmcamX4oEAyQ7POd2j1v
+DHk/q/z1c+oXlmhe+qVum0fv79ZB1T/HYlqwfigQJA0a/JEKUF5con3ZQ7/teWT7CqOPJ35gB1R9
+880340w/HmtyIFjGZ8yY8cwzz+j3vDryiof+9eeRHStMvp74O6st76+1Re6Fqn9b6qH9zJkzn3os
+5s6dC9yLxwIK8+bN+z47JweC3p12+RvbXpC+uQ59cyXmu4p4dwxllxd58CV95MHFixcOdJQgyjrS
+KLxna7/v6HxAdrlE9TzULVeB7v070w96QPcvXLjw+7ycHAj+T4eu7FzcLshfo6+n5U/rbbs3kP4b
+2dA/UMlHwnxf+8WcpyRVn8tbgo3SU3b5GUoZRauiaVXsIw3H05ovmZEsVpcLYnQ5Hh4eMMr/1aTJ
+gZ5++mmHjqvtijng/yowyd/zdgTtYJIPI1EBAb/xCly9cPbsJ4XcQ7cFwYbuMJssEoBIZQyliqfU
+KROitZmMLo81XGGRQriuWrXqq6++chNo/vz5Nh1PJ03q5Ud5rfV44bn5C+bNBb29Zln25iVNLy7d
+usmjpmCftOGI7tYp8yDQxJHKs9Rw0oRoTTq4AhxOpMiJlrBokZeX14MHD9wEWrJkicNQjQ6kyyWJ
+eWn7Z8+eBRCG7ctBUJg1a2ZwwLaS7I8lVUFqSTg+GEOqEklVEqVOozVZE2L0+SzQGDlOI9eJcry9
+vUdHR90EWrFiBYXUYfLzyq60jrrItJjdWzYte2rWzFlPzoTJtf3lNRHBPgUZ/nxuYG/jF/qeaIss
+0a5MoTQZE6JHshl9AYuWOU0VTlOl08TbsmXLvXv33ARavXo1gzXiirzhnswefvzN0uPXLxzISdr9
+rs+mdb96zs/XOyb07auZe5u5R6TNJxXiKKQv0SJPdQxnAseEGMN11ljuNFU7TTVw3bp1q/tA69at
+Y3EBoSrQ9V8cFKe1Vp+uuRZYnP1pVvyu08G/DwvyyUz4sDT3Mz43eEAQqe46a+hNMg2mEkP/CcRz
+YjVOrBaYNm/efPfuXTcd2rBhA0u0WjXFiOyKojOzpzlOwAutKwqqKvgL91JASc7B0tyA6mtB4pqw
+fkGUQhI/0p2Cy88RiguPHDIUM2glY+KzploWq2exWsgh94HWr1/P4iKrpgRXFmn7cmSSlO6mM5Ib
+YS2VIQJeSAvvC1H1yc76iO6GM4r2RGVHsr433XQ7y6LIcwEZisc1BgQooJsMVr9x40b3gZYvX37H
+LLZrSy3qYvT2ZU3POZk4cbAlto8f1ceP7hfG9gvj5OJE9a1UZCATGThvlGVDwtk1hZS+hEKqx0Uj
+PABiMCGLNTOmRpj27gMtW7bsjkVC6rkWdRmhKkQGsnXSdG136nBXiqY7VSf9m7Y7XSvN0Pdnobez
+CcVFRWcGvzKKNFSP65bwwk1eslVXR5sEDN7K4AIGa4K8dB8IHLpr6yINPLu+wqouKb10XNuTUXU1
+pJ4TSwwXm9WlZVfCjwfurC4KwxT5UmHqxXPHQ4/sloryKPRm6tnAimtxnfycpJjDDM6nAYhoZUyC
+tWvXug+0aeP6ew4pbaqjjTV2Lfd8yuepMfuKLp4ouXSSUxDeL87OSgkk1Jz0hCNS0eXW+qzC3IiK
+ogQSvQkKO/aRA6mnjI3X8iJpQsjgYoZoAyxYSqYHyKbhcAvCPvvY16opA52N2Jeb/tdBSa5Zw0WG
+Ss5GHHDoq3pEl6tKk4HGgTYnRh8OOfpJTkY4MlRHE6L/CVBbfWJI0K5xoAupQV8c/UDWkQdABnlx
+zKn9LqDWXE5hNABdy4torEyz6WvFjdnaQd70AMGO8/iQOfS16t6rR//8/jhQxdUISKCY8H0l+eGR
+Jz7pbbsMQP2SS4W5pwDoQtpxSVO2yyrkpkLKGQOSMITkRw2Z2Wx++63XR8lBJ9FMmxootMahKzcM
+5tt1vIeqxFXcAcklTFXuMNSQSC2urrzBSYa8seoar12MzvwyNCPpmKAuh8YggdoZswQK7udQX1/f
+Xn+/UUruJFqdkJUYMFXB95pdW2TTXLdqrtu0JXZ9jV1XbdffINE6Eq0nUWjTRBn5j2QSUlgrjUto
+ooPGOwDI09PTzb0MjjgnQw6O0kqnWeIk2hismUJvkIYKh45j05ZZ1LBallk0HIuGaxupgPEiDS4s
+CpgAyNQyIRqTMIBCdLiuuAQ+0NwESkhISEsKuc8MOy0drFnMYHx4n0NXadeVAwc+XGZSgqBQbtFW
+glUOA5gEDoE9wkcytblQiFuMudt1xTtgYXQTKCDgUHlx2iijdlo6WUJMYwIYFIe+2jbCI4YrjEou
+Iucgcq5RySPUNTZdrcPQQKJNpAuohcLEE6KJTsbSw1r7WEsvY+6CzdUdoJaWljVr1jiI26OMhjV3
+MJiIMvFJpN5huGEdqSbUVaiiwiArB6EKF5B1BIBgPWyC4wdpEk2IwjoYSzdrlrLWfqelD0xyE6io
+qCj8RMAoPcwSXYy5ncJFFCogkUaHoR7MMGtqTKpKZKgCBAW4tenqHAg4xKfQVvCGIaSPC7wBGtbc
+y+BdsNvfuXNnCt9D44emEydOtAkrR2k1Q3RBJlKmVhJtJpEGALLr68APgMDV1SAowK1dXz8G1Owa
+L5OYIjonBMPEmnvAJ5q4RWHtMMucTufUgIBp6dKl9yigcc0LVV/lUHdZ6ZXYzJRjh/a/d3DvO8cO
+fxh96sD1vNMDkoLB9gJABFDAHRsyAWUSwfSeEJC55hfWLpdWcAqTFyxYwLLs1IC+/fbblStX3iWV
++Tkxl86f2em340hgwOmTxxMS4hLiY69cvnjh/LnExNj4szEf7fmj31sv79m549Cn78WeDigriFP0
+lLnS6KHk3eX8utycc+EnQz71/+Ct7a+/mJ+fP+Uhg5MlHIDgzLto0SI/P7+cnJyqqio+ny8QCEQi
+UXNzMxTa2tog8RsaGpqamqA2NDQ0KirK399/zpw5cLzcsMFrXJDCPj4+R48ezczMFAqFMplMo9Hc
+v39/Cg5B06+//hrOcjRNw+6BoqjBYEDGQq/Xj4yM6MZi/CGGYdDGbrdTFAXtYSwYhrFYLI6HAVXQ
+AMfx8ZYkSYI90L87QNC71WolxgIK0Nf4W+GVUAX9QsCXDSwq8B//47GAh7AxjwdUQQPI4onGcI6G
+lJga0LT8+uRGJ5P/2OBGpz/mT34Gmsy9nx36v3PoX1H4mIUGLCOSAAAAAElFTkSuQmCC" />
+</td>
+<td class="content">
+<div class="paragraph"><p>Python vous autorise à « étendre » une longue instruction sur plusieurs
+lignes, si vous continuez à encoder quelque chose qui est délimité par
+une paire de parenthèses, de crochets ou d&#8217;accolades. Vous pouvez
+traiter ainsi des expressions parenthésées, ou encore la définition de
+longues listes, de grands tuples ou de grands dictionnaires (voir plus
+loin). Le niveau d&#8217;indentation n&#8217;a pas d&#8217;importance : l&#8217;interpréteur
+détecte la fin de l&#8217;instruction, là où la paire syntaxique est refermée.
+Cette fonctionnalité vous permet d&#8217;améliorer la lisibilité de vos
+programmes.</p></div>
+</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>Exemple :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>couleurs = ['noir', 'brun', 'rouge',
+'orange', 'jaune', 'vert',
+'bleu', 'violet', 'gris', 'blanc']</tt></pre>
+</div></div>
+<div class="paragraph"><p><strong>Nombres aléatoires - Histogrammes</strong></p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; from random import *</tt></pre>
+</div></div>
+<div class="paragraph"><p>La fonction ci-dessous permet de créer une liste de nombres réels
+aléatoires, de valeur comprise entre zéro et un. L&#8217;argument à fournir est la taille de la liste :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; def list_aleat(n):
+s = [0]*n
+for i in range(n):
+        s[i] = random()
+return s</tt></pre>
+</div></div>
+<div class="paragraph"><p>Avec un seul argument, elle renvoie un entier compris entre zéro et la
+valeur de l&#8217;argument diminué d&#8217;une unité. Par exemple,
+<tt>randrange(6)</tt> renvoie un nombre compris entre 0 et 5. Avec deux
+arguments, le nombre renvoyé est compris entre la valeur du premier
+argument et la valeur du second argument diminué d&#8217;une unité. Par
+exemple, <tt>randrange(2, 8)</tt> renvoie un nombre compris entre 2 et 7. Si
+l&#8217;on ajoute un troisième argument, celui-ci indique que le nombre tiré
+au hasard doit faire partie d&#8217;une série limitée d&#8217;entiers, séparés les
+uns des autres par un certain intervalle, défini lui-même par ce
+troisième argument. Par exemple, <tt>randrange(3, 13, 3)</tt> renverra un des
+nombres de la série 3, 6, 9, 12 :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; for i in range(15):
+print random.randrange(3,13,3),
+3 12 6 9 6 6 12 6 3 6 9 3 6 12 12</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_les_tuples">11.3. Les tuples</h3>
+<div class="paragraph"><p>Python propose un type de données appelé <strong>tuple</strong>, qui est assez
+semblable à une liste mais qui n&#8217;est pas modifiable.</p></div>
+<div class="paragraph"><p>Du point de vue de la syntaxe, un tuple est une collection d'éléments
+séparés par des virgules :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; tuple = 'a', 'b', 'c', 'd', 'e'
+&gt;&gt;&gt; print tuple
+('a', 'b', 'c', 'd', 'e')</tt></pre>
+</div></div>
+<div class="paragraph"><p>Bien que cela ne soit pas nécessaire, il est vivement conseillé de
+mettre le tuple en évidence en l&#8217;enfermant dans une paire de
+parenthèses, comme l&#8217;instruction <tt>print</tt> de Python le fait elle-même.
+(Il s&#8217;agit simplement d&#8217;améliorer la lisibilité du code, mais vous savez
+que c&#8217;est important) :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; tuple = ('a', 'b', 'c', 'd', 'e')</tt></pre>
+</div></div>
+<div class="paragraph"><p>Les opérations que l&#8217;on peut effectuer sur des tuples sont
+syntaxiquement similaires à celles que l&#8217;on effectue sur les listes, si
+ce n&#8217;est que les tuples ne sont pas modifiables :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; print tuple[2:4]
+('c', 'd')
+&gt;&gt;&gt; tuple[1:3] = ('x', 'y') ==&gt; * erreur *
+&gt;&gt;&gt; tuple = ('André',) + tuple[1:]
+&gt;&gt;&gt; print tuple
+('André', 'b', 'c', 'd', 'e')</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_les_dictionnaires">11.4. Les dictionnaires</h3>
+<div class="sect3">
+<h4 id="_création_d_8217_un_dictionnaire">11.4.1. Création d&#8217;un dictionnaire</h4>
+<div class="paragraph"><p>Dans une paire d&#8217;accolades. Un dictionnaire vide sera donc noté <tt>{}</tt> :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; dico = {}
+&gt;&gt;&gt; dico['computer'] = 'ordinateur'
+&gt;&gt;&gt; dico['mouse'] ='souris'
+&gt;&gt;&gt; dico['keyboard'] ='clavier'
+&gt;&gt;&gt; print dico
+{'computer': 'ordinateur', 'keyboard': 'clavier', 'mouse': 'souris'}</tt></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_opérations_sur_les_dictionnaires">11.4.2. Opérations sur les dictionnaires</h4>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; invent = {'pommes': 430, 'bananes': 312, 'oranges' : 274,
+'poires' : 137}
+&gt;&gt;&gt; print invent
+{'oranges': 274, 'pommes': 430, 'bananes': 312, 'poires': 137}</tt></pre>
+</div></div>
+<div class="paragraph"><p>Si le patron décide de liquider toutes les pommes et de ne plus en
+vendre, nous pouvons enlever cette entrée dans le dictionnaire :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; del invent['pommes']
+&gt;&gt;&gt; print invent
+{'oranges': 274, 'bananes': 312, 'poires': 137}</tt></pre>
+</div></div>
+<div class="paragraph"><p>La fonction <tt>len()</tt> est utilisable avec un dictionnaire : elle en
+renvoie le nombre d'éléments.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_les_dictionnaires_sont_des_objets">11.4.3. Les dictionnaires sont des objets</h4>
+<div class="paragraph"><p>La méthode <tt>keys()</tt> renvoie la liste des clés utilisées dans le
+dictionnaire :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; print dico.keys()
+['computer', 'keyboard', 'mouse']</tt></pre>
+</div></div>
+<div class="paragraph"><p>La méthode <tt>values()</tt> renvoie la liste des valeurs mémorisées dans le
+dictionnaire :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; print invent.values()
+[274, 312, 137]</tt></pre>
+</div></div>
+<div class="paragraph"><p>La méthode <tt>has_key()</tt> permet de savoir si un dictionnaire comprend
+une clé déterminée. On fournit la clé en argument, et la méthode renvoie
+une valeur <em>vraie</em> ou <em>fausse</em> (en fait, 1 ou 0), suivant que la clé est
+présente ou pas :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; print invent.has_key('bananes')
+1
+&gt;&gt;&gt; if invent.has_key('pommes'):
+        print 'nous avons des pommes'
+else:
+        print 'pas de pommes, sorry'
+pas de pommes, sorry</tt></pre>
+</div></div>
+<div class="paragraph"><p>La méthode <tt>items()</tt> extrait du dictionnaire une liste équivalente de
+tuples :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; print invent.items()
+[('oranges', 274), ('bananes', 312), ('poires', 137)]</tt></pre>
+</div></div>
+<div class="paragraph"><p>La méthode <tt>copy()</tt> permet d&#8217;effectuer une vraie copie d&#8217;un
+dictionnaire.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; magasin = stock.copy()
+&gt;&gt;&gt; magasin['prunes'] = 561
+&gt;&gt;&gt; print magasin
+{'oranges': 274, 'prunes': 561, 'poires': 137}
+&gt;&gt;&gt; print stock
+{'oranges': 274, 'poires': 137}
+&gt;&gt;&gt; print invent
+{'oranges': 274, 'poires': 137}</tt></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_parcours_d_8217_un_dictionnaire">11.4.4. Parcours d&#8217;un dictionnaire</h4>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; invent ={"oranges":274, "poires":137, "bananes":312}
+&gt;&gt;&gt; for clef in invent:
+... print clef
+poires
+bananes
+oranges</tt></pre>
+</div></div>
+<div class="paragraph"><p>===Les clés ne sont pas nécessairement des chaînes de caractères</p></div>
+<div class="paragraph"><p>rectangulaire. Nous pouvons pour cela utiliser un dictionnaire, dont les
+clés seront des tuples indiquant les coordonnées <tt>x,y</tt> de chaque arbre :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; arb = {}
+&gt;&gt;&gt; arb[(1,2)] = 'Peuplier'
+&gt;&gt;&gt; arb[(3,4)] = 'Platane'
+&gt;&gt;&gt; arb[6,5] = 'Palmier'
+&gt;&gt;&gt; arb[5,1] = 'Cycas'
+&gt;&gt;&gt; arb[7,3] = 'Sapin'</tt></pre>
+</div></div>
+<div class="paragraph"><p><span class="image">
+<img alt="Python-notes_fichiers/image004.gif" width="30%" src="data:image/gif;base64,
+" />
+</span></p></div>
+<div class="paragraph"><p>nous allons provoquer une erreur :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; print arb[1,2]
+Peuplier
+&gt;&gt;&gt; print arb[2,1]
+* Erreur : KeyError: (2, 1) *</tt></pre>
+</div></div>
+<div class="paragraph"><p>Pour résoudre ce petit problème, nous pouvons utiliser la méthode
+<tt>get()</tt> :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; print arb.get((1,2),'néant')
+Peuplier
+&gt;&gt;&gt; print arb.get((2,1),'néant')
+néant</tt></pre>
+</div></div>
+<div class="paragraph"><p>Le premier argument transmis à cette méthode est la clé de recherche, le
+second argument est la valeur que nous voulons obtenir en retour si la
+clé n&#8217;existe pas dans le dictionnaire.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_les_dictionnaires_ne_sont_pas_des_séquences">11.4.5. Les dictionnaires ne sont pas des séquences</h4>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; print arb[1:3]
+* Erreur : KeyError: slice(1, 3, None) *</tt></pre>
+</div></div>
+<div class="paragraph"><p>Vous avez vu également qu&#8217;il suffit d&#8217;affecter un nouvel indice (une
+nouvelle clé) pour ajouter une entrée au dictionnaire. Cela ne
+marcherait pas avec les listes :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; invent['cerises'] = 987
+&gt;&gt;&gt; print invent
+{'oranges': 274, 'cerises': 987, 'poires': 137}
+&gt;&gt;&gt; liste =['jambon', 'salade', 'confiture', 'chocolat']
+&gt;&gt;&gt; liste[4] ='salami'
+
+* IndexError: list assignment index out of range *</tt></pre>
+</div></div>
+<div class="paragraph"><p>Du fait qu&#8217;ils ne sont pas des séquences, les dictionnaires se révèlent
+donc particulièrement précieux pour gérer des ensembles de données où
+l&#8217;on est amené à effectuer fréquemment des ajouts ou des suppressions,
+dans n&#8217;importe quel ordre. Ils remplacent avantageusement les listes
+lorsqu&#8217;il s&#8217;agit de traiter des ensembles de données numérotées, dont
+les numéros ne se suivent pas.</p></div>
+<div class="paragraph"><p>Exemple :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; client = {}
+&gt;&gt;&gt; client[4317] = "Dupond"
+&gt;&gt;&gt; client[256] = "Durand"
+&gt;&gt;&gt; client[782] = "Schmidt"</tt></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_construction_d_8217_un_histogramme_à_l_8217_aide_d_8217_un_dictionnaire">11.4.6. Construction d&#8217;un histogramme à l&#8217;aide d&#8217;un dictionnaire</h4>
+<div class="paragraph"><p>Compter le nombre de caractères dans un texte donné. L&#8217;algorithme
+permettant de réaliser ce travail est extraordinairement simple si on le construit sur
+base d&#8217;un dictionnaire :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; texte ="les saucisses et saucissons secs sont dans le saloir"
+&gt;&gt;&gt; lettres ={}
+&gt;&gt;&gt; for c in texte:
+        lettres[c] = lettres.get(c, 0) + 1
+&gt;&gt;&gt; print lettres
+{'t': 2, 'u': 2, 'r': 1, 's': 14, 'n': 3, 'o': 3, 'l': 3, 'i': 3, 'd':
+1, 'e': 5, 'c': 3, ' ': 8, 'a': 4}</tt></pre>
+</div></div>
+<div class="paragraph"><p>Pour fignoler notre travail, nous pouvons encore souhaiter afficher
+l&#8217;histogramme dans l&#8217;ordre alphabétique. Pour ce faire, nous pensons immédiatement à la méthode
+<tt>sort()</tt>, mais celle-ci ne peut s&#8217;appliquer qu&#8217;aux listes. Qu'à cela ne tienne ! Nous avons vu plus haut
+comment nous pouvions convertir un dictionnaire en une liste de tuples :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; lettres_triees = lettres.items()
+&gt;&gt;&gt; lettres_triees.sort()
+&gt;&gt;&gt; print lettres_triees
+[(' ', 8), ('a', 4), ('c', 3), ('d', 1), ('e', 5), ('i', 3), ('l', 3),
+('n', 3), ('o', 3), ('r', 1), ('s', 14), ('t', 2), ('u', 2)]</tt></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_contrôle_du_flux_d_8217_exécution_à_l_8217_aide_d_8217_un_dictionnaire">11.4.7. Contrôle du flux d&#8217;exécution à l&#8217;aide d&#8217;un dictionnaire</h4>
+<div class="paragraph"><p>Une variable. Vous pouvez bien évidemment traiter ce
+problème à l&#8217;aide d&#8217;une série d&#8217;instructions <tt>if - elif - else</tt>, mais
+cela peut devenir assez lourd et inélégant si vous avez affaire à un
+grand nombre de possibilités. Exemple :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>materiau = raw_input("Choisissez le matériau : ")
+if materiau == 'fer':
+        fonctionA()
+elif materiau == 'bois':
+        fonctionC()
+elif materiau == 'cuivre':
+        fonctionB()
+elif materiau == 'pierre':
+        fonctionD()
+elif *... etc ...* </tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>materiau = raw_input("Choisissez le matériau : ")
+dico = {'fer':fonctionA,
+'bois:fonctionC,
+'cuivre':fonctionB,
+'pierre':fonctionD,
+*... etc ...*}
+
+dico[materiau]()</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+La première instruction définit un dictionnaire <tt>dico</tt> dans lequel
+les clés sont les différentes possibilités pour la variable matériau, et les valeurs, les noms des
+fonctions à invoquer en correspondance. Notez bien qu&#8217;il s&#8217;agit
+seulement des noms de ces fonctions, qu&#8217;il ne faut surtout pas faire
+suivre de parenthèses dans ce cas (Sinon Python exécuterait chacune de
+ces fonctions au moment de la création du dictionnaire).
+</p>
+</li>
+<li>
+<p>
+La seconde instruction invoque la fonction correspondant au choix
+opéré à l&#8217;aide de la variable <tt>matériau</tt>. Le nom de la fonction est
+extrait du dictionnaire à l&#8217;aide de la clé, puis associé à une paire de
+parenthèses. Python reconnaît alors un appel de fonction tout à fait
+classique et l&#8217;exécute.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Vous pouvez encore améliorer la technique ci-dessus en remplaçant cette
+instruction par sa variante ci-dessous, qui fait appel à la méthode
+<tt>get()</tt> afin de prévoir le cas où la clé demandée n&#8217;existerait pas dans
+le dictionnaire (vous obtenez de cette façon l'équivalent d&#8217;une
+instruction <tt>else</tt> terminant une longue série de <tt>elif</tt>) :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>dico.get(materiau, fonctAutre)()</tt></pre>
+</div></div>
+<div class="paragraph"><p>(Lorsque la valeur de la variable <tt>materiau</tt> ne correspond à aucune
+clé du dictionnaire, c&#8217;est la fonction <tt>fonctAutre()</tt> qui est
+invoquée).</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercices_poo">12. Exercices POO</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_classe_simple">12.1. Classe simple</h3>
+<div class="sect3">
+<h4 id="_enoncé">12.1.1. Enoncé</h4>
+<div class="paragraph"><p>Déﬁnir une classe <tt>MaClasse</tt> possédant les attributs suivants :</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+données : deux attributs de classes : <tt>x = 23</tt> et <tt>y = x + 5</tt>.
+</p>
+</li>
+<li>
+<p>
+méthode : une méthode affiche contenant un attribut d’instance <tt>z = 42</tt> et les affichages de <tt>y</tt> et de
+<tt>z</tt>.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Dans le programme principal, instanciez un objet de la classe <tt>MaClasse</tt> et invoquez la
+méthode <tt>affiche</tt>.</p></div>
+<div class="listingblock">
+<div class="title">Ce qui produit :</div>
+<div class="content">
+<pre><tt>> python maclasse.py
+28
+42
+Voila mes valeurs y = 28 z = 42
+42
+23</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_vecteur_2d">12.2. Vecteur 2D</h3>
+<div class="sect3">
+<h4 id="_enoncé_2">12.2.1. Enoncé</h4>
+<div class="paragraph"><p>Déﬁnir une classe <tt>Vecteur2D</tt> avec un constructeur fournissant les coordonnées par
+défaut d’un vecteur du plan (par exemple : <tt>x = 0</tt> et <tt>y = 0</tt>).</p></div>
+<div class="paragraph"><p>Dans le programme principal, instanciez un <tt>Vecteur2D</tt> sans paramètre, un <tt>Vecteur2D</tt>
+avec ses deux paramètres, et afﬁchez-les.</p></div>
+<div class="listingblock">
+<div class="title">Ce qui produit :</div>
+<div class="content">
+<pre><tt>> python vecteur2d.py
+------------ une instance par defaut -------------
+x = 0, y = 0
+------------ une instance initialisee ------------
+x = -5, y = 4
+coucou</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_vecteur_2d_surcharge">12.3. Vecteur 2D : surcharge</h3>
+<div class="sect3">
+<h4 id="_enoncé_3">12.3.1. Enoncé</h4>
+<div class="paragraph"><p>Enrichissez la classe <tt>Vecteur2D</tt> précédente en lui ajoutant une méthode d’affichage
+et une méthode de surcharge d’addition de deux vecteurs du plan.</p></div>
+<div class="paragraph"><p>Dans le programme principal, instanciez deux <tt>Vecteur2D</tt>, affichez-les et affichez leur
+somme.</p></div>
+<div class="listingblock">
+<div class="title">Ce qui produit :</div>
+<div class="content">
+<pre><tt>> python vecteur2dsurcharge.py
+Vecteur(1.2, 2.3)
+Vecteur(3.4, 4.5)
+Vecteur(4.6, 6.8)</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_héritage_simple">12.4. Héritage simple</h3>
+<div class="sect3">
+<h4 id="_enoncé_4">12.4.1. Enoncé</h4>
+<div class="paragraph"><p>Déﬁnir une classe <tt>Rectangle</tt> avec un constructeur donnant des valeurs (<tt>longueur</tt> et
+<tt>largeur</tt>) par défaut et un attribut <tt>nom = "rectangle"</tt>, une méthode d’afﬁchage et
+une méthode surface renvoyant la surface d’une instance.</p></div>
+<div class="paragraph"><p>Déﬁnir une classe <tt>Carre</tt> héritant de <tt>Rectangle</tt> et qui surcharge l’attribut d’instance :
+<tt>nom = "carré"</tt>.</p></div>
+<div class="paragraph"><p>Dans le programme principal, instanciez un <tt>Rectangle</tt> et un <tt>Carre</tt> et afﬁchez-les.</p></div>
+<div class="listingblock">
+<div class="title">Ce qui produit :</div>
+<div class="content">
+<pre><tt>> python rectangle.py
+
+Le rectangle de côtes 12 et 8 a une surface de 96
+
+Le carre de côtes 10 et 10 a une surface de 100</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_points">12.5. Points</h3>
+<div class="sect3">
+<h4 id="_enoncé_5">12.5.1. Enoncé</h4>
+<div class="paragraph"><p>Définir une classe Point avec un constructeur fournissant les coordonnées par défaut
+d’un point du plan (par exemple : <tt>x = 0.0</tt> et <tt>y = 0.0</tt>).</p></div>
+<div class="paragraph"><p>Définir une classe Segment dont le constructeur possède quatre paramètres : deux
+pour l’origine et deux pour l’extrémité. Ce constructeur définit deux attributs : <tt>orig</tt>
+et <tt>extrem</tt>, instances de la classe <tt>Point</tt>. De cette manière, vous concevez une classe
+composite : la classe <tt>Segment</tt> est composée de deux instances de la classe <tt>Point</tt>.</p></div>
+<div class="paragraph"><p>Ajouter une méthode d’affichage.</p></div>
+<div class="paragraph"><p>Enﬁn écrire un auto-test qui affiche une instance de <tt>Segment</tt> initialisée par les valeurs
+1, 2, 3 et 4.</p></div>
+<div class="listingblock">
+<div class="title">Ce qui produit :</div>
+<div class="content">
+<pre><tt>> python point.py
+Segment : [(1.0, 2.0), (3.0, 4.0)]</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_fermeture">12.6. Fermeture</h3>
+<div class="sect3">
+<h4 id="_enoncé_6">12.6.1. Enoncé</h4>
+<div class="paragraph"><p>Déﬁnir une fonction fabrique <tt>creer_plus</tt> renvoyant une fonction fermeture <tt>plus</tt>.
+<tt>cree_plus</tt> a un argument <tt>ajout</tt>. Son code ne renferme que la fonction <tt>plus</tt> qui,
+elle aussi, possède un argument <tt>increment</tt> et dont le code se contente de renvoyer
+la somme : (<tt>ajout + increment</tt>).</p></div>
+<div class="paragraph"><p>Dans le programme principal, créez deux fonctions, par exemple <tt>p = creer_plus(23)</tt>
+et <tt>p = creer_plus(42)</tt>, puis affichez les valeurs données par <tt>p(100)</tt> et <tt>q(100)</tt>.</p></div>
+<div class="listingblock">
+<div class="title">Ce qui produit :</div>
+<div class="content">
+<pre><tt>> python fermeture.py
+----- creation de deux fabriques distinctes ------
+(123, 142)</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_fabrique">12.7. Fabrique</h3>
+<div class="sect3">
+<h4 id="_enoncé_7">12.7.1. Enoncé</h4>
+<div class="paragraph"><p>Écriture d’une fonction fabrique renvoyant une instance de classe.
+Définir une classe <tt>CasNormal</tt> contenant une méthode <tt>uneMethode</tt> qui affiche "normal".
+Définir une classe <tt>CasSpecial</tt> contenant une méthode <tt>uneMethode</tt> qui affiche "spécial".
+Enfin définir la fonction fabrique <tt>casQuiConvient</tt> avec un paramètre <tt>estNormal</tt> initialisé par défaut à <tt>True</tt>.
+Si le paramètre est vérifié, le corps de la fonction renvoie une
+instance de la classe <tt>CasNormal</tt>, sinon il renvoie une instance de la classe <tt>CasSpecial</tt>.</p></div>
+<div class="paragraph"><p>Dans le programme principal, créez l’instance que vous désirez grâce à la fabrique,
+puis vérifiez son type en appelant dessus la méthode <tt>uneMethode</tt></p></div>
+<div class="listingblock">
+<div class="title">Ce qui produit :</div>
+<div class="content">
+<pre><tt>> python fabrique.py
+special</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pile_et_file">12.8. Pile et File</h3>
+<div class="sect3">
+<h4 id="_enoncé_8">12.8.1. Enoncé</h4>
+<div class="paragraph"><p>Implanter des classes <tt>Pile</tt> et <tt>File</tt> utilisant les listes comme structure de données interne et
+respectant l’interface suivante (utiliser l’héritage) :</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Base</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="k">pass</span>
+<span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elt</span><span class="p">):</span>
+<span class="k">pass</span>
+</pre></div></div></div>
+<div class="listingblock">
+<div class="title">Ce qui produit :</div>
+<div class="content">
+<pre><tt>> python pile.py
+[]
+True
+['A', 5, ['toto', 'titi', 'tata']]
+['toto', 'titi', 'tata']
+5
+1
+A</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Ce qui produit :</div>
+<div class="content">
+<pre><tt>> python file.py
+[]
+True
+[['toto', 'titi', 'tata'], 5, 'A']
+A
+5
+1
+['toto', 'titi', 'tata']</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_liens_utiles">12.9. liens utiles</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://labh-curien.univ-st-etienne.fr/~tantini/Ens/Python/cours.pdf">http://labh-curien.univ-st-etienne.fr/~tantini/Ens/Python/cours.pdf</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.fil.univ-lille1.fr/~marvie/download/initiation_python.pdf">http://www.fil.univ-lille1.fr/~marvie/download/initiation_python.pdf</a>
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Version 1.0<br />
+Last updated 2013-01-24 06:28:21 Paris, Madrid
+</div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

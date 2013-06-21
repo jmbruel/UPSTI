@@ -1,0 +1,276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.6" />
+<title>Exercices POO</title>
+<link rel="stylesheet" href="./xhtml11.css" type="text/css" />
+<link rel="stylesheet" href="./layout1.css" type="text/css" />
+<link rel="stylesheet" href="./layout1a.css" type="text/css" />
+<link rel="stylesheet" href="./pygments.css" type="text/css" />
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){asciidoc.footnotes(); asciidoc.toc(1);}
+/*]]>*/
+</script>
+<script type="text/javascript" src="./asciidoc-xhtml11.js"></script>
+</head>
+<body>
+<div id="layout-banner">
+  <div id="layout-title">IGS</div>
+  <div id="layout-description">La langage Python</div>
+</div>
+<table>
+<tr valign="top">
+<td id="layout-menu" width="12%">
+<div>&#187;<a href="plan.html">Accueil</a></div>
+<div>&#187;<a href="http://jmbhome.heroku.com/teaching/POO/POO-python.html">Notes Python</a></div>
+<div>&#187;<a href="exos.html">Exercices POO</a></div>
+<div>&#187;<a href="re_tests.html">ER et Tests</a></div>
+<div>&#187;<a href="classes.html">Classes</a></div>
+<div>&#187;<a href="webserver.html">HTTP Server</a></div>
+<div>&#187;<a href="turtle.html">Turtle</a></div>
+<div>&#187;<a href="tkinter.html">Tkinter GUI</a></div>
+<!--div id="page-source">&#187;<a href="exos.txt" target="_blank">Page&nbsp;Source</a></div-->
+<!--div id="layout-menu-jmi">
+<div>&#187;<a href="plan.html">Accueil</a></div>
+<div>&#187;<a href="http://jmbhome.heroku.com/teaching/POO/POO-python.html">Notes Python</a></div>
+<div>&#187;<a href="exos.html">Exercices POO</a></div>
+<div>&#187;<a href="re_tests.html">ER et Tests</a></div>
+<div>&#187;<a href="classes.html">Classes</a></div>
+<div>&#187;<a href="webserver.html">HTTP Server</a></div>
+<div>&#187;<a href="turtle.html">Turtle</a></div>
+<div>&#187;<a href="tkinter.html">Tkinter GUI</a></div>
+<div id="page-source">&#187;<a href="exos.txt">Page&nbsp;Source</a></div>
+</div-->
+</td>
+<td width="88%">
+<div id="layout-content">
+<div id="header">
+<h1>Exercices POO</h1>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_classe_simple">1. Classe simple</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_enoncé">1.1. Enoncé</h3>
+<div class="paragraph"><p>Déﬁnir une classe <tt>MaClasse</tt> possédant les attributs suivants :</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+données : deux attributs de classes : <tt>x = 23</tt> et <tt>y = x + 5</tt>.
+</p>
+</li>
+<li>
+<p>
+méthode : une méthode affiche contenant un attribut d’instance <tt>z = 42</tt> et les affichages de <tt>y</tt> et de
+<tt>z</tt>.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Dans le programme principal, instanciez un objet de la classe <tt>MaClasse</tt> et invoquez la
+méthode <tt>affiche</tt>.</p></div>
+<div class="listingblock">
+<div class="title">Ce qui produit :</div>
+<div class="content">
+<pre><tt>> python maclasse.py
+28
+42
+Voila mes valeurs y = 28 z = 42
+42
+23</tt></pre>
+</div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_vecteur_2d">2. Vecteur 2D</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_enoncé_2">2.1. Enoncé</h3>
+<div class="paragraph"><p>Déﬁnir une classe <tt>Vecteur2D</tt> avec un constructeur fournissant les coordonnées par
+défaut d’un vecteur du plan (par exemple : <tt>x = 0</tt> et <tt>y = 0</tt>).</p></div>
+<div class="paragraph"><p>Dans le programme principal, instanciez un <tt>Vecteur2D</tt> sans paramètre, un <tt>Vecteur2D</tt>
+avec ses deux paramètres, et afﬁchez-les.</p></div>
+<div class="listingblock">
+<div class="title">Ce qui produit :</div>
+<div class="content">
+<pre><tt>> python vecteur2d.py
+------------ une instance par defaut -------------
+x = 0, y = 0
+------------ une instance initialisee ------------
+x = -5, y = 4
+coucou</tt></pre>
+</div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_vecteur_2d_surcharge">3. Vecteur 2D : surcharge</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_enoncé_3">3.1. Enoncé</h3>
+<div class="paragraph"><p>Enrichissez la classe <tt>Vecteur2D</tt> précédente en lui ajoutant une méthode d’affichage
+et une méthode de surcharge d’addition de deux vecteurs du plan.</p></div>
+<div class="paragraph"><p>Dans le programme principal, instanciez deux <tt>Vecteur2D</tt>, affichez-les et affichez leur
+somme.</p></div>
+<div class="listingblock">
+<div class="title">Ce qui produit :</div>
+<div class="content">
+<pre><tt>> python vecteur2dsurcharge.py
+Vecteur(1.2, 2.3)
+Vecteur(3.4, 4.5)
+Vecteur(4.6, 6.8)</tt></pre>
+</div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_héritage_simple">4. Héritage simple</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_enoncé_4">4.1. Enoncé</h3>
+<div class="paragraph"><p>Déﬁnir une classe <tt>Rectangle</tt> avec un constructeur donnant des valeurs (<tt>longueur</tt> et
+<tt>largeur</tt>) par défaut et un attribut <tt>nom = "rectangle"</tt>, une méthode d’afﬁchage et
+une méthode surface renvoyant la surface d’une instance.</p></div>
+<div class="paragraph"><p>Déﬁnir une classe <tt>Carre</tt> héritant de <tt>Rectangle</tt> et qui surcharge l’attribut d’instance :
+<tt>nom = "carré"</tt>.</p></div>
+<div class="paragraph"><p>Dans le programme principal, instanciez un <tt>Rectangle</tt> et un <tt>Carre</tt> et afﬁchez-les.</p></div>
+<div class="listingblock">
+<div class="title">Ce qui produit :</div>
+<div class="content">
+<pre><tt>> python rectangle.py
+
+Le rectangle de côtes 12 et 8 a une surface de 96
+
+Le carre de côtes 10 et 10 a une surface de 100</tt></pre>
+</div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_points">5. Points</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_enoncé_5">5.1. Enoncé</h3>
+<div class="paragraph"><p>Définir une classe Point avec un constructeur fournissant les coordonnées par défaut
+d’un point du plan (par exemple : <tt>x = 0.0</tt> et <tt>y = 0.0</tt>).</p></div>
+<div class="paragraph"><p>Définir une classe Segment dont le constructeur possède quatre paramètres : deux
+pour l’origine et deux pour l’extrémité. Ce constructeur définit deux attributs : <tt>orig</tt>
+et <tt>extrem</tt>, instances de la classe <tt>Point</tt>. De cette manière, vous concevez une classe
+composite : la classe <tt>Segment</tt> est composée de deux instances de la classe <tt>Point</tt>.</p></div>
+<div class="paragraph"><p>Ajouter une méthode d’affichage.</p></div>
+<div class="paragraph"><p>Enﬁn écrire un auto-test qui affiche une instance de <tt>Segment</tt> initialisée par les valeurs
+1, 2, 3 et 4.</p></div>
+<div class="listingblock">
+<div class="title">Ce qui produit :</div>
+<div class="content">
+<pre><tt>> python point.py
+Segment : [(1.0, 2.0), (3.0, 4.0)]</tt></pre>
+</div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_fermeture">6. Fermeture</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_enoncé_6">6.1. Enoncé</h3>
+<div class="paragraph"><p>Déﬁnir une fonction fabrique <tt>creer_plus</tt> renvoyant une fonction fermeture <tt>plus</tt>.
+<tt>cree_plus</tt> a un argument <tt>ajout</tt>. Son code ne renferme que la fonction <tt>plus</tt> qui,
+elle aussi, possède un argument <tt>increment</tt> et dont le code se contente de renvoyer
+la somme : (<tt>ajout + increment</tt>).</p></div>
+<div class="paragraph"><p>Dans le programme principal, créez deux fonctions, par exemple <tt>p = creer_plus(23)</tt>
+et <tt>p = creer_plus(42)</tt>, puis affichez les valeurs données par <tt>p(100)</tt> et <tt>q(100)</tt>.</p></div>
+<div class="listingblock">
+<div class="title">Ce qui produit :</div>
+<div class="content">
+<pre><tt>> python fermeture.py
+----- creation de deux fabriques distinctes ------
+(123, 142)</tt></pre>
+</div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_fabrique">7. Fabrique</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_enoncé_7">7.1. Enoncé</h3>
+<div class="paragraph"><p>Écriture d’une fonction fabrique renvoyant une instance de classe.
+Définir une classe <tt>CasNormal</tt> contenant une méthode <tt>uneMethode</tt> qui affiche "normal".
+Définir une classe <tt>CasSpecial</tt> contenant une méthode <tt>uneMethode</tt> qui affiche "spécial".
+Enfin définir la fonction fabrique <tt>casQuiConvient</tt> avec un paramètre <tt>estNormal</tt> initialisé par défaut à <tt>True</tt>.
+Si le paramètre est vérifié, le corps de la fonction renvoie une
+instance de la classe <tt>CasNormal</tt>, sinon il renvoie une instance de la classe <tt>CasSpecial</tt>.</p></div>
+<div class="paragraph"><p>Dans le programme principal, créez l’instance que vous désirez grâce à la fabrique,
+puis vérifiez son type en appelant dessus la méthode <tt>uneMethode</tt></p></div>
+<div class="listingblock">
+<div class="title">Ce qui produit :</div>
+<div class="content">
+<pre><tt>> python fabrique.py
+special</tt></pre>
+</div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pile_et_file">8. Pile et File</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_enoncé_8">8.1. Enoncé</h3>
+<div class="paragraph"><p>Implanter des classes <tt>Pile</tt> et <tt>File</tt> utilisant les listes comme structure de données interne et
+respectant l’interface suivante (utiliser l’héritage) :</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Base</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="k">pass</span>
+<span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elt</span><span class="p">):</span>
+<span class="k">pass</span>
+</pre></div></div></div>
+<div class="listingblock">
+<div class="title">Ce qui produit :</div>
+<div class="content">
+<pre><tt>> python pile.py
+[]
+True
+['A', 5, ['toto', 'titi', 'tata']]
+['toto', 'titi', 'tata']
+5
+1
+A</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Ce qui produit :</div>
+<div class="content">
+<pre><tt>> python file.py
+[]
+True
+[['toto', 'titi', 'tata'], 5, 'A']
+A
+5
+1
+['toto', 'titi', 'tata']</tt></pre>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2013-02-26 10:28:04 Paris, Madrid
+</div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

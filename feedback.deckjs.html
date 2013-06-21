@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=1024, user-scalable=no">
         <meta name="author" content="Jean-Michel Bruel" />
         <meta name="generator" content="AsciiDoc 8.6.8" />
-        <meta name="presdate" content="14/06/2013" />
+        <meta name="presdate" content="21/06/2013" />
         
         <!-- Core and extension CSS files -->
 <style type="text/css">
@@ -2473,15 +2473,14 @@ This module adds the necessary methods and key bindings to blank/unblank the scr
 <section class="slide" id="title-slide">
         <h1>Analyse de diagrammes SysML</h1>
         <h3>Jean-Michel Bruel</h3>
-        <h4>14/06/2013</h4>
+        <h4>21/06/2013</h4>
 </section>
 <section class="slide">
 <h2>Contexte</h2>
-<img src="images/logo-Sysml-France.png" alt="images/logo-Sysml-France.png" />
-<p>Quelques notes sur des diagrammes SysML réalisés dans le cadre de la réforme
+<p>Quelques notes sur des diagrammes <a href="http://www.omgsysml.org/">SysML</a> réalisés dans le cadre de la réforme
 des programmes de prépa.</p>
 <p>Les commentaires n&#8217;engagent que l&#8217;auteur et ne visent pas à critiquer
-les auteurs de ces diagrammes mais plutôt à illustrer la difficulté
+les auteurs de certains diagrammes cités en exemples mais plutôt à illustrer la difficulté
 à modéliser.</p>
 <p>Dans ce qui suit, j&#8217;ai utilisé les conventions suivantes pour les diagrammes :</p>
 <div class="admonitionblock">
@@ -2534,7 +2533,7 @@ HJKGtXwCkJZ8HURmJBfwKMKDb0sZhbRlKOAVHV0wN0lCwzAMwzAMwzAMwzAMwzAMwyibpqa/+Hna
 D+7PtIkAAAAASUVORK5CYII=" />
 </td>
 <td class="content">
-<p>Modélisation SysML partiellement correct ou pouvant prêter à confusion.</p>
+<p>Modélisation SysML partiellement correcte ou pouvant prêter à confusion.</p>
 </td>
 </tr></table>
 </div>
@@ -2573,8 +2572,9 @@ I6cpjHT8q5/jOI7jOI7jOI7jOI7TIn19rwHxRFgzUciFPgAAAABJRU5ErkJggg==" />
 <section class="slide">
 <h2>Respect des notations SysML</h2>
 <p>Je recommande vraiment l&#8217;utilisation d&#8217;outils (même de dessins, mais dédié à) <a href="http://www.omgsysml.org/">SysML</a>.
-Ils respectent en général la norme (bien qu&#8217;il faille se méfier).
+Ils respectent en général la norme <a href="http://www.omg.org/spec/SysML/1.3/PDF/">OMG SysML v1.3</a> (bien qu&#8217;il faille se méfier).
 Eviter de "dessiner" des diagrammes.</p>
+<p>Par contre la norme permet de faire des adaptations graphiques (cf. la discussion <a href="http://www.realtimeatwork.com/2011/08/is-sysml-too-abstract/">http://www.realtimeatwork.com/2011/08/is-sysml-too-abstract/</a>).</p>
 </section>
 <section class="slide">
 <h2>Diagramme de bloc</h2>
@@ -2601,13 +2601,15 @@ BqtX+WVRKifB6vRxIkEfxX1BpWRZtEbp1b+CdQg7P7OEUmhn1C2Ngqz61p7hVQ9YjpuibmmSo4UW
 </td>
 <td class="content">
 <div class="title">Erreur : mauvais symboles graphiques pour les blocs</div>
-<img src="images/cordeuseContext.png" alt="images/cordeuseContext.png" />
+<img src="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/images/cordeuseContext.png" alt="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/images/cordeuseContext.png" />
 </td>
 </tr></table>
 </div>
 <p>Pour rappel, la notation <code>jmb : Personne</code> permet de représenter un <strong>objet</strong> (une instance d&#8217;une classe ou d&#8217;un bloc).
 C&#8217;est donc une notation utilisée par exemple dans les participants d&#8217;un diagramme de séquence ou encore les parties
 d&#8217;un diagramme interne de bloc.</p>
+<p>Donc dans le diagramme ci-dessus, l&#8217;acteur est correct (on peut mettre des acteurs dans un bdd, cf. OMG SysML v1.3 p.32), par contre
+les objets <code>Block : &#8230;</code> est une erreur de notation.</p>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -2634,8 +2636,76 @@ FTaQpB8hxX7J53pqLWyw1dYVM19ubezWG/oxu+iuEinl/xvirHZaV88RsqRFi+66hm76b7bRubuz
 I6cpjHT8q5/jOI7jOI7jOI7jOI7TIn19rwHxRFgzUciFPgAAAABJRU5ErkJggg==" />
 </td>
 <td class="content">
-<div class="title">Solution : utiliser un outil (ici plantUML)</div>
-<img src="plantuml/bdd3.png" alt="plantuml/bdd3.png" />
+<div class="title">Solution : utiliser un outil (ici BOUML)</div>
+<img src="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/plantuml/cordeuseContext.png" alt="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/plantuml/cordeuseContext.png" />
+</td>
+</tr></table>
+</div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Warning" src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAMVUlEQVRogdWZeXDVVZbHP7/f27JB
+wtJIiCERRFlbx5FuHRrRBgtBsRIwCCOrFmGmiDBjYVNlQlgiQjU6IjI4xLJxGf5QGp0Cbaftsu3R
+hu6aYXqgLZoWEsjyyDP7S972e7/l3vnj5cW3Ji9M/zOn6lRS997fvd/vueece+59ipSS/89iv5mP
+ZEQQQsS23RQARVEAUFUVRVFQog0ZyogJSClld3c327Ztw7IsLMuKto90KgBsNhtVVVXMnj2bvLw8
+7Ha7HBEJKWXGKoSQXV1dcsuWLfLSpUsyKkKIIdWyrLTqdrvlU089Jc+cOSM9Ho8Mh8NSCCEzxTRi
+8JWVlbKtre0vAt6yLGmapmxtbZXr1q2TZ86ckW1tbSMikTH4GzduyKqqqkHwsSA1TZOhUChOg8Hg
+oBqGIQ3DSAk+VleuXDliEspwviullD09PbzwwgscO3Yszt91XScQCNDZ2YlhGIPfuFwu7Pb48FJV
+lZycnEG/z8/PRwiBqqqDYzweD88//zyrV69m7ty5jBs3DofDMWRgD0lASik9Hg979uzh2LFjcYEa
+CoVob2/n2q9+hbZ585BGSCWltbVMr61NtSYbN25k7dq1zJkzZ1gSaqrGWPD79+9PAh8MBuns7OTi
+e+8R2rwZCYOaqTTt3cuf6+qSwAMcP36co0eP8vXXX9Pd3Y1hGMg0lk65A1HwdXV1vPHGG0mW7+jo
+4A8/+xn2BAAAI0riQOnu3cyork7Zt3btWtavX89dd92VdieSCEgppdvt5sCBAxw5ciSuLxQK0dTU
+RMOHHyJ37hwh1NSiAKU7djDzxRdT9q9YsYJt27YxY8aMlCTiCEgp5eXLl6mvr+fVV1+NmygYDNLW
+1sY3J09ipLEYQDPw2sBfCTwMLARKgKwhiNxWU8OsXbvi2qLYnnzySSorK1PvRGyqvH79uty6dWtS
+Lg8EAvLKlSvyo1275M8hSV8H+eMBvRPkP9Vslp0tV6W3u12+c7hOTgT5NyAXgtwE8gTIUyn0D9XV
+0jAMqet6klZUVMjPP/88KcWqUcs3NjZy+PBhDh06FGeFqNtcOnECY8+euICVwDWgFtj/m1/wD+8f
+5xtg6uy5ZI+5BSkkU6fexgu7tvLWhd/x1tXL5P/905wAggnzSODavn388Sc/SblDL7/8Mq+99hqX
+L1+OC2zb7t27uX79+u7Dhw+ndJvW1lYaP/qI0EDKS1z0XeDjC7/l9llz+d6EWxjv0imdcgeFRcVo
+fR46vm1Cx8ndP5hP3qjR/GDuX/GbC5/iberl1qirxGjv73+PYRjc8tBDcVhGjRpFRUUF27dvp7i4
+mPz8fFwuV2QHVq1aldLyDQ0NXDt5En91NRIQCRqNHld2HsLUCfu6GD9mNIoVQggDy9RQpYLTbkdV
+7Vh6CH9vJ/fcfz/vALsAN2AlzHv1wAEu1tTExUI0Hl555RXq6upobm4mEAhECEyePDkOvK7rtLS0
+cOP0aby1tUnAo2oNkFAUSTjoRfN+ix7wgjRBShACVVFQRGSkHvTypwtnmXHPQhrbb3D0k1McAdpi
+DBLVhp/+lIvV1UlV7oQJE8jNzcXtduPz+ZIPMtM0aWhooPH99+mtrU1ymVRqUxUQFlJYSBFGCivG
+OSyEaSCFAGlhd+Vy7w/n43BmM3POXWx69hl8AyMTDXTl4EEu7t2bCBGAQCCAruupCdjtdrp3705r
++ViN22YhsUwdyzRBCpACyzIRMnpngCxXNjYlMk4L+ggoYXxp5pbAlX37cDgcSQSEEAxmoVgQg/9n
+AP67bVdAUcFmQ3W6IgtIiWUKLCGwLGvQj69e+m+EsBB6iGB/N/3e9oyNlIgRYm5kiR2JH0L6MkFY
+Ei0UQKAycdJUbIodT3Mjpu6n3xfCptoRlomQCqZpRkhLCykMhLBQSV1HJbalKnvSF3MpNO0OSIEw
+DWyuPCaVzCRv7ER8Ph+mtJM35lZsdjvuxktYhobDkYOCgqJEDWLLaAfSVc1p78SJO2AAvUBggLUN
+KIx2Kgqjv3crY2wOiqaqKKoKihKJCctCC/npbW+jq7sbS7UjkGCZCCkQQkdJsV6mRWHGBH4HLHpx
+F3LcGDq6u7nw2S85++V/4gb0kB9hFoAZwuZwgc2BqjpQVRWbzYXd4cDlysHn7WJi0W2EfH24XA6E
+jKySqhTPtDRPIjB4XUtoPw3sKV/O+KJipJT4V63mq3/7Obu21/LN/5xl9l/PIys7G2fOaBS7E5vN
+QrU7UW0KNlUFp5P8MeO5/8HFhPo7CXr7MMIaQW8neSkMlqnEEYj1s8QJbwXaWpopmDgJh93OqHGF
+LFy9jjunTeHNo2uAvUy54/uMuaUYV24BUpVYpoVEwaY4UVUbitNJ9ugxOBw2tEAPfX29QCjuVB9O
+EmNBTdeRGEj3A56OdkwtgDDCCKFjz8ql6N55/G3VcRouX+SXH72Ht6udcCg4cJiJSPIn8oCloIKU
+KAhURUUIiVCjx128pjtrEiVtFkrMNNOBA+s34XG3YIRDSMtAkSbOrDzuvOchHnmiklEFY3n76G7O
+f/nv9Ht7EMJCSjGoljCxjOBAnaSjhYPowevDZrx04FMSGLwnJEzmAOYCn33wAUYoiGXoSMsEoeNw
+ZTO2aDrzFpWxck0VJVOn4fd2E/T7oneNyOFlGkjLwNTD6FoILRQEa/hDcyhJIuB0OlFVNeVE04B3
+XjnC+d9+hRYKYJlhpDBBGDidDiaUfp/xk24nJ3c0eaPzsKsgzEhtZJkGIuzDNDRCAR99fb309XYh
+NAYPsnQ6IgJSSgoKCihavDilJZ4Aajf8HVf/fAnLCCNNAyktECaqIsgbV8So0WMHrn2RGLBMHREO
+YBg6eiiIFgzQ7/US8vmYoEDuENa/u6oqcwJRPysoKOC+N9+kcNGiJGvkAQuADY+twn3tCuFg/4CV
+DbB0VKHhzHbhdGVhs6kgDKTuR9f86KEAWtBHd0c73p52pB5Av5KewJxnnmHeoUOEw+EkjHEEYi8M
+EHlFKyws5IfHjlG4cGHSxJOA1cATPy7nT388j+73YoYDCEuP1DhSRrKOlFhmmLAWQNMCBHw9tHtu
+8K2nBcsI8uGxf8HoiRBINNTtjz7KQ/X1xL6iRDHGvubZAfr7+1Nuz+TJk6G+nv/atInmX/86rq8A
+WAlUrahk/Fio/8XHjM4fi93pHCgRFCzLQtd1tFAQLeCjs9NNb4cHxdL44J8PozfD7XyXRqNy97p1
+PPz220gp0XU9zriKogw+SaqqGtmB48ePU15enkRASklRURH31tcz6cEHk1JrAfAUcEcPLLjvMU69
+/694uzsI+X3093TS5blBl8eNt72VHk8Tfd9eR+vv4MQ/HkZpiJwttgTL3/Hoo2nBNzY2smjRIhYs
+WEBBQQEulyvyLuT3+2VTUxM7d+7k5MmTKXNuS0sL555+mtYvv0zqE0A7kavhqFL4oAlCCWOygGIi
+qTiHyMnuTBgz/bHHKDt9GillnN8D+P1+ysrKWLJkCdOmTWPWrFmUlpZGCAghpN/vp7m5mZqaGl5/
+/XUKCwtJFLfbzX+sX8+Nr75K6rtZiXr49KVLKf/4Y4QQ6LqeBP6RRx6hvLycadOmMXPmTEpKSsjN
+zf3uZS6WRHV1NadOnUpaTEpJa2sr5zZupOkmSaQqk2csWcLyTz4BQNO0uL7GxkbWr1+fErzNZlMG
+w1lVVSUvL4+SkhL27dvH8uXL8Xg8ceABiouLue+ttyieN2+IK2Z6TRx/5+LFacE3NDRQWVmZFjwk
+nAOxJF566SW2bNnChQsXkmKipKSEB959l9vmzcvo1pZOpz/8ME98+mla8Bs2bGDZsmVpwUOa5/VE
+d0oXE319fXxWXs43Z88m9Q0n03/0I1YPJIRE8OfOnWPHjh2UlZUNCT4tgUQSO3fupKqqigceeGCw
+P/a7VM8emUg0VcbK+fPn2bp1KytWrBgW/JAEEknU1NTw7LPPMn/+/GFBZQI8lZw/f57nnnuO5cuX
+M2XKlGHBD0sgkURdXR2PP/44FRUVNwV+qP7Tp09z8ODBjNxmRAQSSRw4cIBly5axdOnSvwh4RVH4
+4osv2L9/P2VlZRlbfkQEEkls376djo4OQqHE83bk4nK5EEKwZs0aSktLRwR+RATgOxItLS1cu3aN
+vr6+wTfK/4tEfzeeMmUKkydPzhg8jJAAREgEg0H6+vrQNC2pFL8ZUVWVrKws8vPzycnJQVXVjH/s
+/F/lgJiyQFHragAAAABJRU5ErkJggg==" />
+</td>
+<td class="content">
+<p>Attention, il est tout à fait possible de représenter des instances dans un bdd (cf. OMG SysML v1.3 p.34),
+même si c&#8217;est très peu courant.</p>
 </td>
 </tr></table>
 </div>
@@ -2663,7 +2733,7 @@ BqtX+WVRKifB6vRxIkEfxX1BpWRZtEbp1b+CdQg7P7OEUmhn1C2Ngqz61p7hVQ9YjpuibmmSo4UW
 </td>
 <td class="content">
 <div class="title">Erreur : pb avec les participants et la boucle</div>
-<img src="images/cordeuseSeqBad.png" alt="images/cordeuseSeqBad.png" />
+<img src="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/images/cordeuseSeqBad.png" alt="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/images/cordeuseSeqBad.png" />
 </td>
 </tr></table>
 </div>
@@ -2767,11 +2837,44 @@ D+7PtIkAAAAASUVORK5CYII=" />
 </td>
 <td class="content">
 <div class="title">Problème : Fournir n&#8217;est pas Obtenir&#8230;</div>
-<img src="images/ucBad.png" alt="images/ucBad.png" />
+<img src="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/images/ucBad.png" alt="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/images/ucBad.png" />
 </td>
 </tr></table>
 </div>
-<p>Il vaut mieux définir les cas d&#8217;utilisation du point de vue de (ou des) utilisateurs plutôt que du système. Cf. <a href="#Conventions">[Conventions]</a>.</p>
+<p>Il vaut mieux définir les cas d&#8217;utilisation du point de vue de (ou des) utilisateurs plutôt que du système. Cf. <a href="#Conventions">[Conventions]</a>.
+Pour rappel, un cas d&#8217;utilisation est un regroupement de scénarios qui correspondent à un but d&#8217;un des acteurs (dans le domaine du problème considéré et selon la granularité envisagée).</p>
+<p>Dans le diagramme ci-dessus il aurait fallut écrire :</p>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Note" src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAEwAAABMCAYAAADHl1ErAAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+jwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAP+SURBVHhe7ZtLqBRHFIavDxSRYDAYkCAI0QTR
+BBHUhVlE0YgPxDeIEgIRRJTsXLgRN4JmkV0QREJ0IwnxkaBLX6gIakQRQRFXCoEQEkQUjc//6+ki
+x6KvM/dO12S653zw0Y+Z6ZmqW111+lTdPsdxHMdxHMdxHMdxnK5iWL7tZmbJZ/JRduQ05YRc09h1
+mjFbvpLfZ0dOUy5JKuxqdtQDDM23g2GJpLLwiRwpa882uaqxO2BC6wp+LmsPhaSwx+QETrSIbV3B
+nbL2DJd/Sgr8QH4jW7lN49aFZ2RP8KO0Bb8gp8r+oJJ5/VP5mVwp98iLsiegwLbC8F+5Q6Zmptzc
+2K0OjG6McrbC6NMmybIZIb+Qe+U9yXctk6UxJN+m5ohcIR/LjfKQjBkvF8nJ+T78Ie9L+q+bnCjg
+HblAcv2l8l0ZOCxXN3arxVfybzknO3oTbtmz8rm0rTCWCtsk40FjhuTa8fv/kh/ISvK+5DHH8omk
+I48L2swbkkqyMEDwcG7fR0uuDQslLcAWcCBSOculhePwOi22NiyWjJK2AgbjSxlX2k+Sa0/JjmoA
+t+E/sqgCBuNDOV0GGHk7Ea50jKIIvl25Zi1ZL4sKXIZfyspB0EjYQIbiV3lOWlK0rmAlWtkYSaC5
+SxJYEpTaQtgs6URpX0sh39HV0NmSby/68Wjz8Ftk0XvK9GuZnHYyotckeSsC0tOciLibb+HDfJsS
+m2/j+bWdsvVLGRel/5gn50obMD7NtzAu36bEfgfhxXVJKy+14sq8GP0YGVYegC9zosPYnD/70+TP
+8nfJndD1kAgMfCeL+p0ytSnskBq3hjuhLZLc5zlkHwK2P0sF+a9AURdAMvGkDHdCV9PpsIKQJn6d
+9NA+uUGmSF6WTicDV0Zw5g6+lWRcx8rKQRKxqLBlyLUto/JtpaG/TNHKrkg7wFQanittf5E6vVNp
+PpI8X/6SHf1HygRipTklQ+FI7VhSpKgrDUO3LSC3TjxxUeYkCMdMtFQSgsawnsLKVFhcUGCajdxZ
+s2m2W7Jomo2K59rxSJmEFBO5TESsbexmsD6VCPs3eVzaiNzC5C3928f5PoSJXD5fNJHLM+IB+Z48
+Kqn8SkHfRGvgFqSzXyftTHRZkMr5QdoWWLlFd9wq2yV/ddLVKWGBSZzhxeQtrMxl5/zg8/KOfMGJ
+FqFV3JbMXjO1z2/iUYa+kDVlRdciWD0oWRZlk5O0Mha61B4yCHFriZ8P+4MZozDIsK1N1P82yGXF
+FTaQpB8hxX7J53pqLWyw1dYVM19ubezWG/oxu+iuEinl/xvirHZaV88RsqRFi+66hm76b7bRubuz
+I6cpjHT8q5/jOI7jOI7jOI7jOI7TIn19rwHxRFgzUciFPgAAAABJRU5ErkJggg==" />
+</td>
+<td class="content">
+<div class="title">Solution : Prendre le point de vue de l&#8217;utilisateur</div>
+<img src="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/plantuml/uc7.png" alt="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/plantuml/uc7.png" />
+</td>
+</tr></table>
+</div>
 </section>
 <section class="slide">
 <h2>Interaction avec les cas d&#8217;utilisation principaux</h2>
@@ -2796,7 +2899,7 @@ BqtX+WVRKifB6vRxIkEfxX1BpWRZtEbp1b+CdQg7P7OEUmhn1C2Ngqz61p7hVQ9YjpuibmmSo4UW
 </td>
 <td class="content">
 <div class="title">Diagramme des Cas d&#8217;Utilisation erroné</div>
-<img src="UPSTI/image001.jpg" alt="UPSTI/image001.jpg" />
+<img src="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/images/image001.jpg" alt="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/images/image001.jpg" />
 </td>
 </tr></table>
 </div>
@@ -2852,7 +2955,7 @@ D+7PtIkAAAAASUVORK5CYII=" />
 </td>
 <td class="content">
 <div class="title">Solution (extrait) : Modifier le diagramme en conséquence</div>
-<img src="plantuml/uc1.png" alt="plantuml/uc1.png" />
+<img src="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/plantuml/uc1.png" alt="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/plantuml/uc1.png" />
 <p>La solution n&#8217;est que partiellement satisfaisante (cf. point suivant).</p>
 </td>
 </tr></table>
@@ -3003,7 +3106,7 @@ D+7PtIkAAAAASUVORK5CYII=" />
 </td>
 <td class="content">
 <div class="title">Problème : mauvaise utilisation de l'<code>&lt;&lt;include&gt;&gt;</code></div>
-<img src="plantuml/uc2.png" alt="plantuml/uc2.png" />
+<img src="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/plantuml/uc2.png" alt="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/plantuml/uc2.png" />
 </td>
 </tr></table>
 </div>
@@ -3036,7 +3139,7 @@ I6cpjHT8q5/jOI7jOI7jOI7jOI7TIn19rwHxRFgzUciFPgAAAABJRU5ErkJggg==" />
 </td>
 <td class="content">
 <div class="title">Solution 1 : On englobe les <code>&lt;&lt;include&gt;&gt;</code> "isolés"</div>
-<img src="plantuml/uc3.png" alt="plantuml/uc3.png" />
+<img src="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/plantuml/uc3.png" alt="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/plantuml/uc3.png" />
 </td>
 </tr></table>
 </div>
@@ -3068,7 +3171,7 @@ I6cpjHT8q5/jOI7jOI7jOI7jOI7TIn19rwHxRFgzUciFPgAAAABJRU5ErkJggg==" />
 </td>
 <td class="content">
 <div class="title">Solution 2 : On "mutualise" les <code>&lt;&lt;include&gt;&gt;</code></div>
-<img src="plantuml/uc4.png" alt="plantuml/uc4.png" />
+<img src="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/plantuml/uc4.png" alt="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/plantuml/uc4.png" />
 </td>
 </tr></table>
 </div>
@@ -3147,7 +3250,9 @@ PAr9L8j/96+U/w3yCoCXW14B8HLLvwDd67nwZIEPdgAAAABJRU5ErkJggg==" />
 </td>
 <td class="content">
 <p>La question de l&#8217;utilisation des cas d&#8217;utilisation pour exprimer les activités du système reste à trancher.
-Le diagramme des activités étant tout de même plus adapté a priori (cf. <a href="#faq">[faq]</a>).</p>
+Le diagramme des activités étant tout de même plus adapté a priori (cf. <a href="#faq">[faq]</a>).
+Le principal défaut du diagramme <a href="#UC1">[UC1]</a> est surtout de mélanger des cas d&#8217;utilisations de niveaux différents.
+N&#8217;oublions pas que derrière chaque UC, il devrait y avoir un but d&#8217;une partie prenante.</p>
 </td>
 </tr></table>
 </div>
@@ -3182,7 +3287,7 @@ BqtX+WVRKifB6vRxIkEfxX1BpWRZtEbp1b+CdQg7P7OEUmhn1C2Ngqz61p7hVQ9YjpuibmmSo4UW
 <div class="title">Erreur : Confondre héritage et propriété</div>
 <p>Un bloc <code>SarmentAttaché</code> hérite des blocs <code>Lien</code> et <code>SarmentNonAttaché</code>.
 <span class="image">
-<img alt="plantuml/bdd1.png" src="data:image/png;base64,
+<img alt="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/plantuml/bdd1.png" src="data:image/png;base64,
 iVBORw0KGgoAAAANSUhEUgAAAPkAAAC6CAIAAADj4XwFAAAANXRFWHRjb3B5bGVmdABHZW5lcmF0
 ZWQgYnkgaHR0cDovL3BsYW50dW1sLnNvdXJjZWZvcmdlLm5ldDpnVRsAAADtelRYdHBsYW50dW1s
 AAB4nHWOvU7DMBSFdz/FHZMhlZ2ihlZVVUABVCVQ4YLYkONYqoVzjezrTDw8bVkAlfV8528dSQVK
@@ -3308,7 +3413,7 @@ AAAAAElFTkSuQmCC" />
 </div>
 <p>La relation doit pourvoir se lire "est un". Or, un <code>SarmentAttaché</code> n&#8217;est pas un <code>SarmentNonAttaché</code> (c&#8217;est même le contraire)!</p>
 <p>Lorsque plusieurs blocs ont des caractéristiques en communs (propriétés, associations, comportement), il peut être utile de "factoriser" ces éléments en un bloc dont les autres vont "hériter". Quand on réalise ces liens hiérarchiques (on utilise souvent le terme "est un") en partant des blocs différents pour établir un nouveau bloc contenant les points communs on parle de <strong>généralisation</strong>. À l&#8217;inverse, quand on constate qu&#8217;un bloc possède réellement plusieurs déclinaisons différentes et que l&#8217;on créé alors des blocs spécifiques, on parle alors de <strong>spécialisation</strong>.</p>
-<img src="../images/genspec.png" alt="../images/genspec.png" />
+<img src="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/images/genspec.png" alt="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/images/genspec.png" />
 <p>On retrouve cette association entre blocs, mais aussi entre acteurs, cas d&#8217;utilisation, etc.</p>
 <div class="admonitionblock">
 <table><tr>
@@ -3339,7 +3444,7 @@ I6cpjHT8q5/jOI7jOI7jOI7jOI7TIn19rwHxRFgzUciFPgAAAABJRU5ErkJggg==" />
 <div class="title">Solution</div>
 <p>Un bloc <code>SarmentAttaché</code> hérite du bloc <code>Sarment</code> et possède un <code>Lien</code>.
 <span class="image">
-<img alt="plantuml/bdd2.png" src="data:image/png;base64,
+<img alt="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/plantuml/bdd2.png" src="data:image/png;base64,
 iVBORw0KGgoAAAANSUhEUgAAAR0AAAD2CAIAAABk/MTZAAAANXRFWHRjb3B5bGVmdABHZW5lcmF0
 ZWQgYnkgaHR0cDovL3BsYW50dW1sLnNvdXJjZWZvcmdlLm5ldDpnVRsAAAEBelRYdHBsYW50dW1s
 AAB4nHWPQUvDQBCF7/srhp4SYUuSSmNDKFWJSklqcat4k81moIvJbtmd5OSPtw2CWvQ633vz3lt5
@@ -3522,7 +3627,7 @@ BqtX+WVRKifB6vRxIkEfxX1BpWRZtEbp1b+CdQg7P7OEUmhn1C2Ngqz61p7hVQ9YjpuibmmSo4UW
 <td class="content">
 <div class="title">Erreur : Le système est composé de 32 propulseurs!</div>
 <p><span class="image">
-<img alt="images/cardBad.png" src="data:image/png;base64,
+<img alt="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/images/cardBad.png" src="data:image/png;base64,
 iVBORw0KGgoAAAANSUhEUgAAAVsAAAIwCAIAAACndl++AAAYGGlDQ1BJQ0MgUHJvZmlsZQAAWAmt
 WXVYVNvX3udMAcMQQ3d3d3endAnC0EMzNEqKKCEqKCkqIQKCWKSIgmAiIihhooiAohdQRKS+g3Hv
 /X3x33eeZ855zzrvXnvttXatPQBwXiVFRYXBDACER8RSHMwM+d3cPfhxLwEEYMAEsAAi+cVEGdjZ
@@ -6260,7 +6365,7 @@ I6cpjHT8q5/jOI7jOI7jOI7jOI7TIn19rwHxRFgzUciFPgAAAABJRU5ErkJggg==" />
 <td class="content">
 <div class="title">Solution possible</div>
 <p><span class="image">
-<img alt="plantuml/bdd4.png" src="data:image/png;base64,
+<img alt="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/plantuml/bdd4.png" src="data:image/png;base64,
 iVBORw0KGgoAAAANSUhEUgAAAXMAAADECAIAAADiYFa8AAAANXRFWHRjb3B5bGVmdABHZW5lcmF0
 ZWQgYnkgaHR0cDovL3BsYW50dW1sLnNvdXJjZWZvcmdlLm5ldDpnVRsAAAEAelRYdHBsYW50dW1s
 AAB4nH2PUUvDMBDH3/Mpjj61QkfbjdWNMTalKqPFYufYm6TpgcE0GZekn99uKigD34673/3ufxvr
@@ -6387,7 +6492,7 @@ AJgFAACzAAAAzAIAgFkAADALAADALAAAmAUAALMAAADMAgCAWQAAMAsAAMAsAACYBQAAswAAAMwC
 AIBZAAAwCwAAZgEAgJfL/wIDpRnJ6Gw83QAAAABJRU5ErkJggg==" />
 </span>
 <span class="image">
-<img alt="plantuml/bdd5.png" src="data:image/png;base64,
+<img alt="/Users/bruel/Dropbox/Public/dev/SysMLBook/slides/plantuml/bdd5.png" src="data:image/png;base64,
 iVBORw0KGgoAAAANSUhEUgAAAREAAACaCAIAAAAB9ut2AAAANXRFWHRjb3B5bGVmdABHZW5lcmF0
 ZWQgYnkgaHR0cDovL3BsYW50dW1sLnNvdXJjZWZvcmdlLm5ldDpnVRsAAAD3elRYdHBsYW50dW1s
 AAB4nH2PQUvDQBCF7/sr5pgcUpJUGltKqUpUSoKhqeJNNpsBFze7ZXY2J3+8sXooFHobeN/7eLP1
@@ -6503,6 +6608,219 @@ BxUgDwuWkKT+Uq9fnX9PIWOpzFKKmMGXwRy0wMMrIam/4Lrh6uEa4kq+fv2aU2bIWCqzlN7/SEhI
 </td>
 </tr></table>
 </div>
+<div style="page-break-after:always"></div>
+<div style="page-break-after:always"></div>
+</section>
+<section class="slide">
+<h2>Diagramme d'états</h2>
+</section>
+<section class="slide">
+<h2>Différence entre UML et SysML sur les machines à état.</h2>
+<p>SysML a repris (quasiment, cf. plus bas) tel quel le diagramme d'états UML :</p>
+<div class="admonitionblock" id="statemachines">
+<table><tr>
+<td class="icon">
+<img alt="Note" src="data:image/png;base64,
+/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBggGBQkIBwgKCQkKDRYaDQwMGBoTFBwWHxwqJx8k
+Hh4jJzEqIyQvLCcnKDYsJj0wLywsKCU3NTA8NicrMiwBCQoKDQsNGQ4OGTUkHiQ1NTU1NTU1NTU1
+NTU1NTU1NTU1NTU1NTU1NTU1NTU0NDU1NTU1NCk0KSw1NDQ2NCwsKf/AABEIAEAAPgMBIgACEQED
+EQH/xAAcAAACAgIDAAAAAAAAAAAAAAAGBwQFAAECAwj/xABCEAABAwICBQcIBA8AAAAAAAABAgMF
+AAQGEQcSEyExIkFRYXGBkTI0QnN0sbLBFCM2wiQzNUVSVGJygoOh0eHw8f/EABsBAAIDAAMAAAAA
+AAAAAAAAAAQFAQMGAAIH/8QAKREAAgIBAgQFBQEAAAAAAAAAAQIAAxEEIQUSMUETMlGR0WFxgaHB
+I//aAAwDAQACEQMRAD8AeNZXFa0toUtaglKRmSeGVBkrpShWWnW466S7cjyFOJXss+0DPwrksrqe
+04QZhk883btKceWltCRvUo5AUKYk0kxuH3mmUNOXzjrYUkskamqeHK/tVE3jO+nI162kIRiYtFj6
+wx69ZWXSUHlDvyoFvTH2d+GtW8csc9zbw2b7f7p4H3GozGOn0QLYs/UallpMsnXG0SEdIR5dI1FO
+IKknPrFGCVBSQRwIpa2cbiOajUOwOLhdWnNtkhLiT0E5Eg1Hto+bt5Vy1uMeMtXrflMqWV5HrCt3
+dXJW+mrbynGO25/m0adZS5RpBvsNyyY/EirW8bUN13ZkZ5dJTTDadQ+yh1pQUhaQUqHODUwS2l6s
+c3QyDNXZtbRP1aXEOEpWlXAgil9b4TXGSirzDTlqpTgyNnIJCh2JV/w0dYl8za9Z8qH217N1Cx6J
+BrJcQ4rfo9cUByu20YaVf8sjvKUNY2srl16xg42PcX+McYSgbh1kndU5b2Lk2W2mYSNmbfLlJb1S
+5l1ZbqK8RutuRYYdbS61c7loVnvT3UHIwZHXGbVjKSUXtN2ySsqbPUOinrcR0y3eAzYb5ko3iLzs
+oH4PzmcIeMg8TKXd4UvbiCk2xmthJ5PennHWPCrK3gJCVkfoeK4KxvWwN0kyQgntHEmgR/EMPo8l
+7lELt5OUa1kKef5DSDz5Ab1GjTRDiaUxPaStxLXJfWh9GoMgEpBTwAHNTXwHCc5ld1pXJQ5HYnr7
+9feWjOizDTNwHforqwPQWslP+aLEIS22lCEhKUjIAcMq2VAHIkZ1uqoA9r2ec5lPiXzNr1nyqhLf
+4OHP2iP6VfYl8za9Z8qq229eDdV+g6PdWD4xX4mucei59hmMtM3LUPvNSN19IbtU5+Q0M+2o9r52
+z6xPvrTDe2uG2x6SgK7QNWVAHM996lBZ7rBc3qBCQAo5RETi/wC2Uv7Y78VNHQF+SZf16PhNK7F/
+2yl/bHfio30T4vicJ4flXZW41FLfRs2kDWWrkngP9Fe1XgtTgfSLrATXgRtTuGbPECQLpT7agAAt
+hRQrIKB493hnVo0gNNJbTnqoAAz6qQ2KdMstMa9vEAxtqfSSc3SO3m7qZWiV5x/R1YOPOLcWpTma
+lkk+Wec0vehq05mgzVlVyYWvMN3Deo8gLT0GoaoltqwuGLfP60bgrp5qsKygLdNVacsu+CM98Had
+Vdl6GDUXHvNS7YebUnUzO/hUT87fz/vUYVVvwTS7pL7KyhQWCQd441nNTwRq6lTT74bO/Xt8Q1NU
+CxL7bTzZi/7ZS/tjvxVFioa/nLwW0ZaO3Lp5mxmB2ngB2042tDDN9ie+kpu82jD9wtaLdjMbic+U
+o+4eNMKKh7GEsxaxtq1bMj0Wxl49J7a3zatVGF3MrN4AwIsMLaDW0ar+JbjaH9VYOQ/iVz93jTTs
+I+1i7Ju0sWEW9u0OQ2gZAVIrKAstazzGDM7N1n//2Q==" />
+</td>
+<td class="content">
+<div class="title">Définition : <em>State Machines</em> (OMG SysML v1.3, p. 189)</div>
+<p><em>SysML reuses many of the major diagram types of UML. In some cases, the UML diagrams are strictly reused, such as use case, sequence, state machine, and package diagrams, whereas in other cases they are modified so that they are consistent with SysML extensions.</em></p>
+</td>
+</tr></table>
+</div>
+<p>À une exception près, les <em>protocol state machines</em> qui ont été retiré pour des raisons de simplification :</p>
+<div class="admonitionblock" id="statemachines">
+<table><tr>
+<td class="icon">
+<img alt="Note" src="data:image/png;base64,
+/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBggGBQkIBwgKCQkKDRYaDQwMGBoTFBwWHxwqJx8k
+Hh4jJzEqIyQvLCcnKDYsJj0wLywsKCU3NTA8NicrMiwBCQoKDQsNGQ4OGTUkHiQ1NTU1NTU1NTU1
+NTU1NTU1NTU1NTU1NTU1NTU1NTU0NDU1NTU1NCk0KSw1NDQ2NCwsKf/AABEIAEAAPgMBIgACEQED
+EQH/xAAcAAACAgIDAAAAAAAAAAAAAAAGBwQFAAECAwj/xABCEAABAwICBQcIBA8AAAAAAAABAgMF
+AAQGEQcSEyExIkFRYXGBkTI0QnN0sbLBFCM2wiQzNUVSVGJygoOh0eHw8f/EABsBAAIDAAMAAAAA
+AAAAAAAAAAQFAQMGAAIH/8QAKREAAgIBAgQFBQEAAAAAAAAAAQIAAxEEIQUSMUETMlGR0WFxgaHB
+I//aAAwDAQACEQMRAD8AeNZXFa0toUtaglKRmSeGVBkrpShWWnW466S7cjyFOJXss+0DPwrksrqe
+04QZhk883btKceWltCRvUo5AUKYk0kxuH3mmUNOXzjrYUkskamqeHK/tVE3jO+nI162kIRiYtFj6
+wx69ZWXSUHlDvyoFvTH2d+GtW8csc9zbw2b7f7p4H3GozGOn0QLYs/UallpMsnXG0SEdIR5dI1FO
+IKknPrFGCVBSQRwIpa2cbiOajUOwOLhdWnNtkhLiT0E5Eg1Hto+bt5Vy1uMeMtXrflMqWV5HrCt3
+dXJW+mrbynGO25/m0adZS5RpBvsNyyY/EirW8bUN13ZkZ5dJTTDadQ+yh1pQUhaQUqHODUwS2l6s
+c3QyDNXZtbRP1aXEOEpWlXAgil9b4TXGSirzDTlqpTgyNnIJCh2JV/w0dYl8za9Z8qH217N1Cx6J
+BrJcQ4rfo9cUByu20YaVf8sjvKUNY2srl16xg42PcX+McYSgbh1kndU5b2Lk2W2mYSNmbfLlJb1S
+5l1ZbqK8RutuRYYdbS61c7loVnvT3UHIwZHXGbVjKSUXtN2ySsqbPUOinrcR0y3eAzYb5ko3iLzs
+oH4PzmcIeMg8TKXd4UvbiCk2xmthJ5PennHWPCrK3gJCVkfoeK4KxvWwN0kyQgntHEmgR/EMPo8l
+7lELt5OUa1kKef5DSDz5Ab1GjTRDiaUxPaStxLXJfWh9GoMgEpBTwAHNTXwHCc5ld1pXJQ5HYnr7
+9feWjOizDTNwHforqwPQWslP+aLEIS22lCEhKUjIAcMq2VAHIkZ1uqoA9r2ec5lPiXzNr1nyqhLf
+4OHP2iP6VfYl8za9Z8qq229eDdV+g6PdWD4xX4mucei59hmMtM3LUPvNSN19IbtU5+Q0M+2o9r52
+z6xPvrTDe2uG2x6SgK7QNWVAHM996lBZ7rBc3qBCQAo5RETi/wC2Uv7Y78VNHQF+SZf16PhNK7F/
+2yl/bHfio30T4vicJ4flXZW41FLfRs2kDWWrkngP9Fe1XgtTgfSLrATXgRtTuGbPECQLpT7agAAt
+hRQrIKB493hnVo0gNNJbTnqoAAz6qQ2KdMstMa9vEAxtqfSSc3SO3m7qZWiV5x/R1YOPOLcWpTma
+lkk+Wec0vehq05mgzVlVyYWvMN3Deo8gLT0GoaoltqwuGLfP60bgrp5qsKygLdNVacsu+CM98Had
+Vdl6GDUXHvNS7YebUnUzO/hUT87fz/vUYVVvwTS7pL7KyhQWCQd441nNTwRq6lTT74bO/Xt8Q1NU
+CxL7bTzZi/7ZS/tjvxVFioa/nLwW0ZaO3Lp5mxmB2ngB2042tDDN9ie+kpu82jD9wtaLdjMbic+U
+o+4eNMKKh7GEsxaxtq1bMj0Wxl49J7a3zatVGF3MrN4AwIsMLaDW0ar+JbjaH9VYOQ/iVz93jTTs
+I+1i7Ju0sWEW9u0OQ2gZAVIrKAstazzGDM7N1n//2Q==" />
+</td>
+<td class="content">
+<div class="title">Définition : <em>State Machines</em> (OMG SysML v1.3, p. 119)</div>
+<p><em>The UML concept of protocol state machines is excluded from SysML to reduce the complexity of the language.</em></p>
+</td>
+</tr></table>
+</div>
+</section>
+<section class="slide">
+<h2>Du danger d&#8217;une lecture trop rapide de la norme</h2>
+<p>C&#8217;est important de faire référence à la norme quand on avance un fait.
+J&#8217;essaye de m&#8217;y atteler personnellement dans mes écrits.
+Néanmoins il faut faire attention car on fait souvent des citations qui finalement ne sont que des extraits.</p>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Note" src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAEwAAABMCAYAAADHl1ErAAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+jwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKySURBVHhe7ZrNCw1RGIcvyUYi+ViILIRSFsp/
+oCyklJQFEgvJUpSyULIhJVYksZBYYUNJlORrwY4sbGQjUUSS8PzuzOiYZq6ZzNyZO/N76umcuXUX
+553znnPmnRkYY4wxxhhjjDHGGGOMMf1lCR7E+/gRf8TtEzyCi9HAHDyDP/HXCL/hKZyOvWUhvsKs
+AOX5EBXk3jEXywYr8QFOw15xFrOCUdR9mDADV+Iq1I3oHEtRi3pWIIr6GXfh3eC3xDd4FGfhRKNA
+aWY8wvQg6/A1LsOJQzvbafzXTliH73ARThSXMGsw41JnuYnZJNZh1iDG7TasjKlxWwc74rZpNsRt
+JdQZMG31bWB13FZCXQHTulHnzSjDvLithDoGtR11HloxvGqeT3HbStZjE0eIUd7Dyqh6hh3GKVG3
+NdyJ21aiUkzWXW7K9zgfK6PqGabCX1tQwPaiTvytZT+m73ITah3dja1Hz46XMWsQ4/IlrsVaqGuB
+XoMbcfbwqn50dHiLz/ApfkfTBpo4AlxAzcCQD7gFNUvymIm34zbNCTwfdbvFVkyvOQpWkee9c5j+
+rzyGnWQB6tgRDrZosPJKRZ0NlriO4WCLBkspqFQN/ys7Hax0KhYNlshKxcaCNY5FX6mos1F4xNBs
+ex51hzzGm1H3L5SKt6LuH47jgajbTdKpmFbVBL1fTJOXinrUCb2KWf+fSDSQzYEqW3/FZPDXMO+b
+ibxdMfQGdiZYWYTPmhdx1AcmqjKEqjAZBusKdvoDFb3KVwppsCexTKVEJe8XmARLh9S2lMBrQ4u1
+BqtX+WVRKifB6vRxIkEfxX1BpWRZtEbp1b+CdQg7P7OEUmhn1C2Ngqz61p7hVQ9YjpuibmmSo4UW
+/N7wPzUxrXeqq5kCaO1Kl4GMMcYYY4wxxhhjjDHGmH4yGPwGW7Ta9y6Gz8IAAAAASUVORK5CYII=" />
+</td>
+<td class="content">
+<div class="title">Erreur : citation sortie de son contexte</div>
+<p>"&#8230;[SysML] limite à 1 le nombre de régions dans un état composite (note de bas de page p. [17 de la norme]&#8230;)."</p>
+</td>
+</tr></table>
+</div>
+<p>Cette partie de la norme <a href="http://www.omg.org/spec/SysML/1.3/PDF/">OMG SysML v1.3</a> mentionne effectivement cette phrase, mais comme un exemple de notes
+qui peuvent se retrouver dans des manuels d&#8217;outils qui ne respecteraient pas la norme justement!!</p>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Note" src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAEwAAABMCAYAAADHl1ErAAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+jwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAP+SURBVHhe7ZtLqBRHFIavDxSRYDAYkCAI0QTR
+BBHUhVlE0YgPxDeIEgIRRJTsXLgRN4JmkV0QREJ0IwnxkaBLX6gIakQRQRFXCoEQEkQUjc//6+ki
+x6KvM/dO12S653zw0Y+Z6ZmqW111+lTdPsdxHMdxHMdxHMdxnK5iWL7tZmbJZ/JRduQ05YRc09h1
+mjFbvpLfZ0dOUy5JKuxqdtQDDM23g2GJpLLwiRwpa882uaqxO2BC6wp+LmsPhaSwx+QETrSIbV3B
+nbL2DJd/Sgr8QH4jW7lN49aFZ2RP8KO0Bb8gp8r+oJJ5/VP5mVwp98iLsiegwLbC8F+5Q6Zmptzc
+2K0OjG6McrbC6NMmybIZIb+Qe+U9yXctk6UxJN+m5ohcIR/LjfKQjBkvF8nJ+T78Ie9L+q+bnCjg
+HblAcv2l8l0ZOCxXN3arxVfybzknO3oTbtmz8rm0rTCWCtsk40FjhuTa8fv/kh/ISvK+5DHH8omk
+I48L2swbkkqyMEDwcG7fR0uuDQslLcAWcCBSOculhePwOi22NiyWjJK2AgbjSxlX2k+Sa0/JjmoA
+t+E/sqgCBuNDOV0GGHk7Ea50jKIIvl25Zi1ZL4sKXIZfyspB0EjYQIbiV3lOWlK0rmAlWtkYSaC5
+SxJYEpTaQtgs6URpX0sh39HV0NmSby/68Wjz8Ftk0XvK9GuZnHYyotckeSsC0tOciLibb+HDfJsS
+m2/j+bWdsvVLGRel/5gn50obMD7NtzAu36bEfgfhxXVJKy+14sq8GP0YGVYegC9zosPYnD/70+TP
+8nfJndD1kAgMfCeL+p0ytSnskBq3hjuhLZLc5zlkHwK2P0sF+a9AURdAMvGkDHdCV9PpsIKQJn6d
+9NA+uUGmSF6WTicDV0Zw5g6+lWRcx8rKQRKxqLBlyLUto/JtpaG/TNHKrkg7wFQanittf5E6vVNp
+PpI8X/6SHf1HygRipTklQ+FI7VhSpKgrDUO3LSC3TjxxUeYkCMdMtFQSgsawnsLKVFhcUGCajdxZ
+s2m2W7Jomo2K59rxSJmEFBO5TESsbexmsD6VCPs3eVzaiNzC5C3928f5PoSJXD5fNJHLM+IB+Z48
+Kqn8SkHfRGvgFqSzXyftTHRZkMr5QdoWWLlFd9wq2yV/ddLVKWGBSZzhxeQtrMxl5/zg8/KOfMGJ
+FqFV3JbMXjO1z2/iUYa+kDVlRdciWD0oWRZlk5O0Mha61B4yCHFriZ8P+4MZozDIsK1N1P82yGXF
+FTaQpB8hxX7J53pqLWyw1dYVM19ubezWG/oxu+iuEinl/xvirHZaV88RsqRFi+66hm76b7bRubuz
+I6cpjHT8q5/jOI7jOI7jOI7jOI7TIn19rwHxRFgzUciFPgAAAABJRU5ErkJggg==" />
+</td>
+<td class="content">
+<div class="title">Solution : Faire attention au contexte (OMG SysML v1.3, p. 17)</div>
+<p>"<em>In the case of “PARTIAL” support for a compliance point, in addition to a formal statement of compliance, implementors, and profile designers must also provide feature support statements.</em>"</p>
+</td>
+</tr></table>
+</div>
+<p>Il faut donc bien faire attention avec les extraits de norme.</p>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Tip" src="data:image/png;base64,
+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" />
+</td>
+<td class="content">
+<p>Quand on cite un extrait de la norme, citer le numéro de page du document papier et non celui du PDF.</p>
+</td>
+</tr></table>
+</div>
+</section>
+<section class="slide">
+<h2>Lien avec le Grafcet</h2>
+<p>Le <a href="http://fr.wikipedia.org/wiki/Grafcet">Grafcet</a> étant plus proche des Réseaux de Petri, la correspondance la plus proche
+serait peut-être le diagramme d&#8217;activité.</p>
+<p>Voir aussi la FAQ <a href="#Grafcet">Comment traduire un grafcet en machine à état ?</a>.</p>
 <div style="page-break-after:always"></div>
 </section>
 <section class="slide">
@@ -6633,7 +6951,7 @@ diagramme des cas non encore pris en compte comme <code>Transporter le système<
 </section>
 <section class="slide">
 <h2>Comment faut-il comprendre "interaction" dans les diagrammes d&#8217;UC ?</h2>
-<p>La définition de la norme :</p>
+<p>La définition de la norme <a href="http://www.omg.org/spec/SysML/1.3/PDF/">OMG SysML v1.3</a> :</p>
 <div class="admonitionblock" id="actorsdef">
 <table><tr>
 <td class="icon">
@@ -6679,9 +6997,12 @@ Par exemple un message (appel de méthode) d&#8217;un élément vers un autre da
 </section>
 <section class="slide">
 <h2>Les "matières premières" font-elles parties des acteurs ?</h2>
-<p>Si on s&#8217;en tient à la définition (cf. <a href="#actorsdef">Acteurs</a>), oui : ce sont des <em>environmental entities</em>.
-Mais habituellement on les retrouve plutôt dans le diagramme de contexte ou encore dans un
-diagramme structurel comme le diagramme de définition de bloc.</p>
+<p>On pourrait les considérer comme des acteurs en se fiant à la définition (cf. <a href="#actorsdef">Acteurs</a>)
+et en les associant à des <em>environmental entities</em>.
+Mais elles sont échangées avec les entités de l&#8217;environnement, ce qui n&#8217;est pas la même chose.
+Autrement dit, il faut indiquer qui fournit les matières premières et qui recueille les matières produites.
+Eventuellement on peut les retrouver dans le diagramme de contexte ou encore dans un
+diagramme structurel comme le diagramme de bloc interne.</p>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -6744,7 +7065,7 @@ qTCT16/0nPgLA/i6xjf+Xw3+B2ll/uiqTaJTAAAAAElFTkSuQmCC" />
 </section>
 <section class="slide">
 <h2>Pour l&#8217;analyse fonctionnelle : diagramme des UC ou des activités ?</h2>
-<p>Pour alimenter le débat, je renvois aux exemples donnés par <a href="mailto:loic.fejoz@realtimeatwork.com">Loïc Féjoz</a> lors de la journée UPSTI.
+<p>Pour alimenter le débat, je renvois aux exemples donnés par <a href="mailto:loic.fejoz@realtimeatwork.com">Loïc Féjoz</a> lors de la journée <a href="http://www.upsti.fr/">UPSTI</a>.
 Voici un diagramme classique <a href="http://fr.wikipedia.org/wiki/Analyse_fonctionnelle_(conception)">FAST</a> :</p>
 <img src="/Users/bruel/dev/asciidoc/sif2013/images/fast.png" alt="/Users/bruel/dev/asciidoc/sif2013/images/fast.png" />
 <img src="/Users/bruel/dev/asciidoc/sif2013/images/sysml-fast.png" alt="/Users/bruel/dev/asciidoc/sif2013/images/sysml-fast.png" />
@@ -6752,13 +7073,90 @@ Voici un diagramme classique <a href="http://fr.wikipedia.org/wiki/Analyse_fonct
 tout. <a href="http://www.omgsysml.org/">SysML</a> présente juste l&#8217;organisation du modèle et non l&#8217;arbre
 d&#8217;appel. De plus, <a href="http://fr.wikipedia.org/wiki/Analyse_fonctionnelle_(conception)">FAST</a> a tendance à focaliser sur une solution unique
 alors que <a href="http://www.omgsysml.org/">SysML</a> permet de repousser ce choix voir d&#8217;explorer des alternatives.</p>
+</section>
+<section class="slide">
+<h2>Comment traduire un grafcet en machine à état ?</h2>
+<p>En automatique, la notation la plus connue pour représenter la dynamique d&#8217;un système est le <a href="http://fr.wikipedia.org/wiki/Grafcet">Grafcet</a>.
+Il semble qu&#8217;il existe une synthèse du passage <a href="http://fr.wikipedia.org/wiki/Grafcet">Grafcet</a> &#8658; diagramme d'état. J&#8217;attends de le trouver
+pour l&#8217;intégrer ici.</p>
+</section>
+<section class="slide">
+<h2>Un système peut il avoir plusieurs états?</h2>
+<p>Il faut bien faire la différence entre :</p>
+<ul>
+<li>
+l'<strong>état du système</strong> (en tant qu&#8217;association de valeurs d&#8217;attributs à un instant T)
+qui lui est unique à un instant donné, et
+</li>
+<li>
+l'<strong>état d&#8217;une machine à états</strong> (en tant qu&#8217;abstraction d&#8217;un ensemble d'états au sens précédent).
+</li>
+</ul>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Note" src="data:image/png;base64,
+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" />
+</td>
+<td class="content">
+<div class="title">Exemple d&#8217;un système ayant plusieurs états (au sens machine à états)</div>
+<p>Soit un système avec une unique variable <code>i</code>.
+Les états du systèmes seraient par exemple l&#8217;ensemble des entiers naturels (positifs).
+Dans une machine à état UML, on pourrait par exemple avoir l'état <code>pair</code> et l'état <code>impair</code>.
+Mais on pourrait aussi avoir, deux-sous états (<code>nul</code> et <code>non-nul</code>) et rajouter en concurrence (+multiple de 4 +ou non, etc.).</p>
+</td>
+</tr></table>
+</div>
 <div style="page-break-after:always"></div>
 </section>
 <section class="slide">
 <h2>About&#8230;</h2>
 <div class="sidebarblock">
 <div class="content">
-<p>Dernière MAJ : 14/06/2013 - 23:12:06 CEST<br />
+<p>Dernière MAJ : 21/06/2013 - 12:54:37 CEST<br />
 Document généré par <a href="mailto:bruel@irit.fr">Jean-Michel Bruel</a> via <a href="http://www.methods.co.nz/asciidoc">AsciiDoc</a> (version <code>8.6.8</code>) de <em>Stuart Rackham</em>.
 La version présentation a été générée en utilisant <a href="http://houqp.github.io/asciidoc-deckjs/">deckjs</a> (version <code>1.6.2</code>).
 Les icônes proviennent de <a href="http://modernuiicons.com/">http://modernuiicons.com/</a>. Diagrammes réalisés avec

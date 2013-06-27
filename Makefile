@@ -15,6 +15,13 @@ cord: cordeuse.$(EXT)
 	-a book \
 	cordeuse.$(EXT)
 
+somfy: somfy.$(EXT) somfy/*.png
+	@echo '==> Compiling asciidoc files to generate HTML'
+	asciidoc -b html5 -a icons -a iconsdir=$(ICONSDIR) -a data-uri \
+	-a stylesheet=/Users/bruel/Dropbox/Public/dev/SysMLBook/stylesheets/scribe.css \
+	-a book \
+	somfy.$(EXT)
+
 main: $(MAIN).$(EXT)
 	@echo '==> Compiling asciidoc files to generate HTML'
 	asciidoc -b html5 -a icons -a iconsdir=$(ICONSDIR) -a data-uri \
@@ -52,5 +59,6 @@ plantuml/%.png: plantuml/%.txt
 
 publish:
 	cp *.html /Users/bruel/dev/jmbhome/public/teaching/SysML
+	cp feedback-all.html /Users/bruel/dev/jmbhome/public/teaching/SysML/feedback.html
 	
 
